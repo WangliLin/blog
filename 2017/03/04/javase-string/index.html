@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Java基础之字符串 | Wangli&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="类结构public final class Stringextends Objectimplements Serializable, Comparable, CharSequence
+类概述Java把内存划分为两种：一种是栈内存，一种是堆内存。在函数中定义的一些基本类型的变量和对象的引用变量都是在函数的栈内存中分配。当在一段代码块定义一个变量时，Java就在栈中为这个变量分配内存空间，当超过变量的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java基础之字符串">
+<meta property="og:url" content="wanglilin.github.io/2017/03/04/javase-string/index.html">
+<meta property="og:site_name" content="Wangli's Blog">
+<meta property="og:description" content="类结构public final class Stringextends Objectimplements Serializable, Comparable, CharSequence
+类概述Java把内存划分为两种：一种是栈内存，一种是堆内存。在函数中定义的一些基本类型的变量和对象的引用变量都是在函数的栈内存中分配。当在一段代码块定义一个变量时，Java就在栈中为这个变量分配内存空间，当超过变量的">
+<meta property="og:image" content="http://omdld2kxe.bkt.clouddn.com/shot_1300714358.png">
+<meta property="og:updated_time" content="2017-03-06T04:43:23.064Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java基础之字符串">
+<meta name="twitter:description" content="类结构public final class Stringextends Objectimplements Serializable, Comparable, CharSequence
+类概述Java把内存划分为两种：一种是栈内存，一种是堆内存。在函数中定义的一些基本类型的变量和对象的引用变量都是在函数的栈内存中分配。当在一段代码块定义一个变量时，Java就在栈中为这个变量分配内存空间，当超过变量的">
+<meta name="twitter:image" content="http://omdld2kxe.bkt.clouddn.com/shot_1300714358.png">
+    
+
+    
+
+    
+        <link rel="icon" href="/blog/css/images/favicon.ico" />
+    
+
+    <link rel="stylesheet" href="/blog/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/blog/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/blog/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/blog/css/style.css">
+
+    <script src="/blog/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/blog/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/blog/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/blog/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Wangli&#39;s Blog</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/blog/.">主页</a>
+                
+                    <a class="main-nav-link" href="/blog/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/blog/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/blog/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/blog/about">关于</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/blog/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Cari" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'pos',
+            PAGES: 'Pages',
+            CATEGORIES: 'kategori',
+            TAGS: 'tag',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/blog/',
+        CONTENT_URL: '/blog/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/blog/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/blog/.">主页</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Cari" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/blog/css/images/avatar.png" />
+            <h2 id="name">Wangli</h2>
+            <h3 id="title">Android/Web开发</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Hangzhou, China</span>
+            <a id="follow" target="_blank" href="https://github.com/wanglilin/">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                1
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                2
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/wanglilin/" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="http://weibo.com/callmebia" target="_blank" title="weibo" class=tooltip>
+                            <i class="fa fa-weibo"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-javase-string" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            Java基础之字符串
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/blog/2017/03/04/javase-string/">
+            <time datetime="2017-03-04T08:08:41.000Z" itemprop="datePublished">2017-03-04</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/blog/categories/JavaSE/">JavaSE</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/blog/tags/JavaSE/">JavaSE</a>, <a class="tag-link" href="/blog/tags/Java基础/">Java基础</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">Catálogo</strong>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#类结构"><span class="toc-number">1.</span> <span class="toc-text">类结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类概述"><span class="toc-number">2.</span> <span class="toc-text">类概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#小结"><span class="toc-number">2.1.</span> <span class="toc-text">小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方法"><span class="toc-number">3.</span> <span class="toc-text">方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#思考"><span class="toc-number">4.</span> <span class="toc-text">思考</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#null和空字符串的区别s"><span class="toc-number">4.1.</span> <span class="toc-text">null和空字符串的区别s</span></a></li></ol></li></ol>
+                </div>
+            
+            <h2 id="类结构"><a href="#类结构" class="headerlink" title="类结构"></a>类结构</h2><p>public final class String<br>extends Object<br>implements Serializable, Comparable, CharSequence</p>
+<h2 id="类概述"><a href="#类概述" class="headerlink" title="类概述"></a>类概述</h2><p>Java把内存划分为两种：一种是栈内存，一种是堆内存。<strong>在函数中定义的一些基本类型的变量和对象的引用变量都是在函数的栈内存中分配</strong>。当在一段代码块定义一个变量时，Java就在栈中为这个变量分配内存空间，当超过变量的作用域后，Java会自动释放掉为该变量分配的内存空间，该内存空间可以立即被另作它用。<br><a id="more"></a></p>
+<p><strong>堆内存用来存放由new创建的对象和数组，在堆中分配的内存，由Java虚拟机的自动垃圾回收器来管理。</strong>在堆中产生了一个数组或者对象之后，还可以在栈中定义一个特殊的变量，让栈中的这个变量的取值等于数组或对象在堆内存中的首地址，栈中的这个变量就成了数组或对象的引用变量（以后就可以在程序中使用栈中的引用变量来访问堆中的数组或者对象，引用变量相当于是为数组或者对象起的一个名称）。</p>
+<p><strong>PS：</strong>引用变量是普通的变量，定义时在栈中分配，引用变量在程序运行到其作用域之外后被释放。而数组和对象本身在堆中分配，引用变量在程序运行到其作用域之外后被释放。而数组和对象本身在堆中分配，即使程序运行到使用new产生的数组或者对象所在的代码块之外，数组和对象本身占据的内存不会被释放，数组和对象在没有引用变量指向它的时候，才变为垃圾，不能再被使用，但仍然占据内存空间不放，在随后的一个不确定的时间被垃圾回收器收走（释放）。- &gt;这也是Java比较占内存的原因。</p>
+<p>String类是一个很特殊的类，它本身是final的，它是不可变的，String类是的本质是字符数组char[], 并且其值不可改变,但StringBuilder也是final，为什么StringBuilder是可变的呢？ 究其原因，String类的内部是char[]数组构成，而String的加号（+）运算符的底层是由StringBuilder实现的，一个String每次“+“上一个String,都会创建一个新的StringBuilder，然后调用它的append()方法，该方法返回一个新形成的String。所以字符串的一些合并操作可以使用StringBuilder来提高效率。</p>
+<p>用new String()创建的字符串不是常量，不能在编译期就确定，而因为String是类，所以new String()创建的字符串不放入常量池中，它们有自己的地址空间。即Java中，只要使用new关键字来创建对象，则一定会（在堆区或栈区）创建一个新的对象。而直接初始化则会形成字符串常量，分配到运行时常量池中，这会在编译时确定。</p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ul>
+<li>Java程序中的所有字面值（string literals），即双引号括起来的字符串，如“bia”，都是作为String类的实例实现的。</li>
+<li>String类是一个很特殊的类，它本身是final的，它是不可变的，String类的本质是字符数组char[ ]， 并且其值不可改变。String是常量，其对象一旦构造就不能被改变。In other words，String对象是不可变的，每一个看起来会修改String值的方法，实际上都是创造了一个全新的String对象（<strong>构建一个新的StringBuilder，然后调用它的append()方法，该方法方法返回一个新创建的String对象</strong>），以包含修改后的字符串内容。</li>
+<li>String对象具有只读特性，指向它的任何引用都不可能改变它的值，因此，也不会对其他的引用有什么影响。</li>
+</ul>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p><strong>1.创建字符串</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">String str = <span class="string">"Hello World"</span>;</div><div class="line">String str1 = <span class="keyword">new</span> String(<span class="string">"Hello World"</span>);</div><div class="line">String str2 = <span class="keyword">new</span> String();</div><div class="line">str2 = <span class="string">"Hello World"</span></div><div class="line">System.out.println(<span class="string">"str:"</span> + str + <span class="string">"str1:"</span> + str1 + <span class="string">"str2:"</span> + str2);</div></pre></td></tr></table></figure>
+<ul>
+<li>String类有11种构造方法，这些方法提供不同的参数来初始化字符串</li>
+<li>String类是不可改变的，所以一旦创建了String对象，其值就无法改变了</li>
+</ul>
+<p><strong>2.字符串长度</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">String str = <span class="string">"Hello World"</span>;</div><div class="line"><span class="keyword">int</span> i = str.length();</div><div class="line">System.out.println(i);</div></pre></td></tr></table></figure>
+<p> String类的一个访问器方法是length( )方法，它返回字符串对象包含的字符数。</p>
+<p><strong>3.连接字符串</strong></p>
+<ul>
+<li>字符串常量使用concat( )方法连接</li>
+<li>使用’+’操作符来连接字符串</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">String str = <span class="string">"Hello World"</span>;</div><div class="line">String str1 = <span class="string">"Good Friends"</span>;</div><div class="line">str2 = str.concat(str1);</div><div class="line">str3 = str + str1;</div></pre></td></tr></table></figure>
+<p><strong>4.创建格式化字符串</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">String str;</div><div class="line"><span class="keyword">int</span> i = <span class="number">100</span>;</div><div class="line"><span class="keyword">double</span> d = <span class="number">10.243</span>;</div><div class="line"><span class="keyword">float</span> f = <span class="number">124124</span>;</div><div class="line">str =  String.format(<span class="string">"NO1 : %d"</span> + <span class="string">"NO2 : %f"</span> + <span class="string">"NO3 : %f"</span>,i,f,d);    <span class="comment">//使用 .format() 方法格式化字符串</span></div><div class="line">System.out.printf(<span class="string">"NO1 : %d"</span> + <span class="string">"NO2 : %f"</span> + <span class="string">"NO3 : %f"</span>,i,f,d);  <span class="comment">//使用 printf()方法 格式化字符串</span></div><div class="line">System.out.println(str);</div></pre></td></tr></table></figure>
+<p>我们知道输出格式化数字可以使用printf( )和format( )方法。String类使用静态方法format( )返回一个String对象而不是PrintStream对象。<br>String类的静态方法format( )能用来创建可复用的格式化字符串，而不仅仅是用于一次打印输出。</p>
+<p><strong>5.char charAt(int index)</strong><br>返回指定索引处的char值<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">String str = <span class="string">"hello world"</span>;</div><div class="line"><span class="keyword">char</span> c = str.charAt(<span class="number">2</span>);</div><div class="line">System.out.println(c);</div><div class="line"></div><div class="line"><span class="comment">//output: l</span></div></pre></td></tr></table></figure></p>
+<p><strong>6.int compareTo(Object o)</strong><br>把这个字符串和另一个对象比较<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">String str = <span class="string">"Hello world"</span>;</div><div class="line">String str1 = <span class="string">"Good Friends"</span>;</div><div class="line"><span class="keyword">int</span> i = str.compareTo(str1);</div><div class="line">System.out.println(i);</div><div class="line"></div><div class="line"><span class="comment">//output: 1</span></div></pre></td></tr></table></figure></p>
+<p>比较此对象与指定对象的顺序。如果该对象小于、等于或大于指定对象，则分别返回负整数、零或正整数。<strong>返回整数，1，-1,0；返回1表示大于，返回-1表示小于，返回0表示相等。</strong></p>
+<p><strong>7.boolean endsWith(String str)</strong><br>测试此字符串是否以指定的后缀结束。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">String str = <span class="string">"Hello World"</span>;</div><div class="line"><span class="keyword">boolean</span> b = str.endsWith(<span class="string">"d"</span>);</div><div class="line">System.out.println(b);</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//output:true</span></div></pre></td></tr></table></figure></p>
+<p><strong>8.boolean equals(Object object)</strong><br>将此字符串与指定的对象比较<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">String str = <span class="string">"Hello World !"</span>; </div><div class="line">String str1 = <span class="string">"Good Friends"</span>;</div><div class="line"><span class="keyword">boolean</span>  b =  str.equals(str1);</div><div class="line">System.out.println(b);</div></pre></td></tr></table></figure></p>
+<p><strong>9.int indexOf(int char)</strong><br>返回指定字符在此字符串中第一次出现处的索引<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">String str = <span class="string">"Hello World !"</span>;</div><div class="line"><span class="keyword">int</span> i = str.indexOf(<span class="string">'e'</span>);</div><div class="line">System.out.println(i);</div><div class="line"></div><div class="line"><span class="comment">//output: 1</span></div><div class="line"><span class="comment">//若无此字符串，则返回-1</span></div></pre></td></tr></table></figure></p>
+<p><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html" target="_blank" rel="external">更多String方法，点击查看</a></p>
+<h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><h3 id="null和空字符串的区别s"><a href="#null和空字符串的区别s" class="headerlink" title="null和空字符串的区别s"></a>null和空字符串的区别s</h3><blockquote>
+<p>String s=null;<br>string.trim()就会抛出为空的exception<br>String s=””;<br>string.trim()就不会抛,为什么?</p>
+</blockquote>
+<p><strong>答：</strong><br>1）null代表声明了一个空对象，根本就不是一个字符串，对空对象做任何操作都不行，除了 = 和 == ；<br>“”代表声明了一个对象实例，这个对象实例的值是一个长度为0的空字符串，其仍代表一个字符串，只是字符串里面没有内容。<br>2）String s = null;只是定义了一个句柄，也就是说你有了个引用，但是这个引用未指向任何内存空间；<br>String s = “”;这个引用指向了一块是空字符串的内存空间，可对其进行满足字符串操作的任何操作。</p>
+<p>所以，题目中为何一个会抛异常，一个不会抛异常就得以解答。</p>
+<blockquote>
+<p> String s;和String s=null;和String s=”a”;有什么区别？<br> 针对这三种情况，使用out.println(s);的时候，第一个会出现异常，第二个会输出null.第三个则会输出a.<br> 这是为什么呢？这三句声明语句，各自作了什么呢？</p>
+</blockquote>
+<p><strong>答：</strong><br>第一个只是定义了一个String类型变量s，并没有给它赋值（若是类的成员变量，才默认赋值），在Java中，默认在使用一个对象的时候必须赋予它初值（降低风险）。<br>第二个和第三个都定义了String类型变量s，并赋予它初值，只不过第二个赋予的值为null；<br><strong>Attention：</strong>s为一个引用，它不是对象。第一个是没有初始化的引用，第二个为空引用，第三个是在字符串池里写入一个字符’a’，然后s指向它。<br><strong>Ps：</strong>String s = ‘a’ ;和 String s = new String(“a”);是有本质上的区别的。前者是在字符串池里写入一个字符’a’，然后s指向它，后者是在堆上创建一个内容为’a’的字符串对象。</p>
+<blockquote>
+<p>声明了一个string a;变量<br>在以后的判断中，a==””和a==null有何不同?</p>
+</blockquote>
+<p><strong>答：</strong><br>如果没有给a赋过值，a == “” 会导致异常。<br>在实际处理中，往往认为””和null代表相同的含义，即代表无值。<br>此时，建议用如下语法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (a == <span class="keyword">null</span> || a == <span class="string">""</span>)&#123;</div><div class="line">   <span class="comment">//处理语句</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>如果a为null，则不会执行后面的判断，直接返回true。<br><strong>null是用来判断引用类型是否分配了存储空间，””是针对字符串的。</strong>所以如果没有给a赋过值，a == “”会导致异常。</p>
+<blockquote>
+<p>String abc=null;String abc=””;String abc;三种写法有什么区别？</p>
+</blockquote>
+<p><strong>答：</strong><br>1：创建一个空字符串对象，<br>2：创建一个字符串为空的字符串对象。<br>3：声明一个字符串对象，但并没有分配内存，而1，2已经分配了内存</p>
+<p><strong>tips：</strong><br>在成员变量的定义中,String s;等同于String s=null;<br>而在本地变量(方法变量)的定义中,String s;不等同于String s=null;,这时要使用s必须显式地赋值。</p>
+<p>还有一点要说明的是：<br>只要是在方法在中定义变量都要显示赋初值，main()方法也不例外，而在方法之外编译器回自动赋初值。</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="wanglilin.github.io/blog/2017/03/04/javase-string/" data-id="cizuz3p1f0000k05lsz5fkii7" class="article-share-link"><i class="fa fa-share"></i>Bagikan</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="wanglilin.github.io/blog/2017/03/04/javase-string/#comments" class="article-comment-link ds-thread-count" data-thread-key="wanglilin.github.io/blog/2017/03/04/javase-string/">Komentar</a>
+    
+
+        </footer>
+    </div>
+    
+        
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div class="ds-thread" data-thread-key="2017/03/04/javase-string/" data-title="Java基础之字符串" data-url="wanglilin.github.io/blog/2017/03/04/javase-string/"></div>
+    <style>
+        #ds-thread #ds-reset .ds-textarea-wrapper {
+            background: none;
+        }
+        #ds-reset .ds-avatar img {
+            box-shadow: none;
+        }
+        #ds-reset .ds-gradient-bg {
+            background: #f7f7f7;
+        }
+        #ds-thread #ds-reset li.ds-tab a {
+            border-radius: 3px;
+        }
+        #ds-thread #ds-reset .ds-post-button {
+            color: white;
+            border: none;
+            box-shadow: none;
+            background: #d32;
+            text-shadow: none;
+            font-weight: normal;
+            font-family: 'Microsoft Yahei';
+        }
+        #ds-thread #ds-reset .ds-post-button:hover {
+            color: white;
+            background: #DE594C;
+        }
+        #ds-thread #ds-reset .ds-post-button:active {
+            background: #d32;
+        }
+        #ds-smilies-tooltip ul.ds-smilies-tabs li a.ds-current {
+            color: white;
+            background: #d32;
+            box-shadow: none;
+            text-shadow: none;
+            font-weight: normal;
+        }
+    </style>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/03/04/javase-string/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://omdld2kxe.bkt.clouddn.com/shot_1300714358.png)" alt="Java基础之字符串" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/JavaSE/">JavaSE</a></p>
+                            <p class="item-title"><a href="/blog/2017/03/04/javase-string/" class="title">Java基础之字符串</a></p>
+                            <p class="item-date"><time datetime="2017-03-04T08:08:41.000Z" itemprop="datePublished">2017-03-04</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/JavaSE/">JavaSE</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/03/">March 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/JavaSE/">JavaSE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Java基础/">Java基础</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/blog/tags/JavaSE/" style="font-size: 10px;">JavaSE</a> <a href="/blog/tags/Java基础/" style="font-size: 10px;">Java基础</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">友链博客</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://tristanhuang0501.github.io" target="_blank">Tristan</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2017 Wangli Lin<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'blogforwangli'};
+    (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+
+
+
+    
+        <script src="/blog/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/blog/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/blog/js/main.js"></script>
+
+    </div>
+</body>
+</html>

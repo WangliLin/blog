@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8">
     
-    <title>Wangli&#39;s Blog</title>
+    <title>Kategori: JavaSE | Wangli&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta property="og:type" content="website">
 <meta property="og:title" content="Wangli's Blog">
-<meta property="og:url" content="wanglilin.github.io/index.html">
+<meta property="og:url" content="wanglilin.github.io/categories/JavaSE/index.html">
 <meta property="og:site_name" content="Wangli's Blog">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Wangli's Blog">
@@ -188,21 +188,24 @@
 
             
             <section id="main">
-    <article id="post-javase-string" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
+<div class="timeline timeline-wrap">
+    <div class="timeline-row timeline-row-major">
+        <span class="node"><i class="fa fa-folder"></i></span>
+        <h1 class="title">JavaSE</h1>
+    </div>
+    
+        <div class="timeline-row">
+            <span class="node"></span>
+            <div class="content">
                 
     
         <h1 itemprop="name">
-            <a class="article-title" href="/blog/2017/03/04/javase-string/">Java基础之字符串</a>
+            <a class="timeline-article-title" href="/blog/2017/03/04/javase-string/">Java基础之字符串</a>
         </h1>
     
 
-                
-                    <div class="article-meta">
-                        
+                <div class="article-meta">
+                    
     <div class="article-date">
         <i class="fa fa-calendar"></i>
         <a href="/blog/2017/03/04/javase-string/">
@@ -211,116 +214,23 @@
     </div>
 
 
-                        
+                    
     <div class="article-category">
     	<i class="fa fa-folder"></i>
         <a class="article-category-link" href="/blog/categories/JavaSE/">JavaSE</a>
     </div>
 
-                        
+                    
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link" href="/blog/tags/JavaSE/">JavaSE</a>, <a class="tag-link" href="/blog/tags/Java基础/">Java基础</a>
     </div>
 
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            <p><h2 id="类结构"><a href="#类结构" class="headerlink" title="类结构"></a>类结构</h2><p>public final class String<br>extends Object<br>implements Serializable, Comparable, CharSequence</p>
-<h2 id="类概述"><a href="#类概述" class="headerlink" title="类概述"></a>类概述</h2><p>Java把内存划分为两种：一种是栈内存，一种是堆内存。<strong>在函数中定义的一些基本类型的变量和对象的引用变量都是在函数的栈内存中分配</strong>。当在一段代码块定义一个变量时，Java就在栈中为这个变量分配内存空间，当超过变量的作用域后，Java会自动释放掉为该变量分配的内存空间，该内存空间可以立即被另作它用。<br></p>
-            <p class="article-more-link">
-                <a href="/blog/2017/03/04/javase-string/#more">Read More</a>
-            </p>
-        
+                </div>
+            </div>
         </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
+    
 </div>
-
-    <a data-url="wanglilin.github.io/blog/2017/03/04/javase-string/" data-id="cizuz3p1f0000k05lsz5fkii7" class="article-share-link"><i class="fa fa-share"></i>Bagikan</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="wanglilin.github.io/blog/2017/03/04/javase-string/#comments" class="article-comment-link ds-thread-count" data-thread-key="wanglilin.github.io/blog/2017/03/04/javase-string/">Komentar</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
 </section>
             
                 <aside id="sidebar">
