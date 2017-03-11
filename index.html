@@ -76,7 +76,7 @@
             <div id="search-form-wrap">
 
     <form class="search-form">
-        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
         <button type="submit" class="search-form-submit"></button>
     </form>
     <div class="ins-search">
@@ -95,10 +95,10 @@
 (function (window) {
     var INSIGHT_CONFIG = {
         TRANSLATION: {
-            POSTS: 'Entradas',
+            POSTS: 'Posts',
             PAGES: 'Pages',
-            CATEGORIES: 'Categorias',
-            TAGS: 'Etiquetas',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
             UNTITLED: '(Untitled)',
         },
         ROOT_URL: '/blog/',
@@ -129,7 +129,7 @@
                 <td>
                     
     <div class="search-form">
-        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
     </div>
 
                 </td>
@@ -153,7 +153,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                1
+                2
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -188,7 +188,7 @@
 
             
             <section id="main">
-    <article id="post-javase-string" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-java-exception" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -196,7 +196,7 @@
                 
     
         <h1 itemprop="name">
-            <a class="article-title" href="/blog/2017/03/04/javase-string/">Java基础之字符串</a>
+            <a class="article-title" href="/blog/2017/03/11/java-exception/">Java基础之异常</a>
         </h1>
     
 
@@ -205,8 +205,8 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/blog/2017/03/04/javase-string/">
-            <time datetime="2017-03-04T08:08:41.000Z" itemprop="datePublished">2017-03-04</time>
+        <a href="/blog/2017/03/11/java-exception/">
+            <time datetime="2017-03-11T12:51:50.000Z" itemprop="datePublished">2017-03-11</time>
         </a>
     </div>
 
@@ -230,10 +230,17 @@
         
         <div class="article-entry" itemprop="articleBody">
         
-            <p><h2 id="类结构"><a href="#类结构" class="headerlink" title="类结构"></a>类结构</h2><p>public final class String<br>extends Object<br>implements Serializable, Comparable, CharSequence</p>
-<h2 id="类概述"><a href="#类概述" class="headerlink" title="类概述"></a>类概述</h2><p>Java把内存划分为两种：一种是栈内存，一种是堆内存。<strong>在函数中定义的一些基本类型的变量和对象的引用变量都是在函数的栈内存中分配</strong>。当在一段代码块定义一个变量时，Java就在栈中为这个变量分配内存空间，当超过变量的作用域后，Java会自动释放掉为该变量分配的内存空间，该内存空间可以立即被另作它用。<br></p>
+            <p><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>A clever person solves a problem, a wise person avoids it.<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;   ——那你，会如何处理异常，try or throw？</p>
+</blockquote>
+<h2 id="1-异常是什么"><a href="#1-异常是什么" class="headerlink" title="1 异常是什么"></a>1 异常是什么</h2><p>我有一辆车（不是自行车，四轮的！！诶，更不是拖拉机！！！），我要开车去隔壁村见小王（不是隔壁老王），开到半路爆胎了，此时，我有两个选择：</p>
+<ul>
+<li>如果我车上有备胎（诶，可惜我备胎这东西是建立在有女朋友的基础之上的，女朋友是个好东西，然而我并没有），我可以选择在当前就换个轮胎，然后将坏了的车胎放到后备箱，车子仍然可以继续开；</li>
+<li>我车上没有备胎，那我只能放个警示牌，打个电话给能处理这个车爆胎的人来处理，而这并不妨碍我走着去见隔壁村的小王。</li>
+</ul>
+<p>这就是在Java中遇到异常的两个常用的方法，你可以处理它（try）或抛出它（throw），即将锅交给别人去处理。</p></p>
             <p class="article-more-link">
-                <a href="/blog/2017/03/04/javase-string/#more">Read More</a>
+                <a href="/blog/2017/03/11/java-exception/#more">Read More</a>
             </p>
         
         </div>
@@ -244,7 +251,7 @@
 
 </div>
 
-    <a data-url="wanglilin.github.io/blog/2017/03/04/javase-string/" data-id="cizxmspvf0000rc5l6yca8vsj" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
+    <a data-url="wanglilin.github.io/blog/2017/03/11/java-exception/" data-id="cj05a1e9e0000vk5lqmutj0ws" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -312,7 +319,141 @@
 
             
     
-        <a href="wanglilin.github.io/blog/2017/03/04/javase-string/#comments" class="article-comment-link ds-thread-count" data-thread-key="wanglilin.github.io/blog/2017/03/04/javase-string/">Comentarios</a>
+        <a href="wanglilin.github.io/blog/2017/03/11/java-exception/#comments" class="article-comment-link ds-thread-count" data-thread-key="wanglilin.github.io/blog/2017/03/11/java-exception/">Comments</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-javase-string" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/blog/2017/03/04/javase-string/">Java基础之字符串</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/blog/2017/03/04/javase-string/">
+            <time datetime="2017-03-04T08:08:41.000Z" itemprop="datePublished">2017-03-04</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/blog/categories/JavaSE/">JavaSE</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/blog/tags/JavaSE/">JavaSE</a>, <a class="tag-link" href="/blog/tags/Java基础/">Java基础</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            <p><h2 id="类结构"><a href="#类结构" class="headerlink" title="类结构"></a>类结构</h2><p>public final class String<br>extends Object<br>implements Serializable, Comparable, CharSequence</p>
+<h2 id="类概述"><a href="#类概述" class="headerlink" title="类概述"></a>类概述</h2><p>Java把内存划分为两种：一种是栈内存，一种是堆内存。<strong>在函数中定义的一些基本类型的变量和对象的引用变量都是在函数的栈内存中分配</strong>。当在一段代码块定义一个变量时，Java就在栈中为这个变量分配内存空间，当超过变量的作用域后，Java会自动释放掉为该变量分配的内存空间，该内存空间可以立即被另作它用。<br></p>
+            <p class="article-more-link">
+                <a href="/blog/2017/03/04/javase-string/#more">Read More</a>
+            </p>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="wanglilin.github.io/blog/2017/03/04/javase-string/" data-id="cj05a1e9x0002vk5l5zkkm5jc" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="wanglilin.github.io/blog/2017/03/04/javase-string/#comments" class="article-comment-link ds-thread-count" data-thread-key="wanglilin.github.io/blog/2017/03/04/javase-string/">Comments</a>
     
 
         </footer>
@@ -330,6 +471,25 @@
         <h3 class="widget-title">最新文章</h3>
         <div class="widget">
             <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/03/11/java-exception/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://omdld2kxe.bkt.clouddn.com/exception_d.jpg)" alt="Java基础之异常" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/JavaSE/">JavaSE</a></p>
+                            <p class="item-title"><a href="/blog/2017/03/11/java-exception/" class="title">Java基础之异常</a></p>
+                            <p class="item-date"><time datetime="2017-03-11T12:51:50.000Z" itemprop="datePublished">2017-03-11</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -359,7 +519,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/JavaSE/">JavaSE</a><span class="category-list-count">1</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/JavaSE/">JavaSE</a><span class="category-list-count">2</span></li></ul>
         </div>
     </div>
 
@@ -368,7 +528,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/03/">March 2017</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/03/">March 2017</a><span class="archive-list-count">2</span></li></ul>
         </div>
     </div>
 
@@ -377,7 +537,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/JavaSE/">JavaSE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Java基础/">Java基础</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/JavaSE/">JavaSE</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Java基础/">Java基础</a><span class="tag-list-count">2</span></li></ul>
         </div>
     </div>
 
