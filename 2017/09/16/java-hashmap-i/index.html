@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>java-hashmap-i | Wangli&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="HashMap源码阅读（上）1.HashMap数据结构简介HashMap就是数据结构中的散列表，是以key、value的形式进行存储数据的。数组具有查找定位快，但是插入操作性能差的特点；链表具有查找慢插入快的特点，而HashMap可以说是这两种方式的一种折中。HashMap采用数组与链表相结合的方式实现，其数据结构示意图如下图所示：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java-hashmap-i">
+<meta property="og:url" content="wanglilin.github.io/2017/09/16/java-hashmap-i/index.html">
+<meta property="og:site_name" content="Wangli's Blog">
+<meta property="og:description" content="HashMap源码阅读（上）1.HashMap数据结构简介HashMap就是数据结构中的散列表，是以key、value的形式进行存储数据的。数组具有查找定位快，但是插入操作性能差的特点；链表具有查找慢插入快的特点，而HashMap可以说是这两种方式的一种折中。HashMap采用数组与链表相结合的方式实现，其数据结构示意图如下图所示：">
+<meta property="og:image" content="http://omdld2kxe.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD.jpg">
+<meta property="og:updated_time" content="2017-09-16T04:34:02.393Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java-hashmap-i">
+<meta name="twitter:description" content="HashMap源码阅读（上）1.HashMap数据结构简介HashMap就是数据结构中的散列表，是以key、value的形式进行存储数据的。数组具有查找定位快，但是插入操作性能差的特点；链表具有查找慢插入快的特点，而HashMap可以说是这两种方式的一种折中。HashMap采用数组与链表相结合的方式实现，其数据结构示意图如下图所示：">
+<meta name="twitter:image" content="http://omdld2kxe.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD.jpg">
+    
+
+    
+        <link rel="alternate" href="atom.xml" title="Wangli&#39;s Blog" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/blog/css/images/favicon.ico" />
+    
+
+    <link rel="stylesheet" href="/blog/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/blog/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/blog/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/blog/css/style.css">
+
+    <script src="/blog/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/blog/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/blog/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/blog/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Wangli&#39;s Blog</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/blog/.">主页</a>
+                
+                    <a class="main-nav-link" href="/blog/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/blog/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/blog/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/blog/about">关于</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/blog/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Entradas',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categorias',
+            TAGS: 'Etiquetas',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/blog/',
+        CONTENT_URL: '/blog/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/blog/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/blog/.">主页</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/blog/css/images/avatar.png" />
+            <h2 id="name">Wangli</h2>
+            <h3 id="title">Android/Web开发</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Hangzhou, China</span>
+            <a id="follow" target="_blank" href="https://github.com/wanglilin/">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                4
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                4
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/wanglilin/" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="http://weibo.com/callmebia" target="_blank" title="weibo" class=tooltip>
+                            <i class="fa fa-weibo"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/blog/atom.xml" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-java-hashmap-i" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            java-hashmap-i
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/blog/2017/09/16/java-hashmap-i/">
+            <time datetime="2017-09-16T04:19:25.000Z" itemprop="datePublished">2017-09-16</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/blog/categories/Java源码/">Java源码</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/blog/tags/Java基础/">Java基础</a>, <a class="tag-link" href="/blog/tags/Java源码阅读/">Java源码阅读</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h1 id="HashMap源码阅读（上）"><a href="#HashMap源码阅读（上）" class="headerlink" title="HashMap源码阅读（上）"></a>HashMap源码阅读（上）</h1><h2 id="1-HashMap数据结构简介"><a href="#1-HashMap数据结构简介" class="headerlink" title="1.HashMap数据结构简介"></a>1.HashMap数据结构简介</h2><p>HashMap就是数据结构中的散列表，是以key、value的形式进行存储数据的。数组具有查找定位快，但是插入操作性能差的特点；链表具有查找慢插入快的特点，而HashMap可以说是这两种方式的一种折中。<br>HashMap采用数组与链表相结合的方式实现，其数据结构示意图如下图所示：<br><img src="http://omdld2kxe.bkt.clouddn.com/3239635-41e5f95e197a5a8e.png" alt="HashMap数据结构示意图"></p>
+<a id="more"></a>
+<h3 id="HashMap的特点"><a href="#HashMap的特点" class="headerlink" title="HashMap的特点"></a>HashMap的特点</h3><ul>
+<li>可以存储null值（HashMap可以接受为null的键或值）</li>
+<li>非线程安全</li>
+<li>存储查找速度快</li>
+</ul>
+<h3 id="HashMap的性能"><a href="#HashMap的性能" class="headerlink" title="HashMap的性能"></a>HashMap的性能</h3><p>影响HashMap性能的因素：</p>
+<ul>
+<li>哈希函数均匀：HashMap是通过hash函数来定位数组下标，进而确定对象存储位置的，最坏的情况是通过hash函数计算出的下标都为相同，那么HashMap就退化成链表了，最好的情况是都不相同那么就能达到O(1)的效率，所以hash计算出来冲突产生越多，那么查找效率就越低。冲突越少查找效率越高。</li>
+<li>处理冲突的方法：既要有较高的查找性能，又要有较高的插入性能，那么冲突就无法避免，解决冲突的方式也决定了其性能的优劣。</li>
+</ul>
+<h2 id="2-HashMap具体实现"><a href="#2-HashMap具体实现" class="headerlink" title="2.HashMap具体实现"></a>2.HashMap具体实现</h2><h3 id="从key到数组的下标"><a href="#从key到数组的下标" class="headerlink" title="从key到数组的下标"></a>从key到数组的下标</h3><ul>
+<li>首先根据key调用hashCode()方法生成hashCode</li>
+<li>调用hash()方法根据生成的hashCode生成hash值</li>
+<li>利用hash值与数组table的length - 1求余得到数组下标（为了使得到的数组在数组区间内）</li>
+</ul>
+<p><code>hash()</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">hash</span><span class="params">(Object key)</span> </span>&#123;</div><div class="line">       <span class="keyword">int</span> h;</div><div class="line">       <span class="keyword">return</span> (key == <span class="keyword">null</span>) ? <span class="number">0</span> : (h = key.hashCode()) ^ (h &gt;&gt;&gt; <span class="number">16</span>);</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<p>这段代码叫扰动函数，大家都知道上面代码中的<code>key.hashCode()</code>函数调用的是key键值类型自带的哈希函数，返回int型散列值。<br>理论上散列值是一个int型，如果直接拿散列值作为下标访问HashMap主数组的话，考虑到带符号的int表值范围前后加起来大概40亿的映射空间，只要哈希函数映射得比较均匀松散，一般应用是很难出现碰撞的。<br>但问题是一个40亿长度的数组，内存是放不下的。HashMap扩容之前的数组初始大小才16，所以这个散列值是不能直接拿来用的。用之前还要先做对数组的长度取模运算，得到的余数才能用来访问数组下标。源码中模运算是在类似<code>indexFor()</code>函数里这样完成的：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">bucketIndex = indexFor(hash, table.length);</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">indexFor</span><span class="params">(<span class="keyword">int</span> h, <span class="keyword">int</span> length)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> h &amp; (length-<span class="number">1</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这正好解释了为什么HashMap的数组长度要取2的整次幂，因为这样（数组长度 - 1）正好相当于一个“低位掩码”，“与”操作的结果就是散列值得高位全部归零，只保留低位值，用来做下标访问。以初始长度为16示例，16 - 1 = 15，2进制表示就是<code>00000000 00000000 00001111</code>。和某散列值做“与”操作如下，结果就是截取了最低的四位值。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">    10100101 11000100 00100101</div><div class="line">&amp;   00000000 00000000 00001111</div><div class="line">----------------------------------</div><div class="line">    00000000 00000000 00000101    //高位全部归零，只保留末四位</div></pre></td></tr></table></figure></p>
+<p>但这时候问题就来了，就算散列值分布再分散，要是只取最后几位的话，碰撞也会很严重，更要命的是如果散列本身做得不好，分布上成等差数列的漏洞，恰好使最后几个低位呈现规律性重复，就会造成很严重的后果。<br>这时候“扰动函数”的价值就体现出来了，如下图：<br><img src="http://omdld2kxe.bkt.clouddn.com/4acf898694b8fb53498542dc0c5f765a_b.png" alt="扰动函数计算过程"><br>右位移16位，正好是32bit的一半，自己的高半区和低半区做异或，就是为了混合原始哈希码的高位和低位，以此来加大低位的随机性。而且混合后的低位参杂了高位的部分特征，这样高位的信息也被变相保留下来。<br>参考：<br><a href="https://www.zhihu.com/question/20733617" target="_blank" rel="external">JDK 源码中 HashMap 的 hash 方法原理是什么？</a></p>
+<h3 id="数组大小"><a href="#数组大小" class="headerlink" title="数组大小"></a>数组大小</h3><p>这里涉及到一个非常有趣且niubi的函数<code>tableSizeFor()</code>，其源码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MAXIMUM_CAPASITY = <span class="number">1</span> &lt;&lt; <span class="number">30</span>;</div><div class="line"><span class="comment">/**</span></div><div class="line">     * Returns a power of two size for the given target capacity.</div><div class="line">     */</div><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">tableSizeFor</span><span class="params">(<span class="keyword">int</span> cap)</span> </span>&#123;</div><div class="line">      <span class="keyword">int</span> n = cap - <span class="number">1</span>;</div><div class="line">      n |= n &gt;&gt;&gt; <span class="number">1</span>;</div><div class="line">      n |= n &gt;&gt;&gt; <span class="number">2</span>;</div><div class="line">      n |= n &gt;&gt;&gt; <span class="number">4</span>;</div><div class="line">      n |= n &gt;&gt;&gt; <span class="number">8</span>;</div><div class="line">      n |= n &gt;&gt;&gt; <span class="number">16</span>;</div><div class="line">      <span class="keyword">return</span> (n &lt; <span class="number">0</span>) ? <span class="number">1</span> : (n &gt;= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + <span class="number">1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这个方法被调用的地方：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">HashMap</span><span class="params">(<span class="keyword">int</span> initialCapacity, <span class="keyword">float</span> loadFactor)</span> </span>&#123;</div><div class="line">        <span class="comment">/**省略此处代码**/</span></div><div class="line">        <span class="keyword">this</span>.loadFactor = loadFactor;</div><div class="line">        <span class="keyword">this</span>.threshold = tableSizeFor(initialCapacity);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>上面的方法就是数组大小生成的方法，永远生成的是一个2的幂的数，也就是说例如输入15，返回的结果就是16。<br>为什么这个方法总能在给定一个值之后返回一个大于它同时最接近它或者等于它的2次幂呢？<br>首先看下下面这段二进制数据：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="number">2</span>的<span class="number">0</span>次方<span class="number">2</span>进制  <span class="number">0000</span> <span class="number">0001</span>    十进制 <span class="number">1</span></div><div class="line"><span class="number">2</span>的<span class="number">1</span>次方<span class="number">2</span>进制  <span class="number">0000</span> <span class="number">0010</span>    十进制  <span class="number">2</span></div><div class="line"><span class="number">2</span>的<span class="number">2</span>次方<span class="number">2</span>进制  <span class="number">0000</span> <span class="number">0100</span>    十进制  <span class="number">4</span></div><div class="line"><span class="number">2</span>的<span class="number">3</span>次方<span class="number">2</span>进制  <span class="number">0000</span> <span class="number">1000</span>    十进制  <span class="number">8</span></div><div class="line"><span class="number">2</span>的<span class="number">4</span>次方<span class="number">2</span>进制  <span class="number">0001</span> <span class="number">0000</span>    十进制  <span class="number">16</span></div></pre></td></tr></table></figure>
+<p>我们发现临近的两个2的幂的高位是相邻的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">例如7要取到8 所以将</div><div class="line">0000 0111</div><div class="line">无符号右移</div><div class="line">0000 0111 &gt;&gt;&gt;1 等于 0000 0011</div><div class="line">进行与操作 （只要存在1那么是1）</div><div class="line">0000 0111 | 0000 0011 等于 0000 0111</div><div class="line">n + 1（源码三目运算符）</div><div class="line">0000 0111 + 0000 0001=0000 1000</div><div class="line"></div><div class="line">给定数字为4最后通过右移变成8</div><div class="line">0000 0100</div><div class="line">无符号右移1</div><div class="line">0000 0100 &gt;&gt;&gt;1 等于 0000 0010</div><div class="line">进行与操作 （只要存在1那么是1）</div><div class="line">0000 0100   |    0000 0010  等于  0000 0110</div><div class="line">接着因为已经有2位达到变成1的目的，所以接着就是移动2位</div><div class="line">0000 0110   &gt;&gt;&gt;   0000 0011</div><div class="line">进行与操作 （只要存在1那么是1）</div><div class="line">0000 0110    |    0000 0011  等于  0000 0111</div><div class="line">n + 1（源码三目运算符）</div><div class="line">0000 0111 + 0000 1000 =8</div></pre></td></tr></table></figure>
+<p>借助两个2的幂之间的高位是相邻的的方式。然后通过无符号右移使得给定的数高位以后全变成1这样最后进行n+1就获取到了最小大于它的2的幂。<br>至于源码为什么到了16就不操作了，是因为int类型是占4个字节，每个字节8位，共32位。而向右移动16位后，可以从高位第一个出现1的位置开始向右连续32位为1，已经超越了int的最大值，所以不用在进行位移操作了，这也是代码中只是移动16位后就结束的原因。<br>注意：得到的这个capacity却被赋值给了threshold：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">this</span>.threshold = tableSizeFor(initialCapacity);</div></pre></td></tr></table></figure>
+<p>按理说，应该这么写：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">this</span>.threshold = tableSizeFor(initialCapacity) * <span class="keyword">this</span>.loadFactor;</div></pre></td></tr></table></figure>
+<p>但是，请注意，在构造方法中，并没有对table这个成员变量进行初始化，table的初始化被推迟到了put方法中，在put方法中会对threshold进行重新运算。</p>
+<h3 id="HashMap是怎么进行扩容的"><a href="#HashMap是怎么进行扩容的" class="headerlink" title="HashMap是怎么进行扩容的"></a>HashMap是怎么进行扩容的</h3><p>扩容（resize）就是重新计算容量，向HashMap对象里不停的添加元素，而HashMap对象内部的数组无法转载更多的元素时，对象就需要扩大数组的长度，以便能装入更多的元素。当然Java里的数组是无法自动扩容的，方法是使用一个新的数组代替已有的容量小的数组，就像我们用一个小桶装水，如果想装更多的水，就得换大水桶。</p>
+<p><code>resize()</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">final</span> Node&lt;K,V&gt;[] resize() &#123;</div><div class="line">       Node&lt;K,V&gt;[] oldTab = table;</div><div class="line">       <span class="keyword">int</span> oldCap = (oldTab == <span class="keyword">null</span>) ? <span class="number">0</span> : oldTab.length;</div><div class="line">       <span class="keyword">int</span> oldThr = threshold;</div><div class="line">       <span class="keyword">int</span> newCap, newThr = <span class="number">0</span>;</div><div class="line">       <span class="keyword">if</span> (oldCap &gt; <span class="number">0</span>) &#123;</div><div class="line">           <span class="keyword">if</span> (oldCap &gt;= MAXIMUM_CAPACITY) &#123;</div><div class="line">               <span class="comment">//如果capcity超过最大阈值了，threshold也设为最大阈值</span></div><div class="line">               threshold = Integer.MAX_VALUE;</div><div class="line">               <span class="keyword">return</span> oldTab;</div><div class="line">           &#125;</div><div class="line">           <span class="keyword">else</span> <span class="keyword">if</span> ((newCap = oldCap &lt;&lt; <span class="number">1</span>) &lt; MAXIMUM_CAPACITY &amp;&amp;</div><div class="line">                    oldCap &gt;= DEFAULT_INITIAL_CAPACITY)</div><div class="line">               newThr = oldThr &lt;&lt; <span class="number">1</span>; <span class="comment">// double threshold</span></div><div class="line">       &#125;</div><div class="line">       <span class="keyword">else</span> <span class="keyword">if</span> (oldThr &gt; <span class="number">0</span>) <span class="comment">// initial capacity was placed in threshold</span></div><div class="line">           <span class="comment">//这里便是上面所讲的，一开始将值赋给了threshold,后面将值赋给capacity</span></div><div class="line">           newCap = oldThr;</div><div class="line">       <span class="keyword">else</span> &#123;               <span class="comment">// zero initial threshold signifies using defaults</span></div><div class="line">           newCap = DEFAULT_INITIAL_CAPACITY;</div><div class="line">           newThr = (<span class="keyword">int</span>)(DEFAULT_LOAD_FACTOR * DEFAULT_INITIAL_CAPACITY);</div><div class="line">       &#125;</div><div class="line">       <span class="keyword">if</span> (newThr == <span class="number">0</span>) &#123;</div><div class="line">           <span class="comment">//这里有来了一轮threshold的赋值</span></div><div class="line">           <span class="keyword">float</span> ft = (<span class="keyword">float</span>)newCap * loadFactor;</div><div class="line">           newThr = (newCap &lt; MAXIMUM_CAPACITY &amp;&amp; ft &lt; (<span class="keyword">float</span>)MAXIMUM_CAPACITY ?</div><div class="line">                     (<span class="keyword">int</span>)ft : Integer.MAX_VALUE);</div><div class="line">       &#125;</div><div class="line">       threshold = newThr;</div><div class="line">       <span class="meta">@SuppressWarnings</span>(&#123;<span class="string">"rawtypes"</span>,<span class="string">"unchecked"</span>&#125;)</div><div class="line">           Node&lt;K,V&gt;[] newTab = (Node&lt;K,V&gt;[])<span class="keyword">new</span> Node[newCap];</div><div class="line">       table = newTab;</div><div class="line">       <span class="comment">//非新建hashmap，扩容</span></div><div class="line">       <span class="keyword">if</span> (oldTab != <span class="keyword">null</span>) &#123;</div><div class="line">           <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; oldCap; ++j) &#123;</div><div class="line">               Node&lt;K,V&gt; e;</div><div class="line">               <span class="keyword">if</span> ((e = oldTab[j]) != <span class="keyword">null</span>) &#123;</div><div class="line">                   oldTab[j] = <span class="keyword">null</span>;</div><div class="line">                   <span class="comment">//如果在该位置上只有一个值</span></div><div class="line">                   <span class="keyword">if</span> (e.next == <span class="keyword">null</span>)</div><div class="line">                       newTab[e.hash &amp; (newCap - <span class="number">1</span>)] = e;</div><div class="line">                   <span class="keyword">else</span> <span class="keyword">if</span> (e <span class="keyword">instanceof</span> TreeNode)</div><div class="line">                       ((TreeNode&lt;K,V&gt;)e).split(<span class="keyword">this</span>, newTab, j, oldCap);</div><div class="line">                   <span class="keyword">else</span> &#123; <span class="comment">// preserve order</span></div><div class="line">                       <span class="comment">//链表优化重hash</span></div><div class="line">                       Node&lt;K,V&gt; loHead = <span class="keyword">null</span>, loTail = <span class="keyword">null</span>;</div><div class="line">                       Node&lt;K,V&gt; hiHead = <span class="keyword">null</span>, hiTail = <span class="keyword">null</span>;</div><div class="line">                       Node&lt;K,V&gt; next;</div><div class="line">                       <span class="comment">//使用尾插法</span></div><div class="line">                       <span class="keyword">do</span> &#123;</div><div class="line">                           next = e.next;</div><div class="line">                           <span class="comment">//lo - 原索引</span></div><div class="line">                           <span class="keyword">if</span> ((e.hash &amp; oldCap) == <span class="number">0</span>) &#123;</div><div class="line">                               <span class="keyword">if</span> (loTail == <span class="keyword">null</span>)</div><div class="line">                                   loHead = e;</div><div class="line">                               <span class="keyword">else</span></div><div class="line">                                   loTail.next = e;</div><div class="line">                               loTail = e;</div><div class="line">                           &#125;</div><div class="line">                           <span class="comment">//hi - 原索引 + oldcap</span></div><div class="line">                           <span class="keyword">else</span> &#123;</div><div class="line">                               <span class="keyword">if</span> (hiTail == <span class="keyword">null</span>)</div><div class="line">                                   hiHead = e;</div><div class="line">                               <span class="keyword">else</span></div><div class="line">                                   hiTail.next = e;</div><div class="line">                               hiTail = e;</div><div class="line">                           &#125;</div><div class="line">                       &#125; <span class="keyword">while</span> ((e = next) != <span class="keyword">null</span>);</div><div class="line">                       <span class="comment">//原索引放到bucket里</span></div><div class="line">                       <span class="keyword">if</span> (loTail != <span class="keyword">null</span>) &#123;</div><div class="line">                           loTail.next = <span class="keyword">null</span>;</div><div class="line">                           newTab[j] = loHead;</div><div class="line">                       &#125;</div><div class="line">                       <span class="comment">//原索引+oldCap放到bucket里</span></div><div class="line">                       <span class="keyword">if</span> (hiTail != <span class="keyword">null</span>) &#123;</div><div class="line">                           hiTail.next = <span class="keyword">null</span>;</div><div class="line">                           newTab[j + oldCap] = hiHead;</div><div class="line">                       &#125;</div><div class="line">                   &#125;</div><div class="line">               &#125;</div><div class="line">           &#125;</div><div class="line">       &#125;</div><div class="line">       <span class="keyword">return</span> newTab;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<p>经过观测可以发现，我们使用的是2次幂的扩展(指长度扩为原来2倍)，所以，元素的位置要么是在原位置，要么是在原位置再移动2次幂的位置。看下图可以明白这句话的意思，n为table的长度，图（a）表示扩容前的key1和key2两种key确定索引位置的示例，图（b）表示扩容后key1和key2两种key确定索引位置的示例，其中hash1是key1对应的哈希与高位运算结果。<br><img src="http://omdld2kxe.bkt.clouddn.com/hashMap.png" alt="扩容计算|center"></p>
+<p>元素重新计算hash之后，因为n变为2倍，那么n-1的mask范围在高位多1bit（红色），因此新的index就会发生这样的变化：<br><img src="http://omdld2kxe.bkt.clouddn.com/hashMap2.png" alt="扩容计算2|center"></p>
+<p>因此，我们在扩充HashMap的时候，只需要看看原来的hash值新增的那个bit是1还是0就好了，是0的话索引没变，是1的话索引变成“原索引+oldCap”，可以看看下图为16扩充为32的resize示意图：<br><img src="http://omdld2kxe.bkt.clouddn.com/jdk1.8hashmap.png" alt="hashMap扩容机制|center"><br>参考：<a href="http://www.importnew.com/20386.html" target="_blank" rel="external">resize()函数解析</a></p>
+<h3 id="HashMap中的内部类"><a href="#HashMap中的内部类" class="headerlink" title="HashMap中的内部类"></a>HashMap中的内部类</h3><p><code>Node类</code>：每个node都含有hash、key、value、next等成员变量</p>
+<ul>
+<li>hash：key的hash值</li>
+<li>key、value：node的键和值</li>
+<li>next：node的下一个node，在产生冲突的时候next才有值</li>
+</ul>
+<p><strong>注意Node类重写了<code>equals()</code>和<code>hashCode()</code>方法</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">implements</span> <span class="title">Map</span>.<span class="title">Entry</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; </span>&#123;</div><div class="line">        <span class="keyword">final</span> <span class="keyword">int</span> hash;</div><div class="line">        <span class="keyword">final</span> K key;</div><div class="line">        V value;</div><div class="line">        Node&lt;K,V&gt; next;</div><div class="line"></div><div class="line">        Node(<span class="keyword">int</span> hash, K key, V value, Node&lt;K,V&gt; next) &#123;</div><div class="line">            <span class="keyword">this</span>.hash = hash;</div><div class="line">            <span class="keyword">this</span>.key = key;</div><div class="line">            <span class="keyword">this</span>.value = value;</div><div class="line">            <span class="keyword">this</span>.next = next;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> K <span class="title">getKey</span><span class="params">()</span>        </span>&#123; <span class="keyword">return</span> key; &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> V <span class="title">getValue</span><span class="params">()</span>      </span>&#123; <span class="keyword">return</span> value; &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> key + <span class="string">"="</span> + value; &#125;</div><div class="line"></div><div class="line">        <span class="comment">//重写了hashCode()方法</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> Objects.hashCode(key) ^ Objects.hashCode(value);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> V <span class="title">setValue</span><span class="params">(V newValue)</span> </span>&#123;</div><div class="line">            V oldValue = value;</div><div class="line">            value = newValue;</div><div class="line">            <span class="keyword">return</span> oldValue;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//重写了equals方法，参考</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object o)</span> </span>&#123;</div><div class="line">            <span class="keyword">if</span> (o == <span class="keyword">this</span>)</div><div class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">            <span class="keyword">if</span> (o <span class="keyword">instanceof</span> Map.Entry) &#123;</div><div class="line">                Map.Entry&lt;?,?&gt; e = (Map.Entry&lt;?,?&gt;)o;</div><div class="line">                <span class="keyword">if</span> (Objects.equals(key, e.getKey()) &amp;&amp;</div><div class="line">                    Objects.equals(value, e.getValue()))</div><div class="line">                    <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>Node中存储了key的hash值，键值对，同时还有下一个链表元素。我们重点关注一些equals这个方法，这个方法在什么时候会用到呢？当我们算出的key的hash值相同时，put方法并不会报错，而是继续向这个hash值的链表中添加元素。我们会调用equals方法来比对key和value是否相同，如果equals方法返回false，会继续向链表的尾部添加一个键值对。</p>
+<p><strong>未完待续…</strong><br><strong>接下来将会就put和get方法展开源码的阅读…</strong></p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="wanglilin.github.io/blog/2017/09/16/java-hashmap-i/" data-id="cj7mt8ank0003xw5ljvs8fzii" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="wanglilin.github.io/blog/2017/09/16/java-hashmap-i/#comments" class="article-comment-link ds-thread-count" data-thread-key="wanglilin.github.io/blog/2017/09/16/java-hashmap-i/">Comentarios</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/blog/2017/03/19/android-memo/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Más viejo</strong>
+            <div class="article-nav-title">Android-备忘录开发</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div class="ds-thread" data-thread-key="2017/09/16/java-hashmap-i/" data-title="java-hashmap-i" data-url="wanglilin.github.io/blog/2017/09/16/java-hashmap-i/"></div>
+    <style>
+        #ds-thread #ds-reset .ds-textarea-wrapper {
+            background: none;
+        }
+        #ds-reset .ds-avatar img {
+            box-shadow: none;
+        }
+        #ds-reset .ds-gradient-bg {
+            background: #f7f7f7;
+        }
+        #ds-thread #ds-reset li.ds-tab a {
+            border-radius: 3px;
+        }
+        #ds-thread #ds-reset .ds-post-button {
+            color: white;
+            border: none;
+            box-shadow: none;
+            background: #d32;
+            text-shadow: none;
+            font-weight: normal;
+            font-family: 'Microsoft Yahei';
+        }
+        #ds-thread #ds-reset .ds-post-button:hover {
+            color: white;
+            background: #DE594C;
+        }
+        #ds-thread #ds-reset .ds-post-button:active {
+            background: #d32;
+        }
+        #ds-smilies-tooltip ul.ds-smilies-tabs li a.ds-current {
+            color: white;
+            background: #d32;
+            box-shadow: none;
+            text-shadow: none;
+            font-weight: normal;
+        }
+    </style>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/09/16/java-hashmap-i/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://omdld2kxe.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD.jpg)" alt="java-hashmap-i" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Java源码/">Java源码</a></p>
+                            <p class="item-title"><a href="/blog/2017/09/16/java-hashmap-i/" class="title">java-hashmap-i</a></p>
+                            <p class="item-date"><time datetime="2017-09-16T04:19:25.000Z" itemprop="datePublished">2017-09-16</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/03/19/android-memo/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://d13yacurqjgara.cloudfront.net/users/23569/screenshots/1662078/memo_app_icon.png)" alt="Android-备忘录开发" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Android/">Android</a></p>
+                            <p class="item-title"><a href="/blog/2017/03/19/android-memo/" class="title">Android-备忘录开发</a></p>
+                            <p class="item-date"><time datetime="2017-03-19T06:30:50.000Z" itemprop="datePublished">2017-03-19</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/03/11/java-exception/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://omdld2kxe.bkt.clouddn.com/exception_d.jpg)" alt="Java基础之异常" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/JavaSE/">JavaSE</a></p>
+                            <p class="item-title"><a href="/blog/2017/03/11/java-exception/" class="title">Java基础之异常</a></p>
+                            <p class="item-date"><time datetime="2017-03-11T12:51:50.000Z" itemprop="datePublished">2017-03-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/03/04/javase-string/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://omdld2kxe.bkt.clouddn.com/shot_1300714358.png)" alt="Java基础之字符串" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/JavaSE/">JavaSE</a></p>
+                            <p class="item-title"><a href="/blog/2017/03/04/javase-string/" class="title">Java基础之字符串</a></p>
+                            <p class="item-date"><time datetime="2017-03-04T08:08:41.000Z" itemprop="datePublished">2017-03-04</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Android/">Android</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/JavaSE/">JavaSE</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java源码/">Java源码</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/03/">March 2017</a><span class="archive-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Android/">Android</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/JavaSE/">JavaSE</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Java基础/">Java基础</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Java源码阅读/">Java源码阅读</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/blog/tags/Android/" style="font-size: 10px;">Android</a> <a href="/blog/tags/JavaSE/" style="font-size: 15px;">JavaSE</a> <a href="/blog/tags/Java基础/" style="font-size: 20px;">Java基础</a> <a href="/blog/tags/Java源码阅读/" style="font-size: 10px;">Java源码阅读</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">友链博客</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://tristanhuang0501.github.io" target="_blank">Tristan</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2017 Wangli Lin<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'blogforwangli'};
+    (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+
+
+
+    
+        <script src="/blog/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/blog/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/blog/js/main.js"></script>
+
+    </div>
+</body>
+</html>
