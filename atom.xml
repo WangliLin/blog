@@ -5,7 +5,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="wanglilin.github.io/"/>
-  <updated>2017-09-16T04:34:02.393Z</updated>
+  <updated>2017-09-16T04:37:49.624Z</updated>
   <id>wanglilin.github.io/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>java-hashmap-i</title>
+    <title>Java源码阅读-HashMap</title>
     <link href="wanglilin.github.io/2017/09/16/java-hashmap-i/"/>
     <id>wanglilin.github.io/2017/09/16/java-hashmap-i/</id>
     <published>2017-09-16T04:19:25.000Z</published>
-    <updated>2017-09-16T04:34:02.393Z</updated>
+    <updated>2017-09-16T04:37:49.624Z</updated>
     
     <content type="html"><![CDATA[<h1 id="HashMap源码阅读（上）"><a href="#HashMap源码阅读（上）" class="headerlink" title="HashMap源码阅读（上）"></a>HashMap源码阅读（上）</h1><h2 id="1-HashMap数据结构简介"><a href="#1-HashMap数据结构简介" class="headerlink" title="1.HashMap数据结构简介"></a>1.HashMap数据结构简介</h2><p>HashMap就是数据结构中的散列表，是以key、value的形式进行存储数据的。数组具有查找定位快，但是插入操作性能差的特点；链表具有查找慢插入快的特点，而HashMap可以说是这两种方式的一种折中。<br>HashMap采用数组与链表相结合的方式实现，其数据结构示意图如下图所示：<br><img src="http://omdld2kxe.bkt.clouddn.com/3239635-41e5f95e197a5a8e.png" alt="HashMap数据结构示意图"></p>
 <a id="more"></a>
@@ -84,9 +84,9 @@
       <category term="Java源码" scheme="wanglilin.github.io/categories/Java%E6%BA%90%E7%A0%81/"/>
     
     
-      <category term="Java基础" scheme="wanglilin.github.io/tags/Java%E5%9F%BA%E7%A1%80/"/>
-    
       <category term="Java源码阅读" scheme="wanglilin.github.io/tags/Java%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/"/>
+    
+      <category term="Java基础" scheme="wanglilin.github.io/tags/Java%E5%9F%BA%E7%A1%80/"/>
     
   </entry>
   

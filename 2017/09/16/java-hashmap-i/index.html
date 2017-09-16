@@ -3,18 +3,18 @@
 <head>
     <meta charset="utf-8">
     
-    <title>java-hashmap-i | Wangli&#39;s Blog</title>
+    <title>Java源码阅读-HashMap | Wangli&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="HashMap源码阅读（上）1.HashMap数据结构简介HashMap就是数据结构中的散列表，是以key、value的形式进行存储数据的。数组具有查找定位快，但是插入操作性能差的特点；链表具有查找慢插入快的特点，而HashMap可以说是这两种方式的一种折中。HashMap采用数组与链表相结合的方式实现，其数据结构示意图如下图所示：">
 <meta property="og:type" content="article">
-<meta property="og:title" content="java-hashmap-i">
+<meta property="og:title" content="Java源码阅读-HashMap">
 <meta property="og:url" content="wanglilin.github.io/2017/09/16/java-hashmap-i/index.html">
 <meta property="og:site_name" content="Wangli's Blog">
 <meta property="og:description" content="HashMap源码阅读（上）1.HashMap数据结构简介HashMap就是数据结构中的散列表，是以key、value的形式进行存储数据的。数组具有查找定位快，但是插入操作性能差的特点；链表具有查找慢插入快的特点，而HashMap可以说是这两种方式的一种折中。HashMap采用数组与链表相结合的方式实现，其数据结构示意图如下图所示：">
 <meta property="og:image" content="http://omdld2kxe.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD.jpg">
-<meta property="og:updated_time" content="2017-09-16T04:34:02.393Z">
+<meta property="og:updated_time" content="2017-09-16T04:37:49.624Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="java-hashmap-i">
+<meta name="twitter:title" content="Java源码阅读-HashMap">
 <meta name="twitter:description" content="HashMap源码阅读（上）1.HashMap数据结构简介HashMap就是数据结构中的散列表，是以key、value的形式进行存储数据的。数组具有查找定位快，但是插入操作性能差的特点；链表具有查找慢插入快的特点，而HashMap可以说是这两种方式的一种折中。HashMap采用数组与链表相结合的方式实现，其数据结构示意图如下图所示：">
 <meta name="twitter:image" content="http://omdld2kxe.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD.jpg">
     
@@ -84,7 +84,7 @@
             <div id="search-form-wrap">
 
     <form class="search-form">
-        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
         <button type="submit" class="search-form-submit"></button>
     </form>
     <div class="ins-search">
@@ -103,10 +103,10 @@
 (function (window) {
     var INSIGHT_CONFIG = {
         TRANSLATION: {
-            POSTS: 'Entradas',
+            POSTS: 'Posts',
             PAGES: 'Pages',
-            CATEGORIES: 'Categorias',
-            TAGS: 'Etiquetas',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
             UNTITLED: '(Untitled)',
         },
         ROOT_URL: '/blog/',
@@ -137,7 +137,7 @@
                 <td>
                     
     <div class="search-form">
-        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
     </div>
 
                 </td>
@@ -209,7 +209,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            java-hashmap-i
+            Java源码阅读-HashMap
         </h1>
     
 
@@ -305,7 +305,7 @@
 
 </div>
 
-    <a data-url="wanglilin.github.io/blog/2017/09/16/java-hashmap-i/" data-id="cj7mt8ank0003xw5ljvs8fzii" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
+    <a data-url="wanglilin.github.io/blog/2017/09/16/java-hashmap-i/" data-id="cj7mtrbzl0001tc5lacp1d5t0" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -373,7 +373,7 @@
 
             
     
-        <a href="wanglilin.github.io/blog/2017/09/16/java-hashmap-i/#comments" class="article-comment-link ds-thread-count" data-thread-key="wanglilin.github.io/blog/2017/09/16/java-hashmap-i/">Comentarios</a>
+        <a href="wanglilin.github.io/blog/2017/09/16/java-hashmap-i/#comments" class="article-comment-link ds-thread-count" data-thread-key="wanglilin.github.io/blog/2017/09/16/java-hashmap-i/">Comments</a>
     
 
         </footer>
@@ -384,7 +384,7 @@
     
     
         <a href="/blog/2017/03/19/android-memo/" id="article-nav-older" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">Más viejo</strong>
+            <strong class="article-nav-caption">Older</strong>
             <div class="article-nav-title">Android-备忘录开发</div>
         </a>
     
@@ -399,7 +399,7 @@
     <section id="comments">
     
         
-    <div class="ds-thread" data-thread-key="2017/09/16/java-hashmap-i/" data-title="java-hashmap-i" data-url="wanglilin.github.io/blog/2017/09/16/java-hashmap-i/"></div>
+    <div class="ds-thread" data-thread-key="2017/09/16/java-hashmap-i/" data-title="Java源码阅读-HashMap" data-url="wanglilin.github.io/blog/2017/09/16/java-hashmap-i/"></div>
     <style>
         #ds-thread #ds-reset .ds-textarea-wrapper {
             background: none;
@@ -457,7 +457,7 @@
                             <a href="/blog/2017/09/16/java-hashmap-i/" class="thumbnail">
     
     
-        <span style="background-image:url(http://omdld2kxe.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD.jpg)" alt="java-hashmap-i" class="thumbnail-image"></span>
+        <span style="background-image:url(http://omdld2kxe.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD.jpg)" alt="Java源码阅读-HashMap" class="thumbnail-image"></span>
     
 </a>
 
@@ -465,7 +465,7 @@
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/blog/categories/Java源码/">Java源码</a></p>
-                            <p class="item-title"><a href="/blog/2017/09/16/java-hashmap-i/" class="title">java-hashmap-i</a></p>
+                            <p class="item-title"><a href="/blog/2017/09/16/java-hashmap-i/" class="title">Java源码阅读-HashMap</a></p>
                             <p class="item-date"><time datetime="2017-09-16T04:19:25.000Z" itemprop="datePublished">2017-09-16</time></p>
                         </div>
                     </li>
