@@ -3,14 +3,26 @@
 <head>
     <meta charset="utf-8">
     
-    <title>Wangli&#39;s Blog</title>
+    <title>mooc-ii | Wangli&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Wangli's Blog">
-<meta property="og:url" content="wanglilin.github.io/index.html">
+    <meta name="description" content="mooc 数据结构第二节作业一元多项式的乘法与加法运算设计函数分别求两个一元多项式的乘积与和。
+输入格式:输入分2行，每行分别先给出多项式非零项的个数，再以指数递降方式输入一个多项式非零项系数和指数（绝对值均为不超过1000的整数）。数字间以空格分隔。
+输出格式:输出分2行，分别以指数递降方式输出乘积多项式以及和多项式非零项的系数和指数。数字间以空格分隔，但结尾不能有多余空格。零多项式应输出0 0">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mooc-ii">
+<meta property="og:url" content="wanglilin.github.io/2017/09/18/mooc-ii/index.html">
 <meta property="og:site_name" content="Wangli's Blog">
+<meta property="og:description" content="mooc 数据结构第二节作业一元多项式的乘法与加法运算设计函数分别求两个一元多项式的乘积与和。
+输入格式:输入分2行，每行分别先给出多项式非零项的个数，再以指数递降方式输入一个多项式非零项系数和指数（绝对值均为不超过1000的整数）。数字间以空格分隔。
+输出格式:输出分2行，分别以指数递降方式输出乘积多项式以及和多项式非零项的系数和指数。数字间以空格分隔，但结尾不能有多余空格。零多项式应输出0 0">
+<meta property="og:image" content="http://omdld2kxe.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD.jpg">
+<meta property="og:updated_time" content="2017-09-18T15:33:22.262Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Wangli's Blog">
+<meta name="twitter:title" content="mooc-ii">
+<meta name="twitter:description" content="mooc 数据结构第二节作业一元多项式的乘法与加法运算设计函数分别求两个一元多项式的乘积与和。
+输入格式:输入分2行，每行分别先给出多项式非零项的个数，再以指数递降方式输入一个多项式非零项系数和指数（绝对值均为不超过1000的整数）。数字间以空格分隔。
+输出格式:输出分2行，分别以指数递降方式输出乘积多项式以及和多项式非零项的系数和指数。数字间以空格分隔，但结尾不能有多余空格。零多项式应输出0 0">
+<meta name="twitter:image" content="http://omdld2kxe.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD.jpg">
     
 
     
@@ -195,16 +207,15 @@
 </aside>
 
             
-            <section id="main">
-    <article id="post-mooc-ii" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-mooc-ii" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
             <header class="article-header">
                 
     
-        <h1 itemprop="name">
-            <a class="article-title" href="/blog/2017/09/18/mooc-ii/">mooc-ii</a>
+        <h1 class="article-title" itemprop="name">
+            mooc-ii
         </h1>
     
 
@@ -348,554 +359,67 @@
         </footer>
     </div>
     
-</article>
-
-
-
-    <article id="post-java-hashmap-i" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
         
-        
-            <header class="article-header">
-                
+<nav id="article-nav">
     
-        <h1 itemprop="name">
-            <a class="article-title" href="/blog/2017/09/16/java-hashmap-i/">Java源码阅读-HashMap</a>
-        </h1>
     
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/blog/2017/09/16/java-hashmap-i/">
-            <time datetime="2017-09-16T04:19:25.000Z" itemprop="datePublished">2017-09-16</time>
+        <a href="/blog/2017/09/16/java-hashmap-i/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">Java源码阅读-HashMap</div>
         </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/blog/categories/Java源码/">Java源码</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/blog/tags/Java基础/">Java基础</a>, <a class="tag-link" href="/blog/tags/Java源码阅读/">Java源码阅读</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            <p><h1 id="HashMap源码阅读（上）"><a href="#HashMap源码阅读（上）" class="headerlink" title="HashMap源码阅读（上）"></a>HashMap源码阅读（上）</h1><h2 id="1-HashMap数据结构简介"><a href="#1-HashMap数据结构简介" class="headerlink" title="1.HashMap数据结构简介"></a>1.HashMap数据结构简介</h2><p>HashMap就是数据结构中的散列表，是以key、value的形式进行存储数据的。数组具有查找定位快，但是插入操作性能差的特点；链表具有查找慢插入快的特点，而HashMap可以说是这两种方式的一种折中。<br>HashMap采用数组与链表相结合的方式实现，其数据结构示意图如下图所示：<br><img src="http://omdld2kxe.bkt.clouddn.com/3239635-41e5f95e197a5a8e.png" alt="HashMap数据结构示意图"></p></p>
-            <p class="article-more-link">
-                <a href="/blog/2017/09/16/java-hashmap-i/#more">Read More</a>
-            </p>
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="wanglilin.github.io/blog/2017/09/16/java-hashmap-i/" data-id="cj7qbw3su0008bs5l5ykq1uw6" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
     
-        <a href="wanglilin.github.io/blog/2017/09/16/java-hashmap-i/#comments" class="article-comment-link ds-thread-count" data-thread-key="wanglilin.github.io/blog/2017/09/16/java-hashmap-i/">Comments</a>
-    
+</nav>
 
-        </footer>
-    </div>
+
     
 </article>
 
 
-
-    <article id="post-android-memo" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
     
-        <h1 itemprop="name">
-            <a class="article-title" href="/blog/2017/03/19/android-memo/">Android-备忘录开发</a>
-        </h1>
+    <section id="comments">
     
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/blog/2017/03/19/android-memo/">
-            <time datetime="2017-03-19T06:30:50.000Z" itemprop="datePublished">2017-03-19</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/blog/categories/Android/">Android</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/blog/tags/Android/">Android</a>
-    </div>
-
-                    </div>
-                
-            </header>
         
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            <p><h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h2><p>由于项目需求，最近需要开发一个备忘录，备忘录对于Android是一个很普遍的功能。其实我内心os是每台手机自带的系统就有备忘录功能，在一个App中再开发一个备忘录功能实在是鸡肋。然鹅，做项目就是这样，老板喊做，那我就做着呗。由于为了毕业还要看文献看算法什么的，平时也没什么时间，所以这次只是简单的做了一个可以基于SQLite本地数据库进行备忘录增删查改操作的一个功能。主要实现以下几点功能：</p>
-<ul>
-<li>备忘录的增删查改功能</li>
-<li>每条备忘录包含标题、内容、时间</li>
-<li>备忘录的排列顺序按照时间来，后来居上</li>
-</ul></p>
-            <p class="article-more-link">
-                <a href="/blog/2017/03/19/android-memo/#more">Read More</a>
-            </p>
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="wanglilin.github.io/blog/2017/03/19/android-memo/" data-id="cj7qbw3tp000abs5l7y39rugh" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
+    <div class="ds-thread" data-thread-key="2017/09/18/mooc-ii/" data-title="mooc-ii" data-url="wanglilin.github.io/blog/2017/09/18/mooc-ii/"></div>
+    <style>
+        #ds-thread #ds-reset .ds-textarea-wrapper {
+            background: none;
         }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="wanglilin.github.io/blog/2017/03/19/android-memo/#comments" class="article-comment-link ds-thread-count" data-thread-key="wanglilin.github.io/blog/2017/03/19/android-memo/">Comments</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-java-exception" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/blog/2017/03/11/java-exception/">Java基础之异常</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/blog/2017/03/11/java-exception/">
-            <time datetime="2017-03-11T12:51:50.000Z" itemprop="datePublished">2017-03-11</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/blog/categories/JavaSE/">JavaSE</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/blog/tags/JavaSE/">JavaSE</a>, <a class="tag-link" href="/blog/tags/Java基础/">Java基础</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            <p><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
-<p>A clever person solves a problem, a wise person avoids it.<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;   ——那你，会如何处理异常，try or throw？</p>
-</blockquote>
-<h2 id="1-异常是什么"><a href="#1-异常是什么" class="headerlink" title="1 异常是什么"></a>1 异常是什么</h2><p>我有一辆车（不是自行车，四轮的！！诶，更不是拖拉机！！！），我要开车去隔壁村见小王（不是隔壁老王），开到半路爆胎了，此时，我有两个选择：</p>
-<ul>
-<li>如果我车上有备胎（诶，可惜我备胎这东西是建立在有女朋友的基础之上的，女朋友是个好东西，然而我并没有），我可以选择在当前就换个轮胎，然后将坏了的车胎放到后备箱，车子仍然可以继续开；</li>
-<li>我车上没有备胎，那我只能放个警示牌，打个电话给能处理这个车爆胎的人来处理，而这并不妨碍我走着去见隔壁村的小王。</li>
-</ul>
-<p>这就是在Java中遇到异常的两个常用的方法，你可以处理它（try）或抛出它（throw），即将锅交给别人去处理。</p></p>
-            <p class="article-more-link">
-                <a href="/blog/2017/03/11/java-exception/#more">Read More</a>
-            </p>
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="wanglilin.github.io/blog/2017/03/11/java-exception/" data-id="cj7qbw3r30002bs5lnqk0tnyo" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
+        #ds-reset .ds-avatar img {
+            box-shadow: none;
         }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="wanglilin.github.io/blog/2017/03/11/java-exception/#comments" class="article-comment-link ds-thread-count" data-thread-key="wanglilin.github.io/blog/2017/03/11/java-exception/">Comments</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-javase-string" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/blog/2017/03/04/javase-string/">Java基础之字符串</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/blog/2017/03/04/javase-string/">
-            <time datetime="2017-03-04T08:08:41.000Z" itemprop="datePublished">2017-03-04</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/blog/categories/JavaSE/">JavaSE</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/blog/tags/JavaSE/">JavaSE</a>, <a class="tag-link" href="/blog/tags/Java基础/">Java基础</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            <p><h2 id="类结构"><a href="#类结构" class="headerlink" title="类结构"></a>类结构</h2><p>public final class String<br>extends Object<br>implements Serializable, Comparable, CharSequence</p>
-<h2 id="类概述"><a href="#类概述" class="headerlink" title="类概述"></a>类概述</h2><p>Java把内存划分为两种：一种是栈内存，一种是堆内存。<strong>在函数中定义的一些基本类型的变量和对象的引用变量都是在函数的栈内存中分配</strong>。当在一段代码块定义一个变量时，Java就在栈中为这个变量分配内存空间，当超过变量的作用域后，Java会自动释放掉为该变量分配的内存空间，该内存空间可以立即被另作它用。<br></p>
-            <p class="article-more-link">
-                <a href="/blog/2017/03/04/javase-string/#more">Read More</a>
-            </p>
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="wanglilin.github.io/blog/2017/03/04/javase-string/" data-id="cj7qbw3se0006bs5lw664r0ag" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
+        #ds-reset .ds-gradient-bg {
+            background: #f7f7f7;
         }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
+        #ds-thread #ds-reset li.ds-tab a {
+            border-radius: 3px;
+        }
+        #ds-thread #ds-reset .ds-post-button {
+            color: white;
+            border: none;
+            box-shadow: none;
+            background: #d32;
+            text-shadow: none;
+            font-weight: normal;
+            font-family: 'Microsoft Yahei';
+        }
+        #ds-thread #ds-reset .ds-post-button:hover {
+            color: white;
+            background: #DE594C;
+        }
+        #ds-thread #ds-reset .ds-post-button:active {
+            background: #d32;
+        }
+        #ds-smilies-tooltip ul.ds-smilies-tabs li a.ds-current {
+            color: white;
+            background: #d32;
+            box-shadow: none;
+            text-shadow: none;
+            font-weight: normal;
+        }
+    </style>
 
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
     
-        <a href="wanglilin.github.io/blog/2017/03/04/javase-string/#comments" class="article-comment-link ds-thread-count" data-thread-key="wanglilin.github.io/blog/2017/03/04/javase-string/">Comments</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
+    </section>
 
 </section>
             
