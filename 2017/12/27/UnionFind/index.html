@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>UnionFind | Wangli&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="并查集写该篇博客的初衷是由于在做天池大数据比赛中用到了并查集的相关概念，因此，想要巩固下这个知识点。
+在计算机科学中，并查集是一种树型的数据结构，用于处理一些不相交集合（Disjoint Sets）的合并及查询问题。有一个联合-查找算法（union-find algorithm）定义了两个用于此数据结构的操作：
+
+Find：确定元素属于哪一个子集。它可以被用来确定两个元素是否属于同一子集。
+Uni">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UnionFind">
+<meta property="og:url" content="wanglilin.github.io/2017/12/27/UnionFind/index.html">
+<meta property="og:site_name" content="Wangli's Blog">
+<meta property="og:description" content="并查集写该篇博客的初衷是由于在做天池大数据比赛中用到了并查集的相关概念，因此，想要巩固下这个知识点。
+在计算机科学中，并查集是一种树型的数据结构，用于处理一些不相交集合（Disjoint Sets）的合并及查询问题。有一个联合-查找算法（union-find algorithm）定义了两个用于此数据结构的操作：
+
+Find：确定元素属于哪一个子集。它可以被用来确定两个元素是否属于同一子集。
+Uni">
+<meta property="og:image" content="http://omdld2kxe.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD.jpg">
+<meta property="og:updated_time" content="2017-12-27T09:22:43.019Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="UnionFind">
+<meta name="twitter:description" content="并查集写该篇博客的初衷是由于在做天池大数据比赛中用到了并查集的相关概念，因此，想要巩固下这个知识点。
+在计算机科学中，并查集是一种树型的数据结构，用于处理一些不相交集合（Disjoint Sets）的合并及查询问题。有一个联合-查找算法（union-find algorithm）定义了两个用于此数据结构的操作：
+
+Find：确定元素属于哪一个子集。它可以被用来确定两个元素是否属于同一子集。
+Uni">
+<meta name="twitter:image" content="http://omdld2kxe.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD.jpg">
+    
+
+    
+        <link rel="alternate" href="atom.xml" title="Wangli&#39;s Blog" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/blog/css/images/favicon.ico" />
+    
+
+    <link rel="stylesheet" href="/blog/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/blog/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/blog/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/blog/css/style.css">
+
+    <script src="/blog/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/blog/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/blog/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/blog/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Wangli&#39;s Blog</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/blog/.">主页</a>
+                
+                    <a class="main-nav-link" href="/blog/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/blog/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/blog/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/blog/about">关于</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/blog/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Entradas',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categorias',
+            TAGS: 'Etiquetas',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/blog/',
+        CONTENT_URL: '/blog/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/blog/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/blog/.">主页</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/blog/css/images/avatar.png" />
+            <h2 id="name">Wangli</h2>
+            <h3 id="title">Android/Web开发</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Hangzhou, China</span>
+            <a id="follow" target="_blank" href="https://github.com/wanglilin/">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                6
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                6
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/wanglilin/" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="http://weibo.com/callmebia" target="_blank" title="weibo" class=tooltip>
+                            <i class="fa fa-weibo"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/blog/atom.xml" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-UnionFind" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            UnionFind
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/blog/2017/12/27/UnionFind/">
+            <time datetime="2017-12-27T09:13:27.000Z" itemprop="datePublished">2017-12-27</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/blog/categories/数据结构/">数据结构</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/blog/tags/数据结构/">数据结构</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h1 id="并查集"><a href="#并查集" class="headerlink" title="并查集"></a>并查集</h1><p>写该篇博客的初衷是由于在做天池大数据比赛中用到了并查集的相关概念，因此，想要巩固下这个知识点。</p>
+<p>在计算机科学中，<strong>并查集</strong>是一种树型的数据结构，用于处理一些不相交集合（Disjoint Sets）的合并及查询问题。有一个联合-查找算法（union-find algorithm）定义了两个用于此数据结构的操作：</p>
+<ul>
+<li><strong>Find</strong>：确定元素属于哪一个子集。它可以被用来确定两个元素是否属于同一子集。</li>
+<li><strong>Union</strong>：将两个子集合并成同一个集合。</li>
+</ul>
+<p>由于支持这两种操作，一个不相交集也常被称为联合-查找数据结构（union-find data structure）或合并-查找集合（merge-find set）。</p>
+<a id="more"></a>
+<h3 id="并查集用途"><a href="#并查集用途" class="headerlink" title="并查集用途"></a>并查集用途</h3><ul>
+<li>维护无向图的连通性，支持判断两个点是否在同一个连通块内，和判断增加一条边是否会产生环</li>
+<li>用在求解最小生成树的Kruskal算法里</li>
+</ul>
+<p>为了更加准确的定义这些方法，需要首先定义集合。一种常用的策略是为每个集合选定一个固定的元素，称为代表，以表示整个集合。接着，Find(x)返回x所属集合的代表，而Union使用两个集合的代表作为参数。</p>
+<h3 id="代表元"><a href="#代表元" class="headerlink" title="代表元"></a>代表元</h3><p>用集合中的某个元素来代表这个集合，该元素称为集合的代表元。</p>
+<ul>
+<li>一个集合内的所有元素组织成以代表元为根的树形结构</li>
+<li>对于每一个元素，<code>parent[x]</code>指向在树形结构上的父亲节点。如果x是根节点，则令<code>parent[x] = x</code></li>
+<li>对于查找操作，假设需要确定x所在的集合，也就是确定集合的代表元，可以沿着<code>parent[x]</code>不断在树形结构中向上移动，直到到达根节点。<br><strong>判断两个元素是否属于同一个集合，只需要看他们的代表元是否相同即可</strong></li>
+</ul>
+<h2 id="并查集森林"><a href="#并查集森林" class="headerlink" title="并查集森林"></a>并查集森林</h2><p>并查集森林是一种将每一个集合以树表示的数据结构，其中每一个节点保存着它的父节点的引用，在并查集森林中，每个集合的代表即是集合的根节点。“查找”根据其父节点的引用向根行进直到树根。“联合”将两棵树合并到一起，这通过将一棵树的根连接到另一棵树的根。实现该操作的代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">MakeSet</span><span class="params">(x)</span>:</span></div><div class="line">    x.parent = x</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">Find</span><span class="params">(x)</span>:</span></div><div class="line">    <span class="keyword">if</span> x.parent = x:</div><div class="line">        <span class="keyword">return</span> x</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="keyword">return</span> Find(x.parent)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">Union</span><span class="params">(x, y)</span>:</span></div><div class="line">    xRoot = Find(x)</div><div class="line">    yRoot = Find(y)</div><div class="line">    xRoot.parent = yRoot</div></pre></td></tr></table></figure>
+<p>这是并查集森林的最基础的表示方法，这个方法并不好，因为创建的树可能会严重不平衡；可以用两种方法优化：</p>
+<ul>
+<li><strong>按秩合并</strong><br>即总是将更小的树连接至更大的树上。因为影响运行时间的是树的深度，更小的树添加到更深的树的根上将不会增加秩除非他们的秩相同。在这个算法中，术语“秩”替代了“深度”，因为同时应用了路径压缩时秩将不会与高度相同，单元素的树的秩定义为0，当两棵秩同为<code>r</code>的树联合时，他们的秩为<code>r+1</code>。只使用这个方法将使最坏的运行时间提高至每个MakeSet、Union或Find操作<code>O(logn)</code>。</li>
+<li><strong>路径压缩</strong><br>是一种在执行“查找”时扁平化树结构的方法。关键在于在路径上的每个节点都可以直接连接到根上；他们都有同样的表示方法。为了达到这样的效果，<code>Find</code>递归地经过树，改变每一个节点的引用到根节点，得到的树将更加扁平，为以后直接或者间接引用节点的操作加速。</li>
+</ul>
+<p>这两种方法的优势互补，同时使用二者的程序每个操作的平均时间仅为<code>O(a(n))</code>。因为a(n)在n十分巨大时还是小于5，因此，平均运行时间是一个极小的常数。</p>
+<h3 id="并查集应用"><a href="#并查集应用" class="headerlink" title="并查集应用"></a>并查集应用</h3><h4 id="1-LintCode-178-判断图是否为树（Java实现）"><a href="#1-LintCode-178-判断图是否为树（Java实现）" class="headerlink" title="1. LintCode 178 判断图是否为树（Java实现）"></a>1. LintCode 178 判断图是否为树（Java实现）</h4><blockquote>
+<p>给出 n 个节点，标号分别从 0 到 n - 1 并且给出一个 无向 边的列表 (给出每条边的两个顶点), 写一个函数去判断这张｀无向｀图是否是一棵树</p>
+</blockquote>
+<ul>
+<li><p><strong>注意事项</strong><br>你可以假设我们不会给出重复的边在边的列表当中. 无向边　[0, 1] 和 [1, 0]　是同一条边， 因此他们不会同时出现在我们给你的边的列表当中。</p>
+</li>
+<li><p><strong>样例</strong><br>给出n = 5 并且 edges = [[0, 1], [0, 2], [0, 3], [1, 4]], 返回 <code>true</code><br>给出n = 5 并且 edges = [[0, 1], [1, 2], [2, 3], [1, 3], [1, 4]], 返回 <code>false</code>.</p>
+</li>
+</ul>
+<p>代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="comment">/*</span></div><div class="line">     * @param n: An integer</div><div class="line">     * @param edges: a list of undirected edges</div><div class="line">     * @return: true if it's a valid tree, or false</div><div class="line">     */</div><div class="line">     </div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">UnionFind</span> </span>&#123;</div><div class="line">        HashMap&lt;Integer, Integer&gt; father = <span class="keyword">new</span> HashMap&lt;Integer, Integer&gt;();</div><div class="line">        UnionFind(<span class="keyword">int</span> n) &#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i &lt; n; i++) &#123;</div><div class="line">                father.put(i, i);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="function"><span class="keyword">int</span> <span class="title">compressed_find</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</div><div class="line">            <span class="keyword">int</span> parent = father.get(x);</div><div class="line">            <span class="keyword">while</span>(parent != father.get(parent)) &#123;</div><div class="line">                parent = father.get(parent);</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">int</span> temp = -<span class="number">1</span>;</div><div class="line">            <span class="keyword">int</span> fa = father.get(x);</div><div class="line">            <span class="keyword">while</span> (fa != father.get(fa)) &#123;</div><div class="line">                temp = father.get(fa);</div><div class="line">                father.put(fa, parent);</div><div class="line">                fa = temp;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> parent;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="function"><span class="keyword">void</span> <span class="title">union</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</div><div class="line">            <span class="keyword">int</span> fa_x = compressed_find(x);</div><div class="line">            <span class="keyword">int</span> fa_y = compressed_find(y);</div><div class="line">            <span class="keyword">if</span> (fa_x != fa_y)</div><div class="line">                father.put(fa_x, fa_y);</div><div class="line">        &#125;</div><div class="line">    &#125; </div><div class="line">     </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">validTree</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span>[][] edges)</span> </span>&#123;</div><div class="line">        <span class="comment">// write your code here</span></div><div class="line">        <span class="keyword">if</span> (n - <span class="number">1</span> != edges.length) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        UnionFind uf = <span class="keyword">new</span> UnionFind(n);</div><div class="line">        </div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; edges.length; i++) &#123;</div><div class="line">            <span class="keyword">if</span> (uf.compressed_find(edges[i][<span class="number">0</span>]) == uf.compressed_find(edges[i][<span class="number">1</span>])) &#123;</div><div class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">            &#125;</div><div class="line">            uf.union(edges[i][<span class="number">0</span>], edges[i][<span class="number">1</span>]);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="2-天池比赛中用于图之间任意两个节点是否有连接（Python实现）"><a href="#2-天池比赛中用于图之间任意两个节点是否有连接（Python实现）" class="headerlink" title="2. 天池比赛中用于图之间任意两个节点是否有连接（Python实现）"></a>2. 天池比赛中用于图之间任意两个节点是否有连接（Python实现）</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">UnionFind</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, groups)</span>:</span></div><div class="line">        self.groups = groups <span class="comment"># 外部传入的相连接的点</span></div><div class="line">        self.items = [] <span class="comment"># 所有的元素</span></div><div class="line">        <span class="keyword">for</span> group <span class="keyword">in</span> groups:</div><div class="line">            self.items += list(group)</div><div class="line">        self.items = set(self.items)</div><div class="line">        self.parent = &#123;&#125; <span class="comment"># 父亲节点</span></div><div class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> self.items:</div><div class="line">            self.parent[item] = item</div><div class="line">        self.create_tree()</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">findroot</span><span class="params">(self, r)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        查找根节点</div><div class="line">        """</div><div class="line">        <span class="keyword">if</span> r == self.parent[r]:</div><div class="line">            <span class="keyword">return</span> r</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="comment"># 路径压缩</span></div><div class="line">            self.parent[r] = self.findroot(self.parent[r])</div><div class="line">            <span class="keyword">return</span> self.parent[r]</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">union</span><span class="params">(self, p, q)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        合并p和q两个节点</div><div class="line">        """</div><div class="line">        p_root = self.findroot(p)</div><div class="line">        q_root = self.findroot(q)</div><div class="line"></div><div class="line">        <span class="keyword">if</span> p_root == q_root:</div><div class="line">            <span class="keyword">return</span></div><div class="line"></div><div class="line">        <span class="comment"># 将父节点指向另一个节点</span></div><div class="line">        self.parent[p_root] = q_root</div><div class="line">        <span class="keyword">return</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">create_tree</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        根据groups来构造树结构</div><div class="line">        """</div><div class="line">        <span class="keyword">for</span> group <span class="keyword">in</span> self.groups:</div><div class="line">            <span class="keyword">if</span> len(group) &lt; <span class="number">2</span>:</div><div class="line">                <span class="keyword">continue</span></div><div class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(len(group) - <span class="number">1</span>):</div><div class="line">                <span class="keyword">if</span> self.findroot(group[i]) != self.findroot(group[i + <span class="number">1</span>]):</div><div class="line">                    self.union(group[i], group[i + <span class="number">1</span>])</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">is_connected</span><span class="params">(self, p, q)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        判断两个节点是否连接</div><div class="line">        """</div><div class="line">        <span class="keyword">if</span> p <span class="keyword">not</span> <span class="keyword">in</span> self.items <span class="keyword">or</span> q <span class="keyword">not</span> <span class="keyword">in</span> self.items:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line">        <span class="keyword">return</span> self.findroot(p) == self.findroot(q)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">add_groups</span><span class="params">(self, groups)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        增加连接</div><div class="line">        """</div><div class="line">        self.groups = self.groups + groups</div><div class="line">        <span class="keyword">for</span> group <span class="keyword">in</span> groups:</div><div class="line">            <span class="keyword">for</span> item <span class="keyword">in</span> group:</div><div class="line">                <span class="keyword">if</span> item <span class="keyword">in</span> self.items:</div><div class="line">                    <span class="keyword">continue</span></div><div class="line">                self.items = list(self.items)</div><div class="line">                self.items.append(item)</div><div class="line">                self.parent[item] = item</div><div class="line">        self.items = set(self.items)</div><div class="line">        self.create_tree()</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">print_trees</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        打印出相连接的树结构</div><div class="line">        """</div><div class="line">        rs = &#123;&#125;</div><div class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> self.items:</div><div class="line">            root = self.findroot(item)</div><div class="line">            rs.setdefault(root, [])</div><div class="line">            rs[root].append(item)</div><div class="line">        <span class="keyword">for</span> key <span class="keyword">in</span> rs:</div><div class="line">            <span class="keyword">print</span> (rs[key])</div><div class="line">            <span class="keyword">print</span> (<span class="string">'*************************'</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_items</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        获取所有的元素</div><div class="line">        """</div><div class="line">        <span class="keyword">return</span> self.items</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    <span class="comment"># 测试功能</span></div><div class="line">    groups = [((<span class="number">1</span>,<span class="number">1</span>), (<span class="number">1</span>,<span class="number">2</span>)), ((<span class="number">3</span>,<span class="number">4</span>), (<span class="number">3</span>,<span class="number">3</span>)), ((<span class="number">1</span>,<span class="number">1</span>), (<span class="number">0</span>,<span class="number">1</span>))]</div><div class="line">    u = UnionFind(groups)</div><div class="line">    u.print_trees()</div><div class="line">    u.add_groups([((<span class="number">3</span>,<span class="number">4</span>), (<span class="number">3</span>,<span class="number">5</span>))])</div><div class="line">    <span class="keyword">print</span> (<span class="string">'after adding'</span>)</div><div class="line">    u.print_trees()</div><div class="line">    <span class="keyword">print</span> (u.is_connected((<span class="number">1</span>,<span class="number">1</span>), (<span class="number">3</span>,<span class="number">4</span>)))</div><div class="line">    print(u.is_connected((<span class="number">1</span>, <span class="number">2</span>), (<span class="number">0</span>, <span class="number">1</span>)))</div></pre></td></tr></table></figure>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="wanglilin.github.io/blog/2017/12/27/UnionFind/" data-id="cjboupqv70002445lf7xr129q" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="wanglilin.github.io/blog/2017/12/27/UnionFind/#comments" class="article-comment-link ds-thread-count" data-thread-key="wanglilin.github.io/blog/2017/12/27/UnionFind/">Comentarios</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/blog/2017/09/18/mooc-ii/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Más viejo</strong>
+            <div class="article-nav-title">mooc-ii</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div class="ds-thread" data-thread-key="2017/12/27/UnionFind/" data-title="UnionFind" data-url="wanglilin.github.io/blog/2017/12/27/UnionFind/"></div>
+    <style>
+        #ds-thread #ds-reset .ds-textarea-wrapper {
+            background: none;
+        }
+        #ds-reset .ds-avatar img {
+            box-shadow: none;
+        }
+        #ds-reset .ds-gradient-bg {
+            background: #f7f7f7;
+        }
+        #ds-thread #ds-reset li.ds-tab a {
+            border-radius: 3px;
+        }
+        #ds-thread #ds-reset .ds-post-button {
+            color: white;
+            border: none;
+            box-shadow: none;
+            background: #d32;
+            text-shadow: none;
+            font-weight: normal;
+            font-family: 'Microsoft Yahei';
+        }
+        #ds-thread #ds-reset .ds-post-button:hover {
+            color: white;
+            background: #DE594C;
+        }
+        #ds-thread #ds-reset .ds-post-button:active {
+            background: #d32;
+        }
+        #ds-smilies-tooltip ul.ds-smilies-tabs li a.ds-current {
+            color: white;
+            background: #d32;
+            box-shadow: none;
+            text-shadow: none;
+            font-weight: normal;
+        }
+    </style>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/12/27/UnionFind/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://omdld2kxe.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD.jpg)" alt="UnionFind" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/数据结构/">数据结构</a></p>
+                            <p class="item-title"><a href="/blog/2017/12/27/UnionFind/" class="title">UnionFind</a></p>
+                            <p class="item-date"><time datetime="2017-12-27T09:13:27.000Z" itemprop="datePublished">2017-12-27</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/09/18/mooc-ii/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://omdld2kxe.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD.jpg)" alt="mooc-ii" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/数据结构/">数据结构</a></p>
+                            <p class="item-title"><a href="/blog/2017/09/18/mooc-ii/" class="title">mooc-ii</a></p>
+                            <p class="item-date"><time datetime="2017-09-18T15:27:38.000Z" itemprop="datePublished">2017-09-18</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/09/16/java-hashmap-i/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://omdld2kxe.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD.jpg)" alt="Java源码阅读-HashMap" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Java源码/">Java源码</a></p>
+                            <p class="item-title"><a href="/blog/2017/09/16/java-hashmap-i/" class="title">Java源码阅读-HashMap</a></p>
+                            <p class="item-date"><time datetime="2017-09-16T04:19:25.000Z" itemprop="datePublished">2017-09-16</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/03/19/android-memo/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://d13yacurqjgara.cloudfront.net/users/23569/screenshots/1662078/memo_app_icon.png)" alt="Android-备忘录开发" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Android/">Android</a></p>
+                            <p class="item-title"><a href="/blog/2017/03/19/android-memo/" class="title">Android-备忘录开发</a></p>
+                            <p class="item-date"><time datetime="2017-03-19T06:30:50.000Z" itemprop="datePublished">2017-03-19</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2017/03/11/java-exception/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://omdld2kxe.bkt.clouddn.com/exception_d.jpg)" alt="Java基础之异常" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/JavaSE/">JavaSE</a></p>
+                            <p class="item-title"><a href="/blog/2017/03/11/java-exception/" class="title">Java基础之异常</a></p>
+                            <p class="item-date"><time datetime="2017-03-11T12:51:50.000Z" itemprop="datePublished">2017-03-11</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Android/">Android</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/JavaSE/">JavaSE</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java源码/">Java源码</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/数据结构/">数据结构</a><span class="category-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/12/">December 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/09/">September 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/03/">March 2017</a><span class="archive-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Android/">Android</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/JavaSE/">JavaSE</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Java基础/">Java基础</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Java源码阅读/">Java源码阅读</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mooc/">mooc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据结构/">数据结构</a><span class="tag-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/blog/tags/Android/" style="font-size: 10px;">Android</a> <a href="/blog/tags/JavaSE/" style="font-size: 15px;">JavaSE</a> <a href="/blog/tags/Java基础/" style="font-size: 20px;">Java基础</a> <a href="/blog/tags/Java源码阅读/" style="font-size: 10px;">Java源码阅读</a> <a href="/blog/tags/mooc/" style="font-size: 10px;">mooc</a> <a href="/blog/tags/数据结构/" style="font-size: 15px;">数据结构</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">友链博客</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://tristanhuang0501.github.io" target="_blank">Tristan</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2017 Wangli Lin<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'blogforwangli'};
+    (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+
+
+
+    
+        <script src="/blog/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/blog/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/blog/js/main.js"></script>
+
+    </div>
+</body>
+</html>
