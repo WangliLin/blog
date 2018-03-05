@@ -5,7 +5,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="wanglilin.github.io/"/>
-  <updated>2018-03-05T03:56:59.724Z</updated>
+  <updated>2018-03-05T03:58:40.170Z</updated>
   <id>wanglilin.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="wanglilin.github.io/2018/03/05/ksum/"/>
     <id>wanglilin.github.io/2018/03/05/ksum/</id>
     <published>2018-03-05T03:45:50.000Z</published>
-    <updated>2018-03-05T03:56:59.724Z</updated>
+    <updated>2018-03-05T03:58:40.170Z</updated>
     
     <content type="html"><![CDATA[<h3 id="天池比赛小结1"><a href="#天池比赛小结1" class="headerlink" title="天池比赛小结1"></a>天池比赛小结1</h3><h4 id="巧妙利用回溯法解决路径提交所引发的血案"><a href="#巧妙利用回溯法解决路径提交所引发的血案" class="headerlink" title="巧妙利用回溯法解决路径提交所引发的血案"></a><strong>巧妙利用回溯法解决路径提交所引发的血案</strong></h4><h4 id="0-引言"><a href="#0-引言" class="headerlink" title="0 引言"></a>0 引言</h4><p>前一阵子参加了天池比赛<a href="https://tianchi.aliyun.com/competition/introduction.htm?spm=5176.100150.711.8.48172009pOnD7K&amp;raceId=231622" target="_blank" rel="external">气象数据领航无人飞行器线路优化大赛</a>，凭借着初赛一步步的稳扎稳打以及最后时刻的一波套磁 + 人品爆发，以第三名的成绩进入了决赛。但在决赛阶段，我们所遇到的最大问题并不是此次赛题中的两个重点：气象数据回归或路径规划算法，令我们差点止步前 10 的是提交路径之后，由于不同路径之间的各种组合导致的无法推知到底是哪些路径成功抵达。后来我们用了一些巧妙的解法在某种程度上解决了这个问题（并没有完全解决，下文会细讲），因此，这也是此篇博客诞生的原因，想要记录下解决这一个问题的思路。</p>
 <a id="more"></a>
@@ -69,7 +69,7 @@
     
     </summary>
     
-      <category term="数据结构" scheme="wanglilin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+      <category term="天池大数据竞赛" scheme="wanglilin.github.io/categories/%E5%A4%A9%E6%B1%A0%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%AB%9E%E8%B5%9B/"/>
     
     
       <category term="数据结构" scheme="wanglilin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
@@ -264,9 +264,9 @@
       <category term="Java源码" scheme="wanglilin.github.io/categories/Java%E6%BA%90%E7%A0%81/"/>
     
     
-      <category term="Java源码阅读" scheme="wanglilin.github.io/tags/Java%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/"/>
-    
       <category term="Java基础" scheme="wanglilin.github.io/tags/Java%E5%9F%BA%E7%A1%80/"/>
+    
+      <category term="Java源码阅读" scheme="wanglilin.github.io/tags/Java%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/"/>
     
   </entry>
   
