@@ -5,7 +5,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="wanglilin.github.io/"/>
-  <updated>2018-03-27T04:36:27.946Z</updated>
+  <updated>2018-03-28T07:51:23.123Z</updated>
   <id>wanglilin.github.io/</id>
   
   <author>
@@ -14,6 +14,47 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>高频面试题总结 —— 动规之拼凑面额</title>
+    <link href="wanglilin.github.io/2018/03/28/dp-money/"/>
+    <id>wanglilin.github.io/2018/03/28/dp-money/</id>
+    <published>2018-03-28T07:47:57.000Z</published>
+    <updated>2018-03-28T07:51:23.123Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="高频面试题总结-——-动规之拼凑面额"><a href="#高频面试题总结-——-动规之拼凑面额" class="headerlink" title="高频面试题总结 —— 动规之拼凑面额"></a>高频面试题总结 —— 动规之拼凑面额</h3><p><a href="https://www.nowcoder.com/practice/14cf13771cd840849a402b848b5c1c93?tpId=85&amp;tqId=29884&amp;tPage=3&amp;rp=3&amp;ru=/ta/2017test&amp;qru=/ta/2017test/question-ranking" target="_blank" rel="external">原题地址</a></p>
+<h4 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h4><blockquote>
+<p>给你六种面额1、5、10、20、50、100元的纸币，假设每种币值的数量都足够多，编写程序求组成N元（N为0-10000的非负整数）的不同组合的个数。</p>
+<p><strong>样例：</strong><br>输入<br><code>5</code><br>输出<br><code>2</code></p>
+</blockquote>
+<a id="more"></a>
+<h4 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h4><ul>
+<li>很明显，这是背包问题的变种，需要用到动态规划来解</li>
+<li>用<code>dp[i][j]</code>表示当有前<code>i</code>种面额时，组成<code>j</code>元的不同组合的个数</li>
+</ul>
+<p><strong>状态转移方程：</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dp[i][j] = dp[i-<span class="number">1</span>][j] + dp[i-<span class="number">1</span>][j-coins[i]]</div></pre></td></tr></table></figure></p>
+<p><strong>tips：</strong><br>每一次都是基于前面一次的结果，即无后效性，为了降低空间复杂度，我们可以做如下改进：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dp[j] = dp[j] + dp[j-coins[i]]</div></pre></td></tr></table></figure></p>
+<h3 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.*;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        Scanner scan = <span class="keyword">new</span> Scanner(System.in);</div><div class="line">        <span class="keyword">int</span> sum = scan.nextInt();</div><div class="line">        <span class="comment">//为int时只能 ac 80%</span></div><div class="line">        <span class="keyword">long</span>[] dp = <span class="keyword">new</span> <span class="keyword">long</span>[sum+<span class="number">1</span>];</div><div class="line">        dp[<span class="number">0</span>] = <span class="number">1L</span>;</div><div class="line">        <span class="keyword">int</span>[] coins = <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">1</span>, <span class="number">5</span>, <span class="number">10</span>, <span class="number">20</span>, <span class="number">50</span>, <span class="number">100</span>&#125;;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; coins.length; i++) &#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= sum; j++) &#123;</div><div class="line">                <span class="keyword">if</span> (j &gt;= coins[i])</div><div class="line">                    dp[j] = dp[j] + dp[j - coins[i]];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        System.out.println(dp[sum]);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;高频面试题总结-——-动规之拼凑面额&quot;&gt;&lt;a href=&quot;#高频面试题总结-——-动规之拼凑面额&quot; class=&quot;headerlink&quot; title=&quot;高频面试题总结 —— 动规之拼凑面额&quot;&gt;&lt;/a&gt;高频面试题总结 —— 动规之拼凑面额&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;https://www.nowcoder.com/practice/14cf13771cd840849a402b848b5c1c93?tpId=85&amp;amp;tqId=29884&amp;amp;tPage=3&amp;amp;rp=3&amp;amp;ru=/ta/2017test&amp;amp;qru=/ta/2017test/question-ranking&quot;&gt;原题地址&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&quot;题目描述：&quot;&gt;&lt;a href=&quot;#题目描述：&quot; class=&quot;headerlink&quot; title=&quot;题目描述：&quot;&gt;&lt;/a&gt;题目描述：&lt;/h4&gt;&lt;blockquote&gt;
+&lt;p&gt;给你六种面额1、5、10、20、50、100元的纸币，假设每种币值的数量都足够多，编写程序求组成N元（N为0-10000的非负整数）的不同组合的个数。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;样例：&lt;/strong&gt;&lt;br&gt;输入&lt;br&gt;&lt;code&gt;5&lt;/code&gt;&lt;br&gt;输出&lt;br&gt;&lt;code&gt;2&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="数据结构" scheme="wanglilin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    
+      <category term="数据结构" scheme="wanglilin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="高频面试题总结" scheme="wanglilin.github.io/tags/%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
   
   <entry>
     <title>高频面试题之最长公共系列</title>
