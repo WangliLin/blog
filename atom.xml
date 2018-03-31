@@ -5,7 +5,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="wanglilin.github.io/"/>
-  <updated>2018-03-31T10:01:06.176Z</updated>
+  <updated>2018-03-31T14:02:28.692Z</updated>
   <id>wanglilin.github.io/</id>
   
   <author>
@@ -14,6 +14,54 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>longest-inceasing-subsequence</title>
+    <link href="wanglilin.github.io/2018/03/31/longest-inceasing-subsequence/"/>
+    <id>wanglilin.github.io/2018/03/31/longest-inceasing-subsequence/</id>
+    <published>2018-03-31T14:00:59.000Z</published>
+    <updated>2018-03-31T14:02:28.692Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="高频面试题总结之最长上升子序列"><a href="#高频面试题总结之最长上升子序列" class="headerlink" title="高频面试题总结之最长上升子序列"></a>高频面试题总结之最长上升子序列</h3><h3 id="题目详情"><a href="#题目详情" class="headerlink" title="题目详情"></a>题目详情</h3><p><a href="http://www.lintcode.com/zh-cn/problem/longest-increasing-subsequence/" target="_blank" rel="external">LintCode No.76</a></p>
+<blockquote>
+<p>给定一个整数序列，找到最长上升子序列（LIS），返回LIS的长度。</p>
+<p><strong>最长上升子序列的定义：</strong><br>最长上升子序列问题是在一个无序的给定序列中找到一个尽可能长的由低到高排列的子序列，这种子序列不一定是连续的或者唯一的。</p>
+<p><strong>样例</strong><br>给出 <code>[5,4,1,2,3]</code>，LIS 是 <code>[1,2,3]</code>，返回 3<br>给出 <code>[4,2,4,5,3,7]</code>，LIS 是 <code>[2,4,5,7]</code>，返回 4</p>
+</blockquote>
+<a id="more"></a>
+<h3 id="解法1-动态规划"><a href="#解法1-动态规划" class="headerlink" title="解法1 动态规划"></a>解法1 动态规划</h3><p>####思路：<br> 两个<code>for</code>循环遍历数组：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; nums.length; i++) &#123;</div><div class="line">           <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++) &#123;</div><div class="line">               <span class="keyword">if</span>(nums[i] &gt; nums[j]) &#123;</div><div class="line">                   dp[i] = Math.max(dp[j] + <span class="number">1</span>, dp[i]);</div><div class="line">               &#125;</div><div class="line">           &#125;</div><div class="line">       &#125;</div></pre></td></tr></table></figure></p>
+<p>状态转移：<br><code>dp[i] = Math.max(dp[j] + 1, dp[i])</code><br>时间复杂度：<br><code>O(n^2)</code></p>
+<p>完整代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">longestIncreasingSubsequence</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</div><div class="line">        <span class="comment">// write your code here</span></div><div class="line">        </div><div class="line">        <span class="keyword">if</span>(nums.length == <span class="number">0</span>) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[nums.length];</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</div><div class="line">            dp[i] = <span class="number">1</span>;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; nums.length; i++) &#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++) &#123;</div><div class="line">                <span class="keyword">if</span>(nums[i] &gt; nums[j]) &#123;</div><div class="line">                    dp[i] = Math.max(dp[j] + <span class="number">1</span>, dp[i]);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        Arrays.sort(dp);</div><div class="line">        <span class="keyword">return</span> dp[nums.length-<span class="number">1</span>];</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>可以尝试使用二分查找来优化，具体思路如下：</p>
+<ol>
+<li>建个数组，令数组中的每个数的值都为<code>Integer.MAX_VALUE</code></li>
+<li>从题目所给序列中，依次取出每个值，更新数组</li>
+<li>更新数组的规则为：找到第一个大于取出值的数组元素，替代其值</li>
+<li>最后，从后往前对数组进行遍历，找到第一个非<code>Integer.MAX_VALUE</code>的数组元素的<code>index</code>即为我们所求的结果。</li>
+</ol>
+<p>完整代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">longestIncreasingSubsequence</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span>[] minLast = <span class="keyword">new</span> <span class="keyword">int</span>[nums.length + <span class="number">1</span>];</div><div class="line">        minLast[<span class="number">0</span>] = Integer.MIN_VALUE;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= nums.length; i++) &#123;</div><div class="line">            minLast[i] = Integer.MAX_VALUE;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</div><div class="line">            <span class="comment">// find the first number in minLast &gt;= nums[i]</span></div><div class="line">            <span class="keyword">int</span> index = binarySearch(minLast, nums[i]);</div><div class="line">            minLast[index] = nums[i];</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = nums.length; i &gt;= <span class="number">1</span>; i--) &#123;</div><div class="line">            <span class="keyword">if</span> (minLast[i] != Integer.MAX_VALUE) &#123;</div><div class="line">                <span class="keyword">return</span> i;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="comment">// find the first number &gt; num</span></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="keyword">int</span>[] minLast, <span class="keyword">int</span> num)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> start = <span class="number">0</span>, end = minLast.length - <span class="number">1</span>;</div><div class="line">        <span class="keyword">while</span> (start &lt;= end) &#123;</div><div class="line">            <span class="keyword">int</span> mid = ((end - start) &gt;&gt; <span class="number">1</span>) + start;</div><div class="line">            <span class="keyword">if</span> (minLast[mid] &lt; num) &#123;</div><div class="line">                start = mid + <span class="number">1</span>;</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                end = mid - <span class="number">1</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">return</span> end + <span class="number">1</span>;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>时间复杂度为<code>O(nlogn)</code>，相比动规，做到了一定程度上的优化。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;高频面试题总结之最长上升子序列&quot;&gt;&lt;a href=&quot;#高频面试题总结之最长上升子序列&quot; class=&quot;headerlink&quot; title=&quot;高频面试题总结之最长上升子序列&quot;&gt;&lt;/a&gt;高频面试题总结之最长上升子序列&lt;/h3&gt;&lt;h3 id=&quot;题目详情&quot;&gt;&lt;a href=&quot;#题目详情&quot; class=&quot;headerlink&quot; title=&quot;题目详情&quot;&gt;&lt;/a&gt;题目详情&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;http://www.lintcode.com/zh-cn/problem/longest-increasing-subsequence/&quot;&gt;LintCode No.76&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;给定一个整数序列，找到最长上升子序列（LIS），返回LIS的长度。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;最长上升子序列的定义：&lt;/strong&gt;&lt;br&gt;最长上升子序列问题是在一个无序的给定序列中找到一个尽可能长的由低到高排列的子序列，这种子序列不一定是连续的或者唯一的。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;样例&lt;/strong&gt;&lt;br&gt;给出 &lt;code&gt;[5,4,1,2,3]&lt;/code&gt;，LIS 是 &lt;code&gt;[1,2,3]&lt;/code&gt;，返回 3&lt;br&gt;给出 &lt;code&gt;[4,2,4,5,3,7]&lt;/code&gt;，LIS 是 &lt;code&gt;[2,4,5,7]&lt;/code&gt;，返回 4&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="数据结构" scheme="wanglilin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    
+      <category term="数据结构" scheme="wanglilin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="高频面试题总结" scheme="wanglilin.github.io/tags/%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
   
   <entry>
     <title>高频面试题之二分查找</title>
