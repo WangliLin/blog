@@ -3,31 +3,31 @@
 <head>
     <meta charset="utf-8">
     
-    <title>longest-inceasing-subsequence | Wangli&#39;s Blog</title>
+    <title>高频面试题总结之最长上升子序列 | Wangli&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="高频面试题总结之最长上升子序列题目详情LintCode No.76
+    <meta name="description" content="题目详情LintCode No.76
 
 给定一个整数序列，找到最长上升子序列（LIS），返回LIS的长度。
 最长上升子序列的定义：最长上升子序列问题是在一个无序的给定序列中找到一个尽可能长的由低到高排列的子序列，这种子序列不一定是连续的或者唯一的。
-样例给出 [5,4,1,2,3]，LIS 是 [1,2,3]，返回 3给出 [4,2,4,5,3,7]，LIS 是 [2">
+样例给出 [5,4,1,2,3]，LIS 是 [1,2,3]，返回 3给出 [4,2,4,5,3,7]，LIS 是 [2,4,5,7]，返回 4">
 <meta property="og:type" content="article">
-<meta property="og:title" content="longest-inceasing-subsequence">
+<meta property="og:title" content="高频面试题总结之最长上升子序列">
 <meta property="og:url" content="wanglilin.github.io/2018/03/31/longest-inceasing-subsequence/index.html">
 <meta property="og:site_name" content="Wangli's Blog">
-<meta property="og:description" content="高频面试题总结之最长上升子序列题目详情LintCode No.76
+<meta property="og:description" content="题目详情LintCode No.76
 
 给定一个整数序列，找到最长上升子序列（LIS），返回LIS的长度。
 最长上升子序列的定义：最长上升子序列问题是在一个无序的给定序列中找到一个尽可能长的由低到高排列的子序列，这种子序列不一定是连续的或者唯一的。
-样例给出 [5,4,1,2,3]，LIS 是 [1,2,3]，返回 3给出 [4,2,4,5,3,7]，LIS 是 [2">
+样例给出 [5,4,1,2,3]，LIS 是 [1,2,3]，返回 3给出 [4,2,4,5,3,7]，LIS 是 [2,4,5,7]，返回 4">
 <meta property="og:image" content="http://img.taopic.com/uploads/allimg/130619/318756-13061ZHF522.jpg">
-<meta property="og:updated_time" content="2018-03-31T14:02:28.692Z">
+<meta property="og:updated_time" content="2018-03-31T14:04:39.423Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="longest-inceasing-subsequence">
-<meta name="twitter:description" content="高频面试题总结之最长上升子序列题目详情LintCode No.76
+<meta name="twitter:title" content="高频面试题总结之最长上升子序列">
+<meta name="twitter:description" content="题目详情LintCode No.76
 
 给定一个整数序列，找到最长上升子序列（LIS），返回LIS的长度。
 最长上升子序列的定义：最长上升子序列问题是在一个无序的给定序列中找到一个尽可能长的由低到高排列的子序列，这种子序列不一定是连续的或者唯一的。
-样例给出 [5,4,1,2,3]，LIS 是 [1,2,3]，返回 3给出 [4,2,4,5,3,7]，LIS 是 [2">
+样例给出 [5,4,1,2,3]，LIS 是 [1,2,3]，返回 3给出 [4,2,4,5,3,7]，LIS 是 [2,4,5,7]，返回 4">
 <meta name="twitter:image" content="http://img.taopic.com/uploads/allimg/130619/318756-13061ZHF522.jpg">
     
 
@@ -221,7 +221,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            longest-inceasing-subsequence
+            高频面试题总结之最长上升子序列
         </h1>
     
 
@@ -256,14 +256,14 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <h3 id="高频面试题总结之最长上升子序列"><a href="#高频面试题总结之最长上升子序列" class="headerlink" title="高频面试题总结之最长上升子序列"></a>高频面试题总结之最长上升子序列</h3><h3 id="题目详情"><a href="#题目详情" class="headerlink" title="题目详情"></a>题目详情</h3><p><a href="http://www.lintcode.com/zh-cn/problem/longest-increasing-subsequence/" target="_blank" rel="external">LintCode No.76</a></p>
+            <h3 id="题目详情"><a href="#题目详情" class="headerlink" title="题目详情"></a>题目详情</h3><p><a href="http://www.lintcode.com/zh-cn/problem/longest-increasing-subsequence/" target="_blank" rel="external">LintCode No.76</a></p>
 <blockquote>
 <p>给定一个整数序列，找到最长上升子序列（LIS），返回LIS的长度。</p>
 <p><strong>最长上升子序列的定义：</strong><br>最长上升子序列问题是在一个无序的给定序列中找到一个尽可能长的由低到高排列的子序列，这种子序列不一定是连续的或者唯一的。</p>
 <p><strong>样例</strong><br>给出 <code>[5,4,1,2,3]</code>，LIS 是 <code>[1,2,3]</code>，返回 3<br>给出 <code>[4,2,4,5,3,7]</code>，LIS 是 <code>[2,4,5,7]</code>，返回 4</p>
 </blockquote>
 <a id="more"></a>
-<h3 id="解法1-动态规划"><a href="#解法1-动态规划" class="headerlink" title="解法1 动态规划"></a>解法1 动态规划</h3><p>####思路：<br> 两个<code>for</code>循环遍历数组：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; nums.length; i++) &#123;</div><div class="line">           <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++) &#123;</div><div class="line">               <span class="keyword">if</span>(nums[i] &gt; nums[j]) &#123;</div><div class="line">                   dp[i] = Math.max(dp[j] + <span class="number">1</span>, dp[i]);</div><div class="line">               &#125;</div><div class="line">           &#125;</div><div class="line">       &#125;</div></pre></td></tr></table></figure></p>
+<h3 id="解法1-动态规划"><a href="#解法1-动态规划" class="headerlink" title="解法1 动态规划"></a>解法1 动态规划</h3><h4 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h4><p> 两个<code>for</code>循环遍历数组：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; nums.length; i++) &#123;</div><div class="line">           <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++) &#123;</div><div class="line">               <span class="keyword">if</span>(nums[i] &gt; nums[j]) &#123;</div><div class="line">                   dp[i] = Math.max(dp[j] + <span class="number">1</span>, dp[i]);</div><div class="line">               &#125;</div><div class="line">           &#125;</div><div class="line">       &#125;</div></pre></td></tr></table></figure></p>
 <p>状态转移：<br><code>dp[i] = Math.max(dp[j] + 1, dp[i])</code><br>时间复杂度：<br><code>O(n^2)</code></p>
 <p>完整代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">longestIncreasingSubsequence</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</div><div class="line">        <span class="comment">// write your code here</span></div><div class="line">        </div><div class="line">        <span class="keyword">if</span>(nums.length == <span class="number">0</span>) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[nums.length];</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</div><div class="line">            dp[i] = <span class="number">1</span>;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; nums.length; i++) &#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++) &#123;</div><div class="line">                <span class="keyword">if</span>(nums[i] &gt; nums[j]) &#123;</div><div class="line">                    dp[i] = Math.max(dp[j] + <span class="number">1</span>, dp[i]);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        Arrays.sort(dp);</div><div class="line">        <span class="keyword">return</span> dp[nums.length-<span class="number">1</span>];</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
 <p>可以尝试使用二分查找来优化，具体思路如下：</p>
@@ -285,7 +285,7 @@
 
 </div>
 
-    <a data-url="wanglilin.github.io/blog/2018/03/31/longest-inceasing-subsequence/" data-id="cjffg59p0000q1k5lzpok8zd9" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="wanglilin.github.io/blog/2018/03/31/longest-inceasing-subsequence/" data-id="cjffg9xxl000qno5lkdatqj2z" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -379,7 +379,7 @@
     <section id="comments">
     
         
-    <div class="ds-thread" data-thread-key="2018/03/31/longest-inceasing-subsequence/" data-title="longest-inceasing-subsequence" data-url="wanglilin.github.io/blog/2018/03/31/longest-inceasing-subsequence/"></div>
+    <div class="ds-thread" data-thread-key="2018/03/31/longest-inceasing-subsequence/" data-title="高频面试题总结之最长上升子序列" data-url="wanglilin.github.io/blog/2018/03/31/longest-inceasing-subsequence/"></div>
     <style>
         #ds-thread #ds-reset .ds-textarea-wrapper {
             background: none;
@@ -437,7 +437,7 @@
                             <a href="/blog/2018/03/31/longest-inceasing-subsequence/" class="thumbnail">
     
     
-        <span style="background-image:url(http://img.taopic.com/uploads/allimg/130619/318756-13061ZHF522.jpg)" alt="longest-inceasing-subsequence" class="thumbnail-image"></span>
+        <span style="background-image:url(http://img.taopic.com/uploads/allimg/130619/318756-13061ZHF522.jpg)" alt="高频面试题总结之最长上升子序列" class="thumbnail-image"></span>
     
 </a>
 
@@ -445,7 +445,7 @@
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/blog/categories/数据结构/">数据结构</a></p>
-                            <p class="item-title"><a href="/blog/2018/03/31/longest-inceasing-subsequence/" class="title">longest-inceasing-subsequence</a></p>
+                            <p class="item-title"><a href="/blog/2018/03/31/longest-inceasing-subsequence/" class="title">高频面试题总结之最长上升子序列</a></p>
                             <p class="item-date"><time datetime="2018-03-31T14:00:59.000Z" itemprop="datePublished">2018-03-31</time></p>
                         </div>
                     </li>
