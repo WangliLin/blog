@@ -3,44 +3,14 @@
 <head>
     <meta charset="utf-8">
     
-    <title>高频面试题之最长公共系列 | Wangli&#39;s Blog</title>
+    <title>Wangli&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="高频面试题总结 —— 最长公共系列最长公共子串
-给出两个字符串，找到最长公共子串，并返回其长度。
-样例:给出A=“ABCD”，B=“CBCE”，返回 2
-
-思路：动态规划求解：
-
-当A.charAt(i) == B.charAt(j), 状态转移：dp[i][j] = dp[i-1][j-1] + 1
-否则：dp[i][j] = 0
-最后求max(dp)">
-<meta property="og:type" content="article">
-<meta property="og:title" content="高频面试题之最长公共系列">
-<meta property="og:url" content="wanglilin.github.io/2018/03/27/longest-common/index.html">
+    <meta property="og:type" content="website">
+<meta property="og:title" content="Wangli's Blog">
+<meta property="og:url" content="wanglilin.github.io/page/2/index.html">
 <meta property="og:site_name" content="Wangli's Blog">
-<meta property="og:description" content="高频面试题总结 —— 最长公共系列最长公共子串
-给出两个字符串，找到最长公共子串，并返回其长度。
-样例:给出A=“ABCD”，B=“CBCE”，返回 2
-
-思路：动态规划求解：
-
-当A.charAt(i) == B.charAt(j), 状态转移：dp[i][j] = dp[i-1][j-1] + 1
-否则：dp[i][j] = 0
-最后求max(dp)">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3987796-76a1644e73e8a885.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/505">
-<meta property="og:updated_time" content="2018-03-27T04:36:27.946Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="高频面试题之最长公共系列">
-<meta name="twitter:description" content="高频面试题总结 —— 最长公共系列最长公共子串
-给出两个字符串，找到最长公共子串，并返回其长度。
-样例:给出A=“ABCD”，B=“CBCE”，返回 2
-
-思路：动态规划求解：
-
-当A.charAt(i) == B.charAt(j), 状态转移：dp[i][j] = dp[i-1][j-1] + 1
-否则：dp[i][j] = 0
-最后求max(dp)">
-<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/3987796-76a1644e73e8a885.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/505">
+<meta name="twitter:title" content="Wangli's Blog">
     
 
     
@@ -225,15 +195,16 @@
 </aside>
 
             
-            <section id="main"><article id="post-longest-common" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main">
+    <article id="post-javase-string" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
             <header class="article-header">
                 
     
-        <h1 class="article-title" itemprop="name">
-            高频面试题之最长公共系列
+        <h1 itemprop="name">
+            <a class="article-title" href="/blog/2017/03/04/javase-string/">Java基础之字符串</a>
         </h1>
     
 
@@ -242,8 +213,8 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/blog/2018/03/27/longest-common/">
-            <time datetime="2018-03-27T04:32:14.000Z" itemprop="datePublished">2018-03-27</time>
+        <a href="/blog/2017/03/04/javase-string/">
+            <time datetime="2017-03-04T08:08:41.000Z" itemprop="datePublished">2017-03-04</time>
         </a>
     </div>
 
@@ -251,13 +222,13 @@
                         
     <div class="article-category">
     	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/blog/categories/数据结构/">数据结构</a>
+        <a class="article-category-link" href="/blog/categories/JavaSE/">JavaSE</a>
     </div>
 
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/blog/tags/数据结构/">数据结构</a>, <a class="tag-link" href="/blog/tags/高频面试题总结/">高频面试题总结</a>
+        <a class="tag-link" href="/blog/tags/JavaSE/">JavaSE</a>, <a class="tag-link" href="/blog/tags/Java基础/">Java基础</a>
     </div>
 
                     </div>
@@ -267,30 +238,11 @@
         
         <div class="article-entry" itemprop="articleBody">
         
-            
-            <h3 id="高频面试题总结-——-最长公共系列"><a href="#高频面试题总结-——-最长公共系列" class="headerlink" title="高频面试题总结 —— 最长公共系列"></a>高频面试题总结 —— 最长公共系列</h3><h4 id="最长公共子串"><a href="#最长公共子串" class="headerlink" title="最长公共子串"></a>最长公共子串</h4><blockquote>
-<p>给出两个字符串，找到最长公共子串，并返回其长度。</p>
-<p><strong>样例:</strong><br>给出A=“ABCD”，B=“CBCE”，返回 2</p>
-</blockquote>
-<h4 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h4><p>动态规划求解：</p>
-<ul>
-<li>当<code>A.charAt(i) == B.charAt(j)</code>, 状态转移：<code>dp[i][j] = dp[i-1][j-1] + 1</code></li>
-<li>否则：<code>dp[i][j] = 0</code></li>
-<li>最后求<code>max(dp)</code></li>
-</ul>
-<a id="more"></a>
-<h4 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="comment">/*</span></div><div class="line">     * @param A: A string</div><div class="line">     * @param B: A string</div><div class="line">     * @return: the length of the longest common substring.</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">longestCommonSubstring</span><span class="params">(String A, String B)</span> </span>&#123;</div><div class="line">        <span class="comment">// write your code here</span></div><div class="line">        <span class="keyword">int</span> lenA = A.length();</div><div class="line">        <span class="keyword">int</span> lenB = B.length();</div><div class="line">        </div><div class="line">        <span class="keyword">int</span>[][] dp = <span class="keyword">new</span> <span class="keyword">int</span>[lenA + <span class="number">1</span>][lenB + <span class="number">1</span>];</div><div class="line">        </div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= lenA; i++) &#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= lenB; j++) &#123;</div><div class="line">                <span class="keyword">if</span> (A.charAt(i - <span class="number">1</span>) == B.charAt(j - <span class="number">1</span>)) &#123;</div><div class="line">                    dp[i][j] = dp[i - <span class="number">1</span>][j - <span class="number">1</span>] + <span class="number">1</span>;</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    dp[i][j] = <span class="number">0</span>;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">int</span> max = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= lenA; i++) &#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= lenB; j++) &#123;</div><div class="line">                max = Math.max(dp[i][j], max);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">return</span> max;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="最长公共子序列"><a href="#最长公共子序列" class="headerlink" title="最长公共子序列"></a>最长公共子序列</h3><blockquote>
-<p>给出两个字符串，找到最长公共子序列(LCS)，返回LCS的长度。</p>
-<p><strong>样例:</strong><br>给出”ABCD” 和 “EDCA”，这个LCS是 “A” (或 D或C)，返回1<br>给出 “ABCD” 和 “EACB”，这个LCS是”AC”返回 2</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="comment">/*</span></div><div class="line">     * @param A: A string</div><div class="line">     * @param B: A string</div><div class="line">     * @return: The length of longest common subsequence of A and B</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">longestCommonSubsequence</span><span class="params">(String A, String B)</span> </span>&#123;</div><div class="line">        <span class="comment">// write your code here</span></div><div class="line">        </div><div class="line">        <span class="keyword">int</span> lenA = A.length();</div><div class="line">        <span class="keyword">int</span> lenB = B.length();</div><div class="line">        <span class="keyword">int</span>[][] dp = <span class="keyword">new</span> <span class="keyword">int</span>[lenA + <span class="number">1</span>][lenB + <span class="number">1</span>];</div><div class="line">        </div><div class="line">        <span class="keyword">if</span> (lenA == <span class="number">0</span> || lenB == <span class="number">0</span> || A == <span class="keyword">null</span> || B == <span class="keyword">null</span>)</div><div class="line">            <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        </div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= lenA; i++) &#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= lenB; j++) &#123;</div><div class="line">                <span class="keyword">if</span> (A.charAt(i - <span class="number">1</span>) == B.charAt(j - <span class="number">1</span>))</div><div class="line">                    dp[i][j] = dp[i-<span class="number">1</span>][j-<span class="number">1</span>] + <span class="number">1</span>;</div><div class="line">                <span class="keyword">else</span></div><div class="line">                    dp[i][j] = Math.max(dp[i-<span class="number">1</span>][j], dp[i][j-<span class="number">1</span>]);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">return</span> dp[lenA][lenB];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="网易面试题"><a href="#网易面试题" class="headerlink" title="网易面试题"></a>网易面试题</h3><blockquote>
-<p>牛牛拿到了一个藏宝图，顺着藏宝图的指示，牛牛发现了一个藏宝盒，藏宝盒上有一个机关，机关每次会显示两个字符串 s 和 t，根据古老的传说，牛牛需要每次都回答 t 是否是 s 的子序列。注意，子序列不要求在原字符串中是连续的，例如串 abc，它的子序列就有 {空串, a, b, c, ab, ac, bc, abc} 8 种。</p>
-<p><strong>样例：</strong><br>输入:<br><code>x.nowcoder.com</code><br><code>ooo</code><br>输出:<br><code>Yes</code></p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.*;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        Scanner scan = <span class="keyword">new</span> Scanner(System.in);</div><div class="line">        String s = scan.nextLine();</div><div class="line">        String t = scan.nextLine();</div><div class="line">        <span class="keyword">int</span> lenS = s.length();</div><div class="line">        <span class="keyword">int</span> lenT = t.length();</div><div class="line">        </div><div class="line">        <span class="keyword">int</span>[][] dp = <span class="keyword">new</span> <span class="keyword">int</span>[lenS+<span class="number">1</span>][lenT+<span class="number">1</span>];</div><div class="line">        </div><div class="line">        <span class="keyword">if</span> (lenT == <span class="number">0</span> || lenS == <span class="number">0</span> || s == <span class="keyword">null</span> || t == <span class="keyword">null</span>) &#123;</div><div class="line">            System.out.println(<span class="string">"No"</span>);</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= lenS; i++) &#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= lenT; j++) &#123;</div><div class="line">                <span class="keyword">if</span> (s.charAt(i-<span class="number">1</span>) == t.charAt(j-<span class="number">1</span>)) &#123;</div><div class="line">                    dp[i][j] = dp[i-<span class="number">1</span>][j-<span class="number">1</span>] + <span class="number">1</span>;</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    dp[i][j] = Math.max(dp[i-<span class="number">1</span>][j], dp[i][j-<span class="number">1</span>]);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">if</span> (dp[lenS][lenT] == lenT) &#123;</div><div class="line">            System.out.println(<span class="string">"Yes"</span>);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            System.out.println(<span class="string">"No"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
+            <p><h2 id="类结构"><a href="#类结构" class="headerlink" title="类结构"></a>类结构</h2><p>public final class String<br>extends Object<br>implements Serializable, Comparable, CharSequence</p>
+<h2 id="类概述"><a href="#类概述" class="headerlink" title="类概述"></a>类概述</h2><p>Java把内存划分为两种：一种是栈内存，一种是堆内存。<strong>在函数中定义的一些基本类型的变量和对象的引用变量都是在函数的栈内存中分配</strong>。当在一段代码块定义一个变量时，Java就在栈中为这个变量分配内存空间，当超过变量的作用域后，Java会自动释放掉为该变量分配的内存空间，该内存空间可以立即被另作它用。<br></p>
+            <p class="article-more-link">
+                <a href="/blog/2017/03/04/javase-string/#more">Read More</a>
+            </p>
         
         </div>
         <footer class="article-footer">
@@ -300,7 +252,7 @@
 
 </div>
 
-    <a data-url="wanglilin.github.io/blog/2018/03/27/longest-common/" data-id="cjff7hg7r000m0c5l65lzn76u" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="wanglilin.github.io/blog/2017/03/04/javase-string/" data-id="cjff7hg78000g0c5lwkw2aamp" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -368,83 +320,19 @@
 
             
     
-        <a href="wanglilin.github.io/blog/2018/03/27/longest-common/#comments" class="article-comment-link ds-thread-count" data-thread-key="wanglilin.github.io/blog/2018/03/27/longest-common/">Comments</a>
+        <a href="wanglilin.github.io/blog/2017/03/04/javase-string/#comments" class="article-comment-link ds-thread-count" data-thread-key="wanglilin.github.io/blog/2017/03/04/javase-string/">Comments</a>
     
 
         </footer>
     </div>
     
-        
-<nav id="article-nav">
-    
-        <a href="/blog/2018/03/28/dp-money/" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">Newer</strong>
-            <div class="article-nav-title">
-                
-                    高频面试题总结 —— 动规之拼凑面额
-                
-            </div>
-        </a>
-    
-    
-        <a href="/blog/2018/03/27/reverse-linked-list/" id="article-nav-older" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">Older</strong>
-            <div class="article-nav-title">高频面试题总结之翻转链表</div>
-        </a>
-    
-</nav>
-
-
-    
 </article>
 
 
-    
-    <section id="comments">
-    
-        
-    <div class="ds-thread" data-thread-key="2018/03/27/longest-common/" data-title="高频面试题之最长公共系列" data-url="wanglilin.github.io/blog/2018/03/27/longest-common/"></div>
-    <style>
-        #ds-thread #ds-reset .ds-textarea-wrapper {
-            background: none;
-        }
-        #ds-reset .ds-avatar img {
-            box-shadow: none;
-        }
-        #ds-reset .ds-gradient-bg {
-            background: #f7f7f7;
-        }
-        #ds-thread #ds-reset li.ds-tab a {
-            border-radius: 3px;
-        }
-        #ds-thread #ds-reset .ds-post-button {
-            color: white;
-            border: none;
-            box-shadow: none;
-            background: #d32;
-            text-shadow: none;
-            font-weight: normal;
-            font-family: 'Microsoft Yahei';
-        }
-        #ds-thread #ds-reset .ds-post-button:hover {
-            color: white;
-            background: #DE594C;
-        }
-        #ds-thread #ds-reset .ds-post-button:active {
-            background: #d32;
-        }
-        #ds-smilies-tooltip ul.ds-smilies-tabs li a.ds-current {
-            color: white;
-            background: #d32;
-            box-shadow: none;
-            text-shadow: none;
-            font-weight: normal;
-        }
-    </style>
 
-    
-    </section>
-
+    <nav id="page-nav">
+        <a class="extend prev" rel="prev" href="/blog/">&laquo; Prev</a><a class="page-number" href="/blog/">1</a><span class="page-number current">2</span>
+    </nav>
 </section>
             
                 <aside id="sidebar">
