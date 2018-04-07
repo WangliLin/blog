@@ -5,7 +5,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="wanglilin.github.io/"/>
-  <updated>2018-04-04T04:22:31.944Z</updated>
+  <updated>2018-04-07T08:15:12.396Z</updated>
   <id>wanglilin.github.io/</id>
   
   <author>
@@ -14,6 +14,44 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>高频面试题总结之链表排序</title>
+    <link href="wanglilin.github.io/2018/04/07/sortLinkedList/"/>
+    <id>wanglilin.github.io/2018/04/07/sortLinkedList/</id>
+    <published>2018-04-07T08:11:44.000Z</published>
+    <updated>2018-04-07T08:15:12.396Z</updated>
+    
+    <content type="html"><![CDATA[<p>由于链表数据结构的特殊性，其实基于交换的排序算法已经不适用了，比较适用的是插入排序和归并排序。下面分别展示具体的求解思路。</p>
+<h3 id="题目详情"><a href="#题目详情" class="headerlink" title="题目详情"></a>题目详情</h3><blockquote>
+<p>Sort a linked list in O(n log n) time using constant space complexity.</p>
+</blockquote>
+<a id="more"></a>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for singly-linked list.</div><div class="line"> * class ListNode &#123;</div><div class="line"> *     int val;</div><div class="line"> *     ListNode next;</div><div class="line"> *     ListNode(int x) &#123;</div><div class="line"> *         val = x;</div><div class="line"> *         next = null;</div><div class="line"> *     &#125;</div><div class="line"> * &#125;</div><div class="line"> */</div><div class="line"><span class="keyword">import</span> java.util.*;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">sortList</span><span class="params">(ListNode head)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (head == <span class="keyword">null</span> || head.next == <span class="keyword">null</span>)</div><div class="line">            <span class="keyword">return</span> head;</div><div class="line">        </div><div class="line">        ListNode midNode = getMid(head);</div><div class="line">        ListNode midNext = midNode.next;</div><div class="line">        midNode.next = <span class="keyword">null</span>;</div><div class="line">        </div><div class="line">        <span class="keyword">return</span> merge(sortList(head), sortList(midNext));</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">private</span> ListNode <span class="title">getMid</span><span class="params">(ListNode head)</span> </span>&#123;</div><div class="line">        ListNode slow = head;</div><div class="line">        ListNode fast = head;</div><div class="line">        <span class="keyword">while</span> (fast.next != <span class="keyword">null</span> &amp;&amp; fast.next.next != <span class="keyword">null</span>) &#123;</div><div class="line">            slow = slow.next;</div><div class="line">            fast = fast.next.next;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> slow;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">private</span> ListNode <span class="title">merge</span><span class="params">(ListNode head1, ListNode head2)</span> </span>&#123;</div><div class="line">        ListNode dummy = <span class="keyword">new</span> ListNode(-<span class="number">1</span>);</div><div class="line">        ListNode curNode = dummy;</div><div class="line">        <span class="keyword">while</span> (head1 != <span class="keyword">null</span> &amp;&amp; head2 != <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">if</span> (head1.val &lt;= head2.val) &#123;</div><div class="line">                curNode.next = head1;</div><div class="line">                head1 = head1.next;</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                curNode.next = head2;</div><div class="line">                head2 = head2.next;</div><div class="line">            &#125;</div><div class="line">            curNode = curNode.next;</div><div class="line">        &#125;</div><div class="line">        curNode.next = head1 == <span class="keyword">null</span> ? head2 : head1;</div><div class="line">        </div><div class="line">        <span class="keyword">return</span> dummy.next;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="链表插入排序"><a href="#链表插入排序" class="headerlink" title="链表插入排序"></a>链表插入排序</h3><p><a href="http://www.lintcode.com/submission/13892356/" target="_blank" rel="external">题目详情</a></p>
+<blockquote>
+<p>用插入排序对链表排序</p>
+</blockquote>
+<h3 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for ListNode.</div><div class="line"> * public class ListNode &#123;</div><div class="line"> *     int val;</div><div class="line"> *     ListNode next;</div><div class="line"> *     ListNode(int val) &#123;</div><div class="line"> *         this.val = val;</div><div class="line"> *         this.next = null;</div><div class="line"> *     &#125;</div><div class="line"> * &#125;</div><div class="line"> */</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="comment">/*</span></div><div class="line">     * @param head: The first node of linked list.</div><div class="line">     * @return: The head of linked list.</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">insertionSortList</span><span class="params">(ListNode head)</span> </span>&#123;</div><div class="line">        <span class="comment">// write your code here</span></div><div class="line">        <span class="comment">//将head中的值都加到该变量后面</span></div><div class="line">        ListNode dummy = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</div><div class="line">        <span class="keyword">while</span>(head != <span class="keyword">null</span>) &#123;</div><div class="line">            ListNode node = dummy;</div><div class="line">            <span class="keyword">while</span> (node.next != <span class="keyword">null</span> &amp;&amp; node.next.val &lt; head.val) &#123;</div><div class="line">                node = node.next;</div><div class="line">            &#125;</div><div class="line">            ListNode temp = head.next;</div><div class="line">            head.next = node.next;</div><div class="line">            node.next = head;</div><div class="line">            head = temp;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> dummy.next;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;由于链表数据结构的特殊性，其实基于交换的排序算法已经不适用了，比较适用的是插入排序和归并排序。下面分别展示具体的求解思路。&lt;/p&gt;
+&lt;h3 id=&quot;题目详情&quot;&gt;&lt;a href=&quot;#题目详情&quot; class=&quot;headerlink&quot; title=&quot;题目详情&quot;&gt;&lt;/a&gt;题目详情&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;Sort a linked list in O(n log n) time using constant space complexity.&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="数据结构" scheme="wanglilin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    
+      <category term="数据结构" scheme="wanglilin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="高频面试题总结" scheme="wanglilin.github.io/tags/%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
   
   <entry>
     <title>SQL典型例题总结</title>
@@ -74,40 +112,27 @@
     <link href="wanglilin.github.io/2018/04/01/continuous-discretization/"/>
     <id>wanglilin.github.io/2018/04/01/continuous-discretization/</id>
     <published>2018-04-01T07:47:52.000Z</published>
-    <updated>2018-04-01T07:55:48.885Z</updated>
+    <updated>2018-04-07T08:18:08.305Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>模型是使用离散特征还是连续特征，其实是一个“海量离散特征 + 简单模型” 同 “少量连续特征 + 复杂模型”的权衡，既可以离散化用线性模型，也可以用连续特征加深度学习。就看是喜欢折腾特征还是喜欢折腾模型了。通常来说，前者容易，可以n个人一起并行做，有成功经验；后者目前看起来很赞，能走多远还需拭目以待。<br>                                    ——李沐</p>
 </blockquote>
 <p>在CTR预估中，通常都会用到离散特征特征 + LR，很少直接将连续值作为逻辑回归模型的特征输入，而是将连续特征离散化为一系列0、1类别特征交给逻辑回归模型，这样做的优势主要有以下几点：</p>
 <a id="more"></a>
-<ol>
-<li>离散特征的增加和减少都很容易，易于模型的快速迭代。</li>
-<li>稀疏向量内积乘法运算速度快，计算结果方便存储，容易扩展；</li>
-<li>离散化后的特征对异常数据具有很强的鲁棒性；</li>
-<li>逻辑回归属于广义线性模型，表达能力有限；单变量离散化为<code>N</code>个后，每个变量有单独的权重，相当于为模型引入了非线性能力，能够提升模型的表达能力：</li>
-</ol>
+<p>1.离散特征的增加和减少都很容易，易于模型的快速迭代。<br>2.稀疏向量内积乘法运算速度快，计算结果方便存储，容易扩展；<br>3.离散化后的特征对异常数据具有很强的鲁棒性；<br>4.逻辑回归属于广义线性模型，表达能力有限；单变量离散化为<code>N</code>个后，每个变量有单独的权重，相当于为模型引入了非线性能力，能够提升模型的表达能力：</p>
 <ul>
 <li>加大拟合：在LR模型中，特征A作为连续特征对应的权重是Wa。A是线性特征，因为<code>y = Wa*A</code>,y对于A的导数就是Wa,如果离散化后，A按区间离散化为A_1,A_2,A_3。那么<code>y = w_1*A_1+w_2*A_2+w_3*A_3</code>.那么y对于A的函数就相当于分段的线性函数，y对于A的导数也随A的取值变动，所以，相当于引入了非线性。</li>
 <li>防止过拟合：当使用连续特征时，一个特征对应于一个权重，那么，如果这个特征权重较大，模型就会很依赖于这个特征，这个特征的一个微小变化可能会导致最终结果产生很大的变化，这样子的模型很危险，当遇到新样本的时候很可能因为对这个特征过分敏感而得到错误的分类结果，也就是泛化能力差，容易过拟合。而使用离散特征的时候，一个特征变成了多个，权重也变为多个，那么之前连续特征对模型的影响力就被分散弱化了，从而降低了过拟合的风险。</li>
 </ul>
-<ol>
-<li>离散化后进行特征交叉，加入特征A离散化为M个值，特征B离散为N个值，那么交叉之后会有M*N个变量，进一步引入非线性，提升表达能力；</li>
-<li>特征离散化后，模型更稳定，比如如果对用户年龄离散化，20-30作为一个区间，不会因为一个用户年龄长了一岁就变成一个完成不同的人，当然，需要注意的是，如何合理的划分区间。</li>
-</ol>
+<p>5.离散化后进行特征交叉，加入特征A离散化为M个值，特征B离散为N个值，那么交叉之后会有M*N个变量，进一步引入非线性，提升表达能力；<br>6.特征离散化后，模型更稳定，比如如果对用户年龄离散化，20-30作为一个区间，不会因为一个用户年龄长了一岁就变成一个完成不同的人，当然，需要注意的是，如何合理的划分区间。</p>
 <h3 id="离散方法"><a href="#离散方法" class="headerlink" title="离散方法"></a>离散方法</h3><h4 id="等距离散"><a href="#等距离散" class="headerlink" title="等距离散"></a>等距离散</h4><p>取值范围均匀划成n等份，每份的间距相等</p>
 <h4 id="等频离散"><a href="#等频离散" class="headerlink" title="等频离散"></a>等频离散</h4><p>均匀分为n等份，每份内包含的观察点数相同</p>
-<h4 id="优化离散"><a href="#优化离散" class="headerlink" title="优化离散"></a>优化离散</h4><p>大致有两类方法： </p>
-<ol>
-<li>卡方检验方法：（统计样本的实际观测值与理论推断值之间的偏离程度，卡方值越大，越不符合；卡方值越小，偏差越小，越趋于符合） </li>
-</ol>
+<h4 id="优化离散"><a href="#优化离散" class="headerlink" title="优化离散"></a>优化离散</h4><p>大致有两类方法：<br>1.卡方检验方法：（统计样本的实际观测值与理论推断值之间的偏离程度，卡方值越大，越不符合；卡方值越小，偏差越小，越趋于符合） </p>
 <ul>
 <li>分裂方法：找到一个分裂点看，左右2个区间，在目标值上分布是否有- 显著差异，有显著差异就分裂，否则就忽略。这个点可以每次找差异最大的点 </li>
 <li>合并方法：先划分如果很小单元区间，按顺序合并在目标值上分布不显著的相邻区间，直到收敛 </li>
 </ul>
-<ol>
-<li>信息增益方法： </li>
-</ol>
+<p>2.信息增益方法： </p>
 <ul>
 <li>分裂方法：找到一个分裂点看，左右2个区间，看分裂前后信息增益变化阈值，如果差值超过阈值（正值，分列前-分裂后信息熵），则分裂。每次找差值最大的点做分裂点，直到收敛 </li>
 <li>合并方法：先划分 如果很小单元区间，按顺序合并信息增益小于阈值的相邻区间，直到收敛</li>
@@ -172,9 +197,9 @@
       <category term="数据结构" scheme="wanglilin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
     
-      <category term="高频面试题总结" scheme="wanglilin.github.io/tags/%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
-    
       <category term="数据结构" scheme="wanglilin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="高频面试题总结" scheme="wanglilin.github.io/tags/%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -220,9 +245,9 @@
       <category term="数据结构" scheme="wanglilin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
     
-      <category term="高频面试题总结" scheme="wanglilin.github.io/tags/%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
-    
       <category term="数据结构" scheme="wanglilin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="高频面试题总结" scheme="wanglilin.github.io/tags/%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -283,9 +308,9 @@
       <category term="数据结构" scheme="wanglilin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
     
-      <category term="高频面试题总结" scheme="wanglilin.github.io/tags/%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
-    
       <category term="数据结构" scheme="wanglilin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="高频面试题总结" scheme="wanglilin.github.io/tags/%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -324,9 +349,9 @@
       <category term="数据结构" scheme="wanglilin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
     
-      <category term="高频面试题总结" scheme="wanglilin.github.io/tags/%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
-    
       <category term="数据结构" scheme="wanglilin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="高频面试题总结" scheme="wanglilin.github.io/tags/%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -379,9 +404,9 @@
       <category term="数据结构" scheme="wanglilin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
     
-      <category term="高频面试题总结" scheme="wanglilin.github.io/tags/%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
-    
       <category term="数据结构" scheme="wanglilin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="高频面试题总结" scheme="wanglilin.github.io/tags/%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -413,9 +438,9 @@
       <category term="数据结构" scheme="wanglilin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
     
-      <category term="高频面试题总结" scheme="wanglilin.github.io/tags/%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
-    
       <category term="数据结构" scheme="wanglilin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="高频面试题总结" scheme="wanglilin.github.io/tags/%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -668,9 +693,9 @@
       <category term="Java源码" scheme="wanglilin.github.io/categories/Java%E6%BA%90%E7%A0%81/"/>
     
     
-      <category term="Java源码阅读" scheme="wanglilin.github.io/tags/Java%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/"/>
-    
       <category term="Java基础" scheme="wanglilin.github.io/tags/Java%E5%9F%BA%E7%A1%80/"/>
+    
+      <category term="Java源码阅读" scheme="wanglilin.github.io/tags/Java%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/"/>
     
   </entry>
   
