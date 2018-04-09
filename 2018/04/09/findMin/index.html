@@ -3,15 +3,29 @@
 <head>
     <meta charset="utf-8">
     
-    <title>About | Wangli&#39;s Blog</title>
+    <title>寻找旋转排序数组中的最小值 | Wangli&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta property="og:type" content="website">
-<meta property="og:title" content="About">
-<meta property="og:url" content="wanglilin.github.io/about/index.html">
+    <meta name="description" content="题目详情
+假设一个旋转排序的数组其起始位置是未知的（比如0 1 2 4 5 6 7 可能变成是4 5 6 7 0 1 2）。
+你需要找到其中最小的元素。
+你可以假设数组中不存在重复的元素。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="寻找旋转排序数组中的最小值">
+<meta property="og:url" content="wanglilin.github.io/2018/04/09/findMin/index.html">
 <meta property="og:site_name" content="Wangli's Blog">
-<meta property="og:updated_time" content="2017-03-01T08:36:45.544Z">
+<meta property="og:description" content="题目详情
+假设一个旋转排序的数组其起始位置是未知的（比如0 1 2 4 5 6 7 可能变成是4 5 6 7 0 1 2）。
+你需要找到其中最小的元素。
+你可以假设数组中不存在重复的元素。">
+<meta property="og:image" content="https://www.m5yu.com/wp-content/themes/Nana/timthumb.php?src=https://www.m5yu.com/wp-content/uploads/2017/09/timg-1.jpeg&w=280&h=210&zc=1">
+<meta property="og:updated_time" content="2018-04-09T03:58:55.013Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="About">
+<meta name="twitter:title" content="寻找旋转排序数组中的最小值">
+<meta name="twitter:description" content="题目详情
+假设一个旋转排序的数组其起始位置是未知的（比如0 1 2 4 5 6 7 可能变成是4 5 6 7 0 1 2）。
+你需要找到其中最小的元素。
+你可以假设数组中不存在重复的元素。">
+<meta name="twitter:image" content="https://www.m5yu.com/wp-content/themes/Nana/timthumb.php?src=https://www.m5yu.com/wp-content/uploads/2017/09/timg-1.jpeg&w=280&h=210&zc=1">
     
 
     
@@ -196,7 +210,7 @@
 </aside>
 
             
-            <section id="main"><article id="page-undefined" class="article article-type-page" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-findMin" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -204,10 +218,34 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            About
+            寻找旋转排序数组中的最小值
         </h1>
     
 
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/blog/2018/04/09/findMin/">
+            <time datetime="2018-04-09T03:51:04.000Z" itemprop="datePublished">2018-04-09</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/blog/categories/数据结构/">数据结构</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/blog/tags/数据结构/">数据结构</a>, <a class="tag-link" href="/blog/tags/高频面试题总结/">高频面试题总结</a>
+    </div>
+
+                    </div>
                 
             </header>
         
@@ -215,7 +253,28 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            
+            <h3 id="题目详情"><a href="#题目详情" class="headerlink" title="题目详情"></a><a href="http://www.lintcode.com/zh-cn/problem/find-minimum-in-rotated-sorted-array/" target="_blank" rel="external">题目详情</a></h3><blockquote>
+<p>假设一个旋转排序的数组其起始位置是未知的（比如0 1 2 4 5 6 7 可能变成是4 5 6 7 0 1 2）。</p>
+<p>你需要找到其中最小的元素。</p>
+<p>你可以假设数组中不存在重复的元素。</p>
+</blockquote>
+<a id="more"></a>
+<h3 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h3><ul>
+<li>顺序遍历，找到逆序对即可</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * <span class="doctag">@param</span> nums: a rotated sorted array</div><div class="line">     * <span class="doctag">@return</span>: the minimum number in the array</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findMin</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</div><div class="line">        <span class="comment">// write your code here</span></div><div class="line">        <span class="keyword">if</span> (nums == <span class="keyword">null</span> || nums.length == <span class="number">0</span>)</div><div class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</div><div class="line">        </div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; nums.length; i++) &#123;</div><div class="line">            <span class="keyword">if</span> (nums[i] &lt; nums[i-<span class="number">1</span>])</div><div class="line">                <span class="keyword">return</span> nums[i];</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">return</span> nums[<span class="number">0</span>];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>暴力解法虽然简单，但时间复杂度较高，因此我们寻找效率更高的二分查找法解决此类问题。</p>
+<h3 id="二分查找解"><a href="#二分查找解" class="headerlink" title="二分查找解"></a>二分查找解</h3><h4 id="思路：-1"><a href="#思路：-1" class="headerlink" title="思路："></a>思路：</h4><ul>
+<li>以数组最后一个最为target，寻找数组中第一个小于target的值</li>
+<li>与常规的排序数组不同：<ul>
+<li>当<code>nums[mid] &gt; target</code>时，我们可以知道最小值在<code>mid</code>的右边</li>
+<li>当<code>nums[mid] &lt; target</code>时，我们可以知道最小值在<code>mid</code>的左边<br>如下图所示：<br><img src="https://img-blog.csdn.net/20151007185027403" alt="二分查找思路示意图"></li>
+</ul>
+</li>
+</ul>
+<p>因此，我们可以得到如下代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * <span class="doctag">@param</span> nums: a rotated sorted array</div><div class="line">     * <span class="doctag">@return</span>: the minimum number in the array</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findMin</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</div><div class="line">        <span class="comment">// write your code here</span></div><div class="line">        <span class="keyword">if</span> (nums == <span class="keyword">null</span> || nums.length == <span class="number">0</span>)</div><div class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</div><div class="line">        </div><div class="line">        <span class="keyword">int</span> start = <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> end = nums.length - <span class="number">1</span>;</div><div class="line">        <span class="keyword">int</span> mid;</div><div class="line">        <span class="keyword">int</span> target = nums[end];</div><div class="line">        <span class="comment">//找到第一个小于target的数</span></div><div class="line">        <span class="keyword">while</span> (start &lt;= end) &#123;</div><div class="line">            mid = start + ((end - start) &gt;&gt; <span class="number">1</span>);</div><div class="line">            <span class="comment">//如果nums[mid] &gt; target , 则最小值在mid左边</span></div><div class="line">            <span class="keyword">if</span> (nums[mid] &gt; target)</div><div class="line">                start = mid + <span class="number">1</span>;</div><div class="line">            <span class="comment">//如果nums[mid] &lt;= target, 则最小值在mid右边</span></div><div class="line">            <span class="keyword">if</span> (nums[mid] &lt;= target)</div><div class="line">                end = mid - <span class="number">1</span>;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">return</span> nums[end + <span class="number">1</span>];</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
         
         </div>
         <footer class="article-footer">
@@ -225,7 +284,7 @@
 
 </div>
 
-    <a data-url="wanglilin.github.io/about/index.html" data-id="cjfrpf80s0001q05lojlkgrt4" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="wanglilin.github.io/blog/2018/04/09/findMin/" data-id="cjfrpf8180008q05lto8sduzu" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -293,13 +352,23 @@
 
             
     
-        <a href="wanglilin.github.io/about/index.html#comments" class="article-comment-link ds-thread-count" data-thread-key="wanglilin.github.io/about/index.html">Comments</a>
+        <a href="wanglilin.github.io/blog/2018/04/09/findMin/#comments" class="article-comment-link ds-thread-count" data-thread-key="wanglilin.github.io/blog/2018/04/09/findMin/">Comments</a>
     
 
         </footer>
     </div>
     
         
+<nav id="article-nav">
+    
+    
+        <a href="/blog/2018/04/07/sortLinkedList/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">高频面试题总结之链表排序</div>
+        </a>
+    
+</nav>
+
 
     
 </article>
@@ -309,7 +378,7 @@
     <section id="comments">
     
         
-    <div class="ds-thread" data-thread-key="about/index.html" data-title="About" data-url="wanglilin.github.io/about/index.html"></div>
+    <div class="ds-thread" data-thread-key="2018/04/09/findMin/" data-title="寻找旋转排序数组中的最小值" data-url="wanglilin.github.io/blog/2018/04/09/findMin/"></div>
     <style>
         #ds-thread #ds-reset .ds-textarea-wrapper {
             background: none;
