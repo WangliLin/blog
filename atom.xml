@@ -5,7 +5,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="wanglilin.github.io/"/>
-  <updated>2018-04-09T03:58:55.013Z</updated>
+  <updated>2018-04-13T03:20:18.332Z</updated>
   <id>wanglilin.github.io/</id>
   
   <author>
@@ -14,6 +14,72 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>dp系列之编辑距离</title>
+    <link href="wanglilin.github.io/2018/04/13/editDistance/"/>
+    <id>wanglilin.github.io/2018/04/13/editDistance/</id>
+    <published>2018-04-13T03:16:18.000Z</published>
+    <updated>2018-04-13T03:20:18.332Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="编辑距离"><a href="#编辑距离" class="headerlink" title="编辑距离"></a>编辑距离</h3><h4 id="题目详情"><a href="#题目详情" class="headerlink" title="题目详情"></a><a href="http://www.lintcode.com/zh-cn/problem/edit-distance/" target="_blank" rel="external">题目详情</a></h4><blockquote>
+<p>给出两个单词word1和word2，计算出将word1 转换为word2的最少操作次数。</p>
+<p>你总共三种操作方法：</p>
+<ul>
+<li>插入一个字符</li>
+<li>删除一个字符</li>
+<li>替换一个字符</li>
+</ul>
+<p><strong>样例：</strong><br>给出 work1=”mart” 和 work2=”karma”<br>返回 3</p>
+</blockquote>
+<a id="more"></a>
+<h4 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h4><ul>
+<li>动态规划求解</li>
+<li><code>dp[i][j]:</code> word1的前i个字符转换成word2的前j个字符所需要的最少操作次数</li>
+<li>其中，状态转移方程为：<code>dp[i][j] = Math.min {dp[i-1][j] + 1, dp[i][j-1] + 1, dp[i-1][j-1] (+1)}</code></li>
+</ul>
+<h4 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * <span class="doctag">@param</span> word1: A string</div><div class="line">     * <span class="doctag">@param</span> word2: A string</div><div class="line">     * <span class="doctag">@return</span>: The minimum number of steps.</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">minDistance</span><span class="params">(String word1, String word2)</span> </span>&#123;</div><div class="line">        <span class="comment">// write your code here</span></div><div class="line">        <span class="keyword">if</span> (word1 == <span class="keyword">null</span> || word2 == <span class="keyword">null</span>)</div><div class="line">            <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        </div><div class="line">        <span class="keyword">char</span>[] chas1 = word1.toCharArray();</div><div class="line">        <span class="keyword">char</span>[] chas2 = word2.toCharArray();</div><div class="line">        <span class="keyword">int</span> row = chas1.length + <span class="number">1</span>;</div><div class="line">        <span class="keyword">int</span> col = chas2.length + <span class="number">1</span>;</div><div class="line">        <span class="keyword">int</span>[][] dp = <span class="keyword">new</span> <span class="keyword">int</span>[row][col];</div><div class="line">        dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; row; i++) &#123;</div><div class="line">            dp[i][<span class="number">0</span>] = i;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; col; j++) &#123;</div><div class="line">            dp[<span class="number">0</span>][j] = j;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; row; i++) &#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; col; j++) &#123;</div><div class="line">                <span class="keyword">if</span> (chas1[i-<span class="number">1</span>] == chas2[j-<span class="number">1</span>])</div><div class="line">                    dp[i][j] = dp[i-<span class="number">1</span>][j-<span class="number">1</span>];</div><div class="line">                <span class="keyword">else</span></div><div class="line">                    dp[i][j] = dp[i-<span class="number">1</span>][j-<span class="number">1</span>] + <span class="number">1</span>; </div><div class="line">                    </div><div class="line">                dp[i][j] = Math.min(dp[i][j], dp[i][j-<span class="number">1</span>] + <span class="number">1</span>);  </div><div class="line">                dp[i][j] = Math.min(dp[i][j], dp[i-<span class="number">1</span>][j] + <span class="number">1</span>);  </div><div class="line">            &#125;</div><div class="line">          </div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">return</span> dp[row-<span class="number">1</span>][col-<span class="number">1</span>];</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="编辑距离ii"><a href="#编辑距离ii" class="headerlink" title="编辑距离ii"></a>编辑距离ii</h3><h4 id="题目详情-1"><a href="#题目详情-1" class="headerlink" title="题目详情"></a><a href="http://www.lintcode.com/zh-cn/problem/edit-distance-ii/" target="_blank" rel="external">题目详情</a></h4><blockquote>
+<p>给你两个字符串 S 和 T, 判断他们是否只差一步编辑。</p>
+<p><strong>样例：</strong><br>给你字符串 s = “aDb”, t= “adb”<br>返回 true</p>
+</blockquote>
+<h4 id="思路：-1"><a href="#思路：-1" class="headerlink" title="思路："></a>思路：</h4><p>只有以下三种可能性的时候才为只差一步编辑距离：</p>
+<ul>
+<li><code>abcd</code> &lt;–&gt; <code>abce</code></li>
+<li><code>abc</code> &lt;–&gt; <code>abcd</code></li>
+<li><code>abce</code> &lt;–&gt; <code>abc</code></li>
+</ul>
+<p>Ps：当两个字符串相等时，应该返回false</p>
+<h4 id="代码：-1"><a href="#代码：-1" class="headerlink" title="代码："></a>代码：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * <span class="doctag">@param</span> s: a string</div><div class="line">     * <span class="doctag">@param</span> t: a string</div><div class="line">     * <span class="doctag">@return</span>: true if they are both one edit distance apart or false</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isOneEditDistance</span><span class="params">(String s, String t)</span> </span>&#123;</div><div class="line">        <span class="comment">// write your code here</span></div><div class="line">        <span class="keyword">if</span> (s.equals(t))</div><div class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">            </div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; Math.min(s.length(), t.length()); i++) &#123;</div><div class="line">            <span class="keyword">if</span> (s.charAt(i) != t.charAt(i)) &#123;</div><div class="line">                <span class="keyword">if</span> (s.length() == t.length())</div><div class="line">                    <span class="keyword">return</span> s.substring(i+<span class="number">1</span>).equals(t.substring(i+<span class="number">1</span>));</div><div class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (s.length() &gt; t.length())</div><div class="line">                    <span class="keyword">return</span> s.substring(i+<span class="number">1</span>).equals(t.substring(i));</div><div class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (s.length() &lt; t.length())</div><div class="line">                    <span class="keyword">return</span> t.substring(i+<span class="number">1</span>).equals(s.substring(i));</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">return</span> Math.abs(s.length() - t.length()) &lt;= <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;编辑距离&quot;&gt;&lt;a href=&quot;#编辑距离&quot; class=&quot;headerlink&quot; title=&quot;编辑距离&quot;&gt;&lt;/a&gt;编辑距离&lt;/h3&gt;&lt;h4 id=&quot;题目详情&quot;&gt;&lt;a href=&quot;#题目详情&quot; class=&quot;headerlink&quot; title=&quot;题目详情&quot;&gt;&lt;/a&gt;&lt;a href=&quot;http://www.lintcode.com/zh-cn/problem/edit-distance/&quot;&gt;题目详情&lt;/a&gt;&lt;/h4&gt;&lt;blockquote&gt;
+&lt;p&gt;给出两个单词word1和word2，计算出将word1 转换为word2的最少操作次数。&lt;/p&gt;
+&lt;p&gt;你总共三种操作方法：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;插入一个字符&lt;/li&gt;
+&lt;li&gt;删除一个字符&lt;/li&gt;
+&lt;li&gt;替换一个字符&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;样例：&lt;/strong&gt;&lt;br&gt;给出 work1=”mart” 和 work2=”karma”&lt;br&gt;返回 3&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="数据结构" scheme="wanglilin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="动态规划" scheme="wanglilin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+    
+    
+      <category term="数据结构" scheme="wanglilin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="dp系列" scheme="wanglilin.github.io/tags/dp%E7%B3%BB%E5%88%97/"/>
+    
+      <category term="高频面试题总结" scheme="wanglilin.github.io/tags/%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
   
   <entry>
     <title>寻找旋转排序数组中的最小值</title>
@@ -58,9 +124,9 @@
       <category term="数据结构" scheme="wanglilin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
     
-      <category term="高频面试题总结" scheme="wanglilin.github.io/tags/%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
-    
       <category term="数据结构" scheme="wanglilin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="高频面试题总结" scheme="wanglilin.github.io/tags/%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -96,9 +162,9 @@
       <category term="数据结构" scheme="wanglilin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
     
-      <category term="高频面试题总结" scheme="wanglilin.github.io/tags/%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
-    
       <category term="数据结构" scheme="wanglilin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="高频面试题总结" scheme="wanglilin.github.io/tags/%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -246,9 +312,9 @@
       <category term="数据结构" scheme="wanglilin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
     
-      <category term="高频面试题总结" scheme="wanglilin.github.io/tags/%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
-    
       <category term="数据结构" scheme="wanglilin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="高频面试题总结" scheme="wanglilin.github.io/tags/%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -294,9 +360,9 @@
       <category term="数据结构" scheme="wanglilin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
     
-      <category term="高频面试题总结" scheme="wanglilin.github.io/tags/%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
-    
       <category term="数据结构" scheme="wanglilin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="高频面试题总结" scheme="wanglilin.github.io/tags/%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -357,9 +423,9 @@
       <category term="数据结构" scheme="wanglilin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
     
-      <category term="高频面试题总结" scheme="wanglilin.github.io/tags/%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
-    
       <category term="数据结构" scheme="wanglilin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="高频面试题总结" scheme="wanglilin.github.io/tags/%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -398,9 +464,9 @@
       <category term="数据结构" scheme="wanglilin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
     
-      <category term="高频面试题总结" scheme="wanglilin.github.io/tags/%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
-    
       <category term="数据结构" scheme="wanglilin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="高频面试题总结" scheme="wanglilin.github.io/tags/%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -453,9 +519,9 @@
       <category term="数据结构" scheme="wanglilin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
     
-      <category term="高频面试题总结" scheme="wanglilin.github.io/tags/%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
-    
       <category term="数据结构" scheme="wanglilin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="高频面试题总结" scheme="wanglilin.github.io/tags/%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -487,9 +553,9 @@
       <category term="数据结构" scheme="wanglilin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
     
-      <category term="高频面试题总结" scheme="wanglilin.github.io/tags/%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
-    
       <category term="数据结构" scheme="wanglilin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="高频面试题总结" scheme="wanglilin.github.io/tags/%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
