@@ -5,7 +5,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="wanglilin.github.io/"/>
-  <updated>2018-04-19T09:03:11.335Z</updated>
+  <updated>2018-04-19T12:46:37.641Z</updated>
   <id>wanglilin.github.io/</id>
   
   <author>
@@ -14,6 +14,57 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>dp系列之房屋染色</title>
+    <link href="wanglilin.github.io/2018/04/19/housePaint/"/>
+    <id>wanglilin.github.io/2018/04/19/housePaint/</id>
+    <published>2018-04-19T12:44:09.000Z</published>
+    <updated>2018-04-19T12:46:37.641Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="房屋染色"><a href="#房屋染色" class="headerlink" title="房屋染色"></a><a href="http://www.lintcode.com/zh-cn/problem/paint-house/" target="_blank" rel="external">房屋染色</a></h4><blockquote>
+<p>这里有n个房子在一列直线上，现在我们需要给房屋染色，分别有红色蓝色和绿色。每个房屋染不同的颜色费用也不同，你需要设计一种染色方案使得相邻的房屋颜色不同，并且费用最小。<br>费用通过一个nx3 的矩阵给出，比如cost[0][0]表示房屋0染红色的费用，cost[1][2]表示房屋1染绿色的费用。</p>
+<p><strong>样例：</strong><br>costs = [[14,2,11],[11,14,5],[14,3,10]] return 10<br>房屋 0 蓝色, 房屋 1 绿色, 房屋 2 蓝色， 2 + 5 + 3 = 10</p>
+</blockquote>
+<a id="more"></a>
+<h4 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h4><ul>
+<li>动态规划</li>
+<li>状态转移公式：<code>costs[i][0] += Math.min(costs[i-1][1], costs[i-1][2])</code></li>
+</ul>
+<h4 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * <span class="doctag">@param</span> costs n x 3 cost matrix</div><div class="line">     * <span class="doctag">@return</span> an integer, the minimum cost to paint all houses</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">minCost</span><span class="params">(<span class="keyword">int</span>[][] costs)</span> </span>&#123;</div><div class="line">        <span class="comment">// Write your code here</span></div><div class="line">        <span class="comment">/**</span></div><div class="line">         * 当决定当前房屋涂何种颜色时，也决定相邻房屋的可选颜色</div><div class="line">         * 将所有可能性枚举，选择费用最小的</div><div class="line">         * </div><div class="line">         * */</div><div class="line">         </div><div class="line">         <span class="keyword">if</span>(costs == <span class="keyword">null</span> || costs.length == <span class="number">0</span>) &#123;</div><div class="line">             <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">         &#125;</div><div class="line">         </div><div class="line">         <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; costs.length; i++) &#123;</div><div class="line">             costs[i][<span class="number">0</span>] += Math.min(costs[i-<span class="number">1</span>][<span class="number">1</span>], costs[i-<span class="number">1</span>][<span class="number">2</span>]);</div><div class="line">             costs[i][<span class="number">1</span>] += Math.min(costs[i-<span class="number">1</span>][<span class="number">0</span>], costs[i-<span class="number">1</span>][<span class="number">2</span>]);</div><div class="line">             costs[i][<span class="number">2</span>] += Math.min(costs[i-<span class="number">1</span>][<span class="number">0</span>], costs[i-<span class="number">1</span>][<span class="number">1</span>]);</div><div class="line">         &#125;</div><div class="line">         </div><div class="line">         <span class="keyword">int</span> minCost = Math.min(costs[costs.length - <span class="number">1</span>][<span class="number">0</span>], costs[costs.length - <span class="number">1</span>][<span class="number">1</span>]);</div><div class="line">         minCost = Math.min(minCost, costs[costs.length - <span class="number">1</span>][<span class="number">2</span>]);</div><div class="line">         </div><div class="line">         <span class="keyword">return</span> minCost;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="房屋染色-II"><a href="#房屋染色-II" class="headerlink" title="房屋染色 II"></a><a href="http://www.lintcode.com/zh-cn/problem/paint-house-ii/" target="_blank" rel="external">房屋染色 II</a></h4><blockquote>
+<p>这里有n个房子在一列直线上，现在我们需要给房屋染色，共有k种颜色。每个房屋染不同的颜色费用也不同，你需要设计一种染色方案使得相邻的房屋颜色不同，并且费用最小。</p>
+<p>费用通过一个nxk 的矩阵给出，比如cost[0][0]表示房屋0染颜色0的费用，cost[1][2]表示房屋1染颜色2的费用。</p>
+<p><strong>样例：</strong><br>costs = [[14,2,11],[11,14,5],[14,3,10]] return 10<br>房屋 0 颜色 1, 房屋 1 颜色 2, 房屋 2 颜色 1， 2 + 5 + 3 = 10</p>
+</blockquote>
+<h4 id="思路：-1"><a href="#思路：-1" class="headerlink" title="思路："></a>思路：</h4><ul>
+<li>把<code>i</code>中for函数里面加个<code>for</code>循环即可</li>
+<li>写个功能函数，算临近房屋涂其他颜色时候的最小值</li>
+</ul>
+<h4 id="代码：-1"><a href="#代码：-1" class="headerlink" title="代码："></a>代码：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * <span class="doctag">@param</span> costs: n x k cost matrix</div><div class="line">     * <span class="doctag">@return</span>: an integer, the minimum cost to paint all houses</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">minCostII</span><span class="params">(<span class="keyword">int</span>[][] costs)</span> </span>&#123;</div><div class="line">        <span class="comment">// write your code here</span></div><div class="line">        <span class="keyword">if</span> (costs == <span class="keyword">null</span> || costs.length == <span class="number">0</span>)</div><div class="line">            <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; costs.length; i++) &#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; costs[<span class="number">0</span>].length; j++) &#123;</div><div class="line">                costs[i][j] += helper(costs, i, j);</div><div class="line">            &#125;</div><div class="line">            </div><div class="line">        &#125;</div><div class="line">        <span class="comment">//最后是求所有中最小的，这里用了个-1,可以算是小trick吧~</span></div><div class="line">        <span class="keyword">return</span> helper(costs, costs.length, -<span class="number">1</span>);</div><div class="line">                </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">helper</span><span class="params">(<span class="keyword">int</span>[][] costs, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> min = Integer.MAX_VALUE;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; costs[<span class="number">0</span>].length; k++) &#123;</div><div class="line">            <span class="keyword">if</span> (k == j)</div><div class="line">                <span class="keyword">continue</span>;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (min &gt; costs[i-<span class="number">1</span>][k])</div><div class="line">                min = costs[i-<span class="number">1</span>][k];</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> min;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;房屋染色&quot;&gt;&lt;a href=&quot;#房屋染色&quot; class=&quot;headerlink&quot; title=&quot;房屋染色&quot;&gt;&lt;/a&gt;&lt;a href=&quot;http://www.lintcode.com/zh-cn/problem/paint-house/&quot;&gt;房屋染色&lt;/a&gt;&lt;/h4&gt;&lt;blockquote&gt;
+&lt;p&gt;这里有n个房子在一列直线上，现在我们需要给房屋染色，分别有红色蓝色和绿色。每个房屋染不同的颜色费用也不同，你需要设计一种染色方案使得相邻的房屋颜色不同，并且费用最小。&lt;br&gt;费用通过一个nx3 的矩阵给出，比如cost[0][0]表示房屋0染红色的费用，cost[1][2]表示房屋1染绿色的费用。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;样例：&lt;/strong&gt;&lt;br&gt;costs = [[14,2,11],[11,14,5],[14,3,10]] return 10&lt;br&gt;房屋 0 蓝色, 房屋 1 绿色, 房屋 2 蓝色， 2 + 5 + 3 = 10&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="数据结构" scheme="wanglilin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="动态规划" scheme="wanglilin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+    
+    
+      <category term="数据结构" scheme="wanglilin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="高频面试题总结" scheme="wanglilin.github.io/tags/%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="dp系列" scheme="wanglilin.github.io/tags/dp%E7%B3%BB%E5%88%97/"/>
+    
+  </entry>
   
   <entry>
     <title>深搜系列之分割字符串</title>
@@ -878,9 +929,9 @@
       <category term="Java源码" scheme="wanglilin.github.io/categories/Java%E6%BA%90%E7%A0%81/"/>
     
     
-      <category term="Java源码阅读" scheme="wanglilin.github.io/tags/Java%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/"/>
-    
       <category term="Java基础" scheme="wanglilin.github.io/tags/Java%E5%9F%BA%E7%A1%80/"/>
+    
+      <category term="Java源码阅读" scheme="wanglilin.github.io/tags/Java%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/"/>
     
   </entry>
   
@@ -1174,87 +1225,6 @@
 &lt;li&gt;我车上没有备胎，那我只能放个警示牌，打个电话给能处理这个车爆胎的人来处理，而这并不妨碍我走着去见隔壁村的小王。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;这就是在Java中遇到异常的两个常用的方法，你可以处理它（try）或抛出它（throw），即将锅交给别人去处理。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="JavaSE" scheme="wanglilin.github.io/categories/JavaSE/"/>
-    
-    
-      <category term="Java基础" scheme="wanglilin.github.io/tags/Java%E5%9F%BA%E7%A1%80/"/>
-    
-      <category term="JavaSE" scheme="wanglilin.github.io/tags/JavaSE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java基础之字符串</title>
-    <link href="wanglilin.github.io/2017/03/04/javase-string/"/>
-    <id>wanglilin.github.io/2017/03/04/javase-string/</id>
-    <published>2017-03-04T08:08:41.000Z</published>
-    <updated>2017-03-11T13:09:38.106Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="类结构"><a href="#类结构" class="headerlink" title="类结构"></a>类结构</h2><p>public final class String<br>extends Object<br>implements Serializable, Comparable, CharSequence</p>
-<h2 id="类概述"><a href="#类概述" class="headerlink" title="类概述"></a>类概述</h2><p>Java把内存划分为两种：一种是栈内存，一种是堆内存。<strong>在函数中定义的一些基本类型的变量和对象的引用变量都是在函数的栈内存中分配</strong>。当在一段代码块定义一个变量时，Java就在栈中为这个变量分配内存空间，当超过变量的作用域后，Java会自动释放掉为该变量分配的内存空间，该内存空间可以立即被另作它用。<br><a id="more"></a></p>
-<p><strong>堆内存用来存放由new创建的对象和数组，在堆中分配的内存，由Java虚拟机的自动垃圾回收器来管理。</strong>在堆中产生了一个数组或者对象之后，还可以在栈中定义一个特殊的变量，让栈中的这个变量的取值等于数组或对象在堆内存中的首地址，栈中的这个变量就成了数组或对象的引用变量（以后就可以在程序中使用栈中的引用变量来访问堆中的数组或者对象，引用变量相当于是为数组或者对象起的一个名称）。</p>
-<p><strong>PS：</strong>引用变量是普通的变量，定义时在栈中分配，引用变量在程序运行到其作用域之外后被释放。而数组和对象本身在堆中分配，引用变量在程序运行到其作用域之外后被释放。而数组和对象本身在堆中分配，即使程序运行到使用new产生的数组或者对象所在的代码块之外，数组和对象本身占据的内存不会被释放，数组和对象在没有引用变量指向它的时候，才变为垃圾，不能再被使用，但仍然占据内存空间不放，在随后的一个不确定的时间被垃圾回收器收走（释放）。- &gt;这也是Java比较占内存的原因。</p>
-<p>String类是一个很特殊的类，它本身是final的，它是不可变的，String类是的本质是字符数组char[], 并且其值不可改变,但StringBuilder也是final，为什么StringBuilder是可变的呢？ 究其原因，String类的内部是char[]数组构成，而String的加号（+）运算符的底层是由StringBuilder实现的，一个String每次“+“上一个String,都会创建一个新的StringBuilder，然后调用它的append()方法，该方法返回一个新形成的String。所以字符串的一些合并操作可以使用StringBuilder来提高效率。</p>
-<p>用new String()创建的字符串不是常量，不能在编译期就确定，而因为String是类，所以new String()创建的字符串不放入常量池中，它们有自己的地址空间。即Java中，只要使用new关键字来创建对象，则一定会（在堆区或栈区）创建一个新的对象。而直接初始化则会形成字符串常量，分配到运行时常量池中，这会在编译时确定。</p>
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ul>
-<li>Java程序中的所有字面值（string literals），即双引号括起来的字符串，如“bia”，都是作为String类的实例实现的。</li>
-<li>String类是一个很特殊的类，它本身是final的，它是不可变的，String类的本质是字符数组char[ ]， 并且其值不可改变。String是常量，其对象一旦构造就不能被改变。In other words，String对象是不可变的，每一个看起来会修改String值的方法，实际上都是创造了一个全新的String对象（<strong>构建一个新的StringBuilder，然后调用它的append()方法，该方法方法返回一个新创建的String对象</strong>），以包含修改后的字符串内容。</li>
-<li>String对象具有只读特性，指向它的任何引用都不可能改变它的值，因此，也不会对其他的引用有什么影响。</li>
-</ul>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p><strong>1.创建字符串</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">String str = <span class="string">"Hello World"</span>;</div><div class="line">String str1 = <span class="keyword">new</span> String(<span class="string">"Hello World"</span>);</div><div class="line">String str2 = <span class="keyword">new</span> String();</div><div class="line">str2 = <span class="string">"Hello World"</span></div><div class="line">System.out.println(<span class="string">"str:"</span> + str + <span class="string">"str1:"</span> + str1 + <span class="string">"str2:"</span> + str2);</div></pre></td></tr></table></figure>
-<ul>
-<li>String类有11种构造方法，这些方法提供不同的参数来初始化字符串</li>
-<li>String类是不可改变的，所以一旦创建了String对象，其值就无法改变了</li>
-</ul>
-<p><strong>2.字符串长度</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">String str = <span class="string">"Hello World"</span>;</div><div class="line"><span class="keyword">int</span> i = str.length();</div><div class="line">System.out.println(i);</div></pre></td></tr></table></figure>
-<p> String类的一个访问器方法是length( )方法，它返回字符串对象包含的字符数。</p>
-<p><strong>3.连接字符串</strong></p>
-<ul>
-<li>字符串常量使用concat( )方法连接</li>
-<li>使用’+’操作符来连接字符串</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">String str = <span class="string">"Hello World"</span>;</div><div class="line">String str1 = <span class="string">"Good Friends"</span>;</div><div class="line">str2 = str.concat(str1);</div><div class="line">str3 = str + str1;</div></pre></td></tr></table></figure>
-<p><strong>4.创建格式化字符串</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">String str;</div><div class="line"><span class="keyword">int</span> i = <span class="number">100</span>;</div><div class="line"><span class="keyword">double</span> d = <span class="number">10.243</span>;</div><div class="line"><span class="keyword">float</span> f = <span class="number">124124</span>;</div><div class="line">str =  String.format(<span class="string">"NO1 : %d"</span> + <span class="string">"NO2 : %f"</span> + <span class="string">"NO3 : %f"</span>,i,f,d);    <span class="comment">//使用 .format() 方法格式化字符串</span></div><div class="line">System.out.printf(<span class="string">"NO1 : %d"</span> + <span class="string">"NO2 : %f"</span> + <span class="string">"NO3 : %f"</span>,i,f,d);  <span class="comment">//使用 printf()方法 格式化字符串</span></div><div class="line">System.out.println(str);</div></pre></td></tr></table></figure>
-<p>我们知道输出格式化数字可以使用printf( )和format( )方法。String类使用静态方法format( )返回一个String对象而不是PrintStream对象。<br>String类的静态方法format( )能用来创建可复用的格式化字符串，而不仅仅是用于一次打印输出。</p>
-<p><strong>5.char charAt(int index)</strong><br>返回指定索引处的char值<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">String str = <span class="string">"hello world"</span>;</div><div class="line"><span class="keyword">char</span> c = str.charAt(<span class="number">2</span>);</div><div class="line">System.out.println(c);</div><div class="line"></div><div class="line"><span class="comment">//output: l</span></div></pre></td></tr></table></figure></p>
-<p><strong>6.int compareTo(Object o)</strong><br>把这个字符串和另一个对象比较<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">String str = <span class="string">"Hello world"</span>;</div><div class="line">String str1 = <span class="string">"Good Friends"</span>;</div><div class="line"><span class="keyword">int</span> i = str.compareTo(str1);</div><div class="line">System.out.println(i);</div><div class="line"></div><div class="line"><span class="comment">//output: 1</span></div></pre></td></tr></table></figure></p>
-<p>比较此对象与指定对象的顺序。如果该对象小于、等于或大于指定对象，则分别返回负整数、零或正整数。<strong>返回整数，1，-1,0；返回1表示大于，返回-1表示小于，返回0表示相等。</strong></p>
-<p><strong>7.boolean endsWith(String str)</strong><br>测试此字符串是否以指定的后缀结束。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">String str = <span class="string">"Hello World"</span>;</div><div class="line"><span class="keyword">boolean</span> b = str.endsWith(<span class="string">"d"</span>);</div><div class="line">System.out.println(b);</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//output:true</span></div></pre></td></tr></table></figure></p>
-<p><strong>8.boolean equals(Object object)</strong><br>将此字符串与指定的对象比较<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">String str = <span class="string">"Hello World !"</span>; </div><div class="line">String str1 = <span class="string">"Good Friends"</span>;</div><div class="line"><span class="keyword">boolean</span>  b =  str.equals(str1);</div><div class="line">System.out.println(b);</div></pre></td></tr></table></figure></p>
-<p><strong>9.int indexOf(int char)</strong><br>返回指定字符在此字符串中第一次出现处的索引<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">String str = <span class="string">"Hello World !"</span>;</div><div class="line"><span class="keyword">int</span> i = str.indexOf(<span class="string">'e'</span>);</div><div class="line">System.out.println(i);</div><div class="line"></div><div class="line"><span class="comment">//output: 1</span></div><div class="line"><span class="comment">//若无此字符串，则返回-1</span></div></pre></td></tr></table></figure></p>
-<p><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html" target="_blank" rel="external">更多String方法，点击查看</a></p>
-<h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><h3 id="null和空字符串的区别s"><a href="#null和空字符串的区别s" class="headerlink" title="null和空字符串的区别s"></a>null和空字符串的区别s</h3><blockquote>
-<p>String s=null;<br>string.trim()就会抛出为空的exception<br>String s=””;<br>string.trim()就不会抛,为什么?</p>
-</blockquote>
-<p><strong>答：</strong><br>1）null代表声明了一个空对象，根本就不是一个字符串，对空对象做任何操作都不行，除了 = 和 == ；<br>“”代表声明了一个对象实例，这个对象实例的值是一个长度为0的空字符串，其仍代表一个字符串，只是字符串里面没有内容。<br>2）String s = null;只是定义了一个句柄，也就是说你有了个引用，但是这个引用未指向任何内存空间；<br>String s = “”;这个引用指向了一块是空字符串的内存空间，可对其进行满足字符串操作的任何操作。</p>
-<p>所以，题目中为何一个会抛异常，一个不会抛异常就得以解答。</p>
-<blockquote>
-<p> String s;和String s=null;和String s=”a”;有什么区别？<br> 针对这三种情况，使用out.println(s);的时候，第一个会出现异常，第二个会输出null.第三个则会输出a.<br> 这是为什么呢？这三句声明语句，各自作了什么呢？</p>
-</blockquote>
-<p><strong>答：</strong><br>第一个只是定义了一个String类型变量s，并没有给它赋值（若是类的成员变量，才默认赋值），在Java中，默认在使用一个对象的时候必须赋予它初值（降低风险）。<br>第二个和第三个都定义了String类型变量s，并赋予它初值，只不过第二个赋予的值为null；<br><strong>Attention：</strong>s为一个引用，它不是对象。第一个是没有初始化的引用，第二个为空引用，第三个是在字符串池里写入一个字符’a’，然后s指向它。<br><strong>Ps：</strong>String s = ‘a’ ;和 String s = new String(“a”);是有本质上的区别的。前者是在字符串池里写入一个字符’a’，然后s指向它，后者是在堆上创建一个内容为’a’的字符串对象。</p>
-<blockquote>
-<p>声明了一个string a;变量<br>在以后的判断中，a==””和a==null有何不同?</p>
-</blockquote>
-<p><strong>答：</strong><br>如果没有给a赋过值，a == “” 会导致异常。<br>在实际处理中，往往认为””和null代表相同的含义，即代表无值。<br>此时，建议用如下语法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (a == <span class="keyword">null</span> || a == <span class="string">""</span>)&#123;</div><div class="line">   <span class="comment">//处理语句</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>如果a为null，则不会执行后面的判断，直接返回true。<br><strong>null是用来判断引用类型是否分配了存储空间，””是针对字符串的。</strong>所以如果没有给a赋过值，a == “”会导致异常。</p>
-<blockquote>
-<p>String abc=null;String abc=””;String abc;三种写法有什么区别？</p>
-</blockquote>
-<p><strong>答：</strong><br>1：创建一个空字符串对象，<br>2：创建一个字符串为空的字符串对象。<br>3：声明一个字符串对象，但并没有分配内存，而1，2已经分配了内存</p>
-<p><strong>tips：</strong><br>在成员变量的定义中,String s;等同于String s=null;<br>而在本地变量(方法变量)的定义中,String s;不等同于String s=null;,这时要使用s必须显式地赋值。</p>
-<p>还有一点要说明的是：<br>只要是在方法在中定义变量都要显示赋初值，main()方法也不例外，而在方法之外编译器回自动赋初值。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;类结构&quot;&gt;&lt;a href=&quot;#类结构&quot; class=&quot;headerlink&quot; title=&quot;类结构&quot;&gt;&lt;/a&gt;类结构&lt;/h2&gt;&lt;p&gt;public final class String&lt;br&gt;extends Object&lt;br&gt;implements Serializable, Comparable, CharSequence&lt;/p&gt;
-&lt;h2 id=&quot;类概述&quot;&gt;&lt;a href=&quot;#类概述&quot; class=&quot;headerlink&quot; title=&quot;类概述&quot;&gt;&lt;/a&gt;类概述&lt;/h2&gt;&lt;p&gt;Java把内存划分为两种：一种是栈内存，一种是堆内存。&lt;strong&gt;在函数中定义的一些基本类型的变量和对象的引用变量都是在函数的栈内存中分配&lt;/strong&gt;。当在一段代码块定义一个变量时，Java就在栈中为这个变量分配内存空间，当超过变量的作用域后，Java会自动释放掉为该变量分配的内存空间，该内存空间可以立即被另作它用。&lt;br&gt;
     
     </summary>
     

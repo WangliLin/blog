@@ -3,14 +3,26 @@
 <head>
     <meta charset="utf-8">
     
-    <title>Category: 深度优先搜索 | Wangli&#39;s Blog</title>
+    <title>dp系列之房屋染色 | Wangli&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Wangli's Blog">
-<meta property="og:url" content="wanglilin.github.io/categories/数据结构/深度优先搜索/index.html">
+    <meta name="description" content="房屋染色
+这里有n个房子在一列直线上，现在我们需要给房屋染色，分别有红色蓝色和绿色。每个房屋染不同的颜色费用也不同，你需要设计一种染色方案使得相邻的房屋颜色不同，并且费用最小。费用通过一个nx3 的矩阵给出，比如cost[0][0]表示房屋0染红色的费用，cost[1][2]表示房屋1染绿色的费用。
+样例：costs = [[14,2,11],[11,14,5],[14,3,10]] return">
+<meta property="og:type" content="article">
+<meta property="og:title" content="dp系列之房屋染色">
+<meta property="og:url" content="wanglilin.github.io/2018/04/19/housePaint/index.html">
 <meta property="og:site_name" content="Wangli's Blog">
+<meta property="og:description" content="房屋染色
+这里有n个房子在一列直线上，现在我们需要给房屋染色，分别有红色蓝色和绿色。每个房屋染不同的颜色费用也不同，你需要设计一种染色方案使得相邻的房屋颜色不同，并且费用最小。费用通过一个nx3 的矩阵给出，比如cost[0][0]表示房屋0染红色的费用，cost[1][2]表示房屋1染绿色的费用。
+样例：costs = [[14,2,11],[11,14,5],[14,3,10]] return">
+<meta property="og:image" content="https://cdn.thestandnews.com/media/photos/cache/E8B2933_VEA5F_1200x0.jpg">
+<meta property="og:updated_time" content="2018-04-19T12:46:37.641Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Wangli's Blog">
+<meta name="twitter:title" content="dp系列之房屋染色">
+<meta name="twitter:description" content="房屋染色
+这里有n个房子在一列直线上，现在我们需要给房屋染色，分别有红色蓝色和绿色。每个房屋染不同的颜色费用也不同，你需要设计一种染色方案使得相邻的房屋颜色不同，并且费用最小。费用通过一个nx3 的矩阵给出，比如cost[0][0]表示房屋0染红色的费用，cost[1][2]表示房屋1染绿色的费用。
+样例：costs = [[14,2,11],[11,14,5],[14,3,10]] return">
+<meta name="twitter:image" content="https://cdn.thestandnews.com/media/photos/cache/E8B2933_VEA5F_1200x0.jpg">
     
 
     
@@ -195,86 +207,215 @@
 </aside>
 
             
-            <section id="main">
-<div class="timeline timeline-wrap">
-    <div class="timeline-row timeline-row-major">
-        <span class="node"><i class="fa fa-folder"></i></span>
-        <h1 class="title">深度优先搜索</h1>
-    </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
+            <section id="main"><article id="post-housePaint" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
                 
     
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/blog/2018/04/19/splitwords/">深搜系列之分割字符串</a>
+        <h1 class="article-title" itemprop="name">
+            dp系列之房屋染色
         </h1>
     
 
-                <div class="article-meta">
-                    
+                
+                    <div class="article-meta">
+                        
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/blog/2018/04/19/splitwords/">
-            <time datetime="2018-04-19T08:58:53.000Z" itemprop="datePublished">2018-04-19</time>
+        <a href="/blog/2018/04/19/housePaint/">
+            <time datetime="2018-04-19T12:44:09.000Z" itemprop="datePublished">2018-04-19</time>
         </a>
     </div>
 
 
-                    
+                        
     <div class="article-category">
     	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/blog/categories/数据结构/">数据结构</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/数据结构/深度优先搜索/">深度优先搜索</a>
+        <a class="article-category-link" href="/blog/categories/数据结构/">数据结构</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/数据结构/动态规划/">动态规划</a>
     </div>
 
-                    
+                        
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/blog/tags/dfs系列/">dfs系列</a>, <a class="tag-link" href="/blog/tags/数据结构/">数据结构</a>, <a class="tag-link" href="/blog/tags/高频面试题总结/">高频面试题总结</a>
+        <a class="tag-link" href="/blog/tags/dp系列/">dp系列</a>, <a class="tag-link" href="/blog/tags/数据结构/">数据结构</a>, <a class="tag-link" href="/blog/tags/高频面试题总结/">高频面试题总结</a>
     </div>
 
-                </div>
-            </div>
-        </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
+                    </div>
                 
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/blog/2018/04/13/fullCombination/">深搜系列之字符串全组合</a>
-        </h1>
-    
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h4 id="房屋染色"><a href="#房屋染色" class="headerlink" title="房屋染色"></a><a href="http://www.lintcode.com/zh-cn/problem/paint-house/" target="_blank" rel="external">房屋染色</a></h4><blockquote>
+<p>这里有n个房子在一列直线上，现在我们需要给房屋染色，分别有红色蓝色和绿色。每个房屋染不同的颜色费用也不同，你需要设计一种染色方案使得相邻的房屋颜色不同，并且费用最小。<br>费用通过一个nx3 的矩阵给出，比如cost[0][0]表示房屋0染红色的费用，cost[1][2]表示房屋1染绿色的费用。</p>
+<p><strong>样例：</strong><br>costs = [[14,2,11],[11,14,5],[14,3,10]] return 10<br>房屋 0 蓝色, 房屋 1 绿色, 房屋 2 蓝色， 2 + 5 + 3 = 10</p>
+</blockquote>
+<a id="more"></a>
+<h4 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h4><ul>
+<li>动态规划</li>
+<li>状态转移公式：<code>costs[i][0] += Math.min(costs[i-1][1], costs[i-1][2])</code></li>
+</ul>
+<h4 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * <span class="doctag">@param</span> costs n x 3 cost matrix</div><div class="line">     * <span class="doctag">@return</span> an integer, the minimum cost to paint all houses</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">minCost</span><span class="params">(<span class="keyword">int</span>[][] costs)</span> </span>&#123;</div><div class="line">        <span class="comment">// Write your code here</span></div><div class="line">        <span class="comment">/**</span></div><div class="line">         * 当决定当前房屋涂何种颜色时，也决定相邻房屋的可选颜色</div><div class="line">         * 将所有可能性枚举，选择费用最小的</div><div class="line">         * </div><div class="line">         * */</div><div class="line">         </div><div class="line">         <span class="keyword">if</span>(costs == <span class="keyword">null</span> || costs.length == <span class="number">0</span>) &#123;</div><div class="line">             <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">         &#125;</div><div class="line">         </div><div class="line">         <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; costs.length; i++) &#123;</div><div class="line">             costs[i][<span class="number">0</span>] += Math.min(costs[i-<span class="number">1</span>][<span class="number">1</span>], costs[i-<span class="number">1</span>][<span class="number">2</span>]);</div><div class="line">             costs[i][<span class="number">1</span>] += Math.min(costs[i-<span class="number">1</span>][<span class="number">0</span>], costs[i-<span class="number">1</span>][<span class="number">2</span>]);</div><div class="line">             costs[i][<span class="number">2</span>] += Math.min(costs[i-<span class="number">1</span>][<span class="number">0</span>], costs[i-<span class="number">1</span>][<span class="number">1</span>]);</div><div class="line">         &#125;</div><div class="line">         </div><div class="line">         <span class="keyword">int</span> minCost = Math.min(costs[costs.length - <span class="number">1</span>][<span class="number">0</span>], costs[costs.length - <span class="number">1</span>][<span class="number">1</span>]);</div><div class="line">         minCost = Math.min(minCost, costs[costs.length - <span class="number">1</span>][<span class="number">2</span>]);</div><div class="line">         </div><div class="line">         <span class="keyword">return</span> minCost;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="房屋染色-II"><a href="#房屋染色-II" class="headerlink" title="房屋染色 II"></a><a href="http://www.lintcode.com/zh-cn/problem/paint-house-ii/" target="_blank" rel="external">房屋染色 II</a></h4><blockquote>
+<p>这里有n个房子在一列直线上，现在我们需要给房屋染色，共有k种颜色。每个房屋染不同的颜色费用也不同，你需要设计一种染色方案使得相邻的房屋颜色不同，并且费用最小。</p>
+<p>费用通过一个nxk 的矩阵给出，比如cost[0][0]表示房屋0染颜色0的费用，cost[1][2]表示房屋1染颜色2的费用。</p>
+<p><strong>样例：</strong><br>costs = [[14,2,11],[11,14,5],[14,3,10]] return 10<br>房屋 0 颜色 1, 房屋 1 颜色 2, 房屋 2 颜色 1， 2 + 5 + 3 = 10</p>
+</blockquote>
+<h4 id="思路：-1"><a href="#思路：-1" class="headerlink" title="思路："></a>思路：</h4><ul>
+<li>把<code>i</code>中for函数里面加个<code>for</code>循环即可</li>
+<li>写个功能函数，算临近房屋涂其他颜色时候的最小值</li>
+</ul>
+<h4 id="代码：-1"><a href="#代码：-1" class="headerlink" title="代码："></a>代码：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * <span class="doctag">@param</span> costs: n x k cost matrix</div><div class="line">     * <span class="doctag">@return</span>: an integer, the minimum cost to paint all houses</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">minCostII</span><span class="params">(<span class="keyword">int</span>[][] costs)</span> </span>&#123;</div><div class="line">        <span class="comment">// write your code here</span></div><div class="line">        <span class="keyword">if</span> (costs == <span class="keyword">null</span> || costs.length == <span class="number">0</span>)</div><div class="line">            <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; costs.length; i++) &#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; costs[<span class="number">0</span>].length; j++) &#123;</div><div class="line">                costs[i][j] += helper(costs, i, j);</div><div class="line">            &#125;</div><div class="line">            </div><div class="line">        &#125;</div><div class="line">        <span class="comment">//最后是求所有中最小的，这里用了个-1,可以算是小trick吧~</span></div><div class="line">        <span class="keyword">return</span> helper(costs, costs.length, -<span class="number">1</span>);</div><div class="line">                </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">helper</span><span class="params">(<span class="keyword">int</span>[][] costs, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> min = Integer.MAX_VALUE;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; costs[<span class="number">0</span>].length; k++) &#123;</div><div class="line">            <span class="keyword">if</span> (k == j)</div><div class="line">                <span class="keyword">continue</span>;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (min &gt; costs[i-<span class="number">1</span>][k])</div><div class="line">                min = costs[i-<span class="number">1</span>][k];</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> min;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/blog/2018/04/13/fullCombination/">
-            <time datetime="2018-04-13T03:48:28.000Z" itemprop="datePublished">2018-04-13</time>
-        </a>
-    </div>
-
-
-                    
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/blog/categories/数据结构/">数据结构</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/数据结构/深度优先搜索/">深度优先搜索</a>
-    </div>
-
-                    
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/blog/tags/dfs系列/">dfs系列</a>, <a class="tag-link" href="/blog/tags/数据结构/">数据结构</a>, <a class="tag-link" href="/blog/tags/高频面试题总结/">高频面试题总结</a>
-    </div>
-
-                </div>
-            </div>
+        
         </div>
-    
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
 </div>
+
+    <a data-url="wanglilin.github.io/blog/2018/04/19/housePaint/" data-id="cjg6isqut000lxs5l01b5lof2" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="wanglilin.github.io/blog/2018/04/19/housePaint/#comments" class="article-comment-link ds-thread-count" data-thread-key="wanglilin.github.io/blog/2018/04/19/housePaint/">Comments</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/blog/2018/04/19/splitwords/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">深搜系列之分割字符串</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div class="ds-thread" data-thread-key="2018/04/19/housePaint/" data-title="dp系列之房屋染色" data-url="wanglilin.github.io/blog/2018/04/19/housePaint/"></div>
+    <style>
+        #ds-thread #ds-reset .ds-textarea-wrapper {
+            background: none;
+        }
+        #ds-reset .ds-avatar img {
+            box-shadow: none;
+        }
+        #ds-reset .ds-gradient-bg {
+            background: #f7f7f7;
+        }
+        #ds-thread #ds-reset li.ds-tab a {
+            border-radius: 3px;
+        }
+        #ds-thread #ds-reset .ds-post-button {
+            color: white;
+            border: none;
+            box-shadow: none;
+            background: #d32;
+            text-shadow: none;
+            font-weight: normal;
+            font-family: 'Microsoft Yahei';
+        }
+        #ds-thread #ds-reset .ds-post-button:hover {
+            color: white;
+            background: #DE594C;
+        }
+        #ds-thread #ds-reset .ds-post-button:active {
+            background: #d32;
+        }
+        #ds-smilies-tooltip ul.ds-smilies-tabs li a.ds-current {
+            color: white;
+            background: #d32;
+            box-shadow: none;
+            text-shadow: none;
+            font-weight: normal;
+        }
+    </style>
+
+    
+    </section>
+
 </section>
             
                 <aside id="sidebar">
