@@ -3,14 +3,35 @@
 <head>
     <meta charset="utf-8">
     
-    <title>Archive: 2017/3 | Wangli&#39;s Blog</title>
+    <title>链表系列之linked-list-cycle | Wangli&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Wangli's Blog">
-<meta property="og:url" content="wanglilin.github.io/archives/2017/03/index.html">
+    <meta name="description" content="链表是否有环 I题目详情
+Given a linked list, determine if it has a cycle in it.
+Follow up:Can you solve it without using extra space?
+
+思路：
+快慢指针，若快慢指针能相遇则说明链表存在环">
+<meta property="og:type" content="article">
+<meta property="og:title" content="链表系列之linked-list-cycle">
+<meta property="og:url" content="wanglilin.github.io/2018/04/30/linked-list-circly/index.html">
 <meta property="og:site_name" content="Wangli's Blog">
+<meta property="og:description" content="链表是否有环 I题目详情
+Given a linked list, determine if it has a cycle in it.
+Follow up:Can you solve it without using extra space?
+
+思路：
+快慢指针，若快慢指针能相遇则说明链表存在环">
+<meta property="og:image" content="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1324786758,424579799&fm=200&gp=0.jpg">
+<meta property="og:updated_time" content="2018-04-30T09:18:25.248Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Wangli's Blog">
+<meta name="twitter:title" content="链表系列之linked-list-cycle">
+<meta name="twitter:description" content="链表是否有环 I题目详情
+Given a linked list, determine if it has a cycle in it.
+Follow up:Can you solve it without using extra space?
+
+思路：
+快慢指针，若快慢指针能相遇则说明链表存在环">
+<meta name="twitter:image" content="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1324786758,424579799&fm=200&gp=0.jpg">
     
 
     
@@ -195,122 +216,223 @@
 </aside>
 
             
-            <section id="main"><div class="timeline timeline-wrap">
-    
-            <div class="timeline-row timeline-row-major">
-                <span class="node"><i class="fa fa-calendar"></i></span>
-                <h1 class="title">2017</h1>
-            </div>
+            <section id="main"><article id="post-linked-list-circly" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
         
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
+        
+            <header class="article-header">
                 
     
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/blog/2017/03/19/android-memo/">Android-备忘录开发</a>
+        <h1 class="article-title" itemprop="name">
+            链表系列之linked-list-cycle
         </h1>
     
 
-                <div class="article-meta">
-                    
+                
+                    <div class="article-meta">
+                        
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/blog/2017/03/19/android-memo/">
-            <time datetime="2017-03-19T06:30:50.000Z" itemprop="datePublished">2017-03-19</time>
+        <a href="/blog/2018/04/30/linked-list-circly/">
+            <time datetime="2018-04-30T09:13:59.000Z" itemprop="datePublished">2018-04-30</time>
         </a>
     </div>
 
 
-                    
+                        
     <div class="article-category">
     	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/blog/categories/Android/">Android</a>
+        <a class="article-category-link" href="/blog/categories/数据结构/">数据结构</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/数据结构/链表/">链表</a>
     </div>
 
-                    
+                        
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/blog/tags/Android/">Android</a>
+        <a class="tag-link" href="/blog/tags/数据结构/">数据结构</a>, <a class="tag-link" href="/blog/tags/链表系列/">链表系列</a>, <a class="tag-link" href="/blog/tags/高频面试题总结/">高频面试题总结</a>
     </div>
 
-                </div>
-            </div>
-        </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
+                    </div>
                 
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/blog/2017/03/11/java-exception/">Java基础之异常</a>
-        </h1>
-    
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h4 id="链表是否有环-I"><a href="#链表是否有环-I" class="headerlink" title="链表是否有环 I"></a>链表是否有环 I</h4><h4 id="题目详情"><a href="#题目详情" class="headerlink" title="题目详情"></a><a href="https://www.nowcoder.com/practice/650474f313294468a4ded3ce0f7898b9?tpId=46&amp;tqId=29039&amp;tPage=1&amp;rp=1&amp;ru=/ta/leetcode&amp;qru=/ta/leetcode/question-ranking" target="_blank" rel="external">题目详情</a></h4><blockquote>
+<p>Given a linked list, determine if it has a cycle in it.</p>
+<p>Follow up:<br>Can you solve it without using extra space?</p>
+</blockquote>
+<h4 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h4><ul>
+<li>快慢指针，若快慢指针能相遇则说明链表存在环</li>
+</ul>
+<a id="more"></a>
+<h4 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for singly-linked list.</div><div class="line"> * class ListNode &#123;</div><div class="line"> *     int val;</div><div class="line"> *     ListNode next;</div><div class="line"> *     ListNode(int x) &#123;</div><div class="line"> *         val = x;</div><div class="line"> *         next = null;</div><div class="line"> *     &#125;</div><div class="line"> * &#125;</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasCycle</span><span class="params">(ListNode head)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (head == <span class="keyword">null</span> || head.next == <span class="keyword">null</span>)</div><div class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        </div><div class="line">        ListNode fast = head;</div><div class="line">        ListNode slow = head;</div><div class="line">        </div><div class="line">        <span class="keyword">while</span> (fast != <span class="keyword">null</span> &amp;&amp; fast.next != <span class="keyword">null</span>) &#123;</div><div class="line">            fast = fast.next.next;</div><div class="line">            slow = slow.next;</div><div class="line">            <span class="keyword">if</span> (fast == slow)</div><div class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="链表是否有环-II"><a href="#链表是否有环-II" class="headerlink" title="链表是否有环 II"></a>链表是否有环 II</h4><h4 id="题目详情-1"><a href="#题目详情-1" class="headerlink" title="题目详情"></a><a href="https://www.nowcoder.com/practice/6e630519bf86480296d0f1c868d425ad?tpId=46&amp;tqId=29038&amp;tPage=1&amp;rp=1&amp;ru=%2Fta%2Fleetcode&amp;qru=%2Fta%2Fleetcode%2Fquestion-ranking" target="_blank" rel="external">题目详情</a></h4><blockquote>
+<p>Given a linked list, return the node where the cycle begins. If there is no cycle, returnnull.</p>
+<p>Follow up:<br>Can you solve it without using extra space?</p>
+</blockquote>
+<h4 id="思路：-1"><a href="#思路：-1" class="headerlink" title="思路："></a>思路：</h4><p><img src="https://images0.cnblogs.com/blog/354747/201311/05171805-64db9f059a1641e7afaf3dd8223c4fe7.jpg" alt="enter image description here"></p>
+<p>如上图所示：</p>
+<ul>
+<li>当快慢指针相遇时，<ul>
+<li>快指针走过的长度：a + b + c + b</li>
+<li>慢指针走过的长度：a + b</li>
+</ul>
+</li>
+<li>因此，可以知道：<ul>
+<li>2 * ( a + b ) = a + b + c + d</li>
+</ul>
+</li>
+<li>所以，可以得到： a == c</li>
+</ul>
+<h4 id="代码：-1"><a href="#代码：-1" class="headerlink" title="代码："></a>代码：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for singly-linked list.</div><div class="line"> * class ListNode &#123;</div><div class="line"> *     int val;</div><div class="line"> *     ListNode next;</div><div class="line"> *     ListNode(int x) &#123;</div><div class="line"> *         val = x;</div><div class="line"> *         next = null;</div><div class="line"> *     &#125;</div><div class="line"> * &#125;</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">detectCycle</span><span class="params">(ListNode head)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (head == <span class="keyword">null</span> || head.next == <span class="keyword">null</span>)</div><div class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">        </div><div class="line">        ListNode fast = head;</div><div class="line">        ListNode slow = head;</div><div class="line">        <span class="keyword">while</span> (fast != <span class="keyword">null</span> &amp;&amp; fast.next != <span class="keyword">null</span>) &#123;</div><div class="line">            fast = fast.next.next;</div><div class="line">            slow = slow.next;</div><div class="line">            <span class="keyword">if</span> (slow == fast) &#123;</div><div class="line">                ListNode slow2 = head;</div><div class="line">                <span class="keyword">while</span> (slow != slow2) &#123;</div><div class="line">                    slow = slow.next;</div><div class="line">                    slow2 = slow2.next;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">return</span> slow;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/blog/2017/03/11/java-exception/">
-            <time datetime="2017-03-11T12:51:50.000Z" itemprop="datePublished">2017-03-11</time>
-        </a>
-    </div>
-
-
-                    
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/blog/categories/JavaSE/">JavaSE</a>
-    </div>
-
-                    
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/blog/tags/JavaSE/">JavaSE</a>, <a class="tag-link" href="/blog/tags/Java基础/">Java基础</a>
-    </div>
-
-                </div>
-            </div>
+        
         </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
-                
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/blog/2017/03/04/javase-string/">Java基础之字符串</a>
-        </h1>
-    
-
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/blog/2017/03/04/javase-string/">
-            <time datetime="2017-03-04T08:08:41.000Z" itemprop="datePublished">2017-03-04</time>
-        </a>
-    </div>
+        <footer class="article-footer">
+            <div class="share-container">
 
 
-                    
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/blog/categories/JavaSE/">JavaSE</a>
-    </div>
 
-                    
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/blog/tags/JavaSE/">JavaSE</a>, <a class="tag-link" href="/blog/tags/Java基础/">Java基础</a>
-    </div>
-
-                </div>
-            </div>
-        </div>
-    
 </div>
+
+    <a data-url="wanglilin.github.io/blog/2018/04/30/linked-list-circly/" data-id="cjgm161ku000qms5ldqe5aui8" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="wanglilin.github.io/blog/2018/04/30/linked-list-circly/#comments" class="article-comment-link ds-thread-count" data-thread-key="wanglilin.github.io/blog/2018/04/30/linked-list-circly/">Comments</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/blog/2018/04/28/zigzagTree/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">二叉树系列之zigzag打印二叉树</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div class="ds-thread" data-thread-key="2018/04/30/linked-list-circly/" data-title="链表系列之linked-list-cycle" data-url="wanglilin.github.io/blog/2018/04/30/linked-list-circly/"></div>
+    <style>
+        #ds-thread #ds-reset .ds-textarea-wrapper {
+            background: none;
+        }
+        #ds-reset .ds-avatar img {
+            box-shadow: none;
+        }
+        #ds-reset .ds-gradient-bg {
+            background: #f7f7f7;
+        }
+        #ds-thread #ds-reset li.ds-tab a {
+            border-radius: 3px;
+        }
+        #ds-thread #ds-reset .ds-post-button {
+            color: white;
+            border: none;
+            box-shadow: none;
+            background: #d32;
+            text-shadow: none;
+            font-weight: normal;
+            font-family: 'Microsoft Yahei';
+        }
+        #ds-thread #ds-reset .ds-post-button:hover {
+            color: white;
+            background: #DE594C;
+        }
+        #ds-thread #ds-reset .ds-post-button:active {
+            background: #d32;
+        }
+        #ds-smilies-tooltip ul.ds-smilies-tabs li a.ds-current {
+            color: white;
+            background: #d32;
+            box-shadow: none;
+            text-shadow: none;
+            font-weight: normal;
+        }
+    </style>
+
+    
+    </section>
+
 </section>
             
                 <aside id="sidebar">
