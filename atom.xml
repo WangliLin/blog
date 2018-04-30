@@ -5,7 +5,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="wanglilin.github.io/"/>
-  <updated>2018-04-19T12:46:37.641Z</updated>
+  <updated>2018-04-28T09:11:01.379Z</updated>
   <id>wanglilin.github.io/</id>
   
   <author>
@@ -14,6 +14,65 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>二叉树系列之zigzag打印二叉树</title>
+    <link href="wanglilin.github.io/2018/04/28/zigzagTree/"/>
+    <id>wanglilin.github.io/2018/04/28/zigzagTree/</id>
+    <published>2018-04-28T08:59:43.000Z</published>
+    <updated>2018-04-28T09:11:01.379Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="题目详情"><a href="#题目详情" class="headerlink" title="题目详情"></a><a href="https://www.lintcode.com/zh-cn/problem/binary-tree-zigzag-level-order-traversal/" target="_blank" rel="external">题目详情</a></h4><blockquote>
+<p>给出一棵二叉树，返回其节点值的锯齿形层次遍历（先从左往右，下一层再从右往左，层与层之间交替进行） </p>
+<p><strong>样例：</strong><br>给出一棵二叉树 {3,9,20,#,#,15,7},<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">  3</div><div class="line"> / \</div><div class="line">9  20</div><div class="line">  /  \</div><div class="line"> 15   7</div></pre></td></tr></table></figure></p>
+<p>返回其锯齿形的层次遍历为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[</div><div class="line">  [3],</div><div class="line">  [20,9],</div><div class="line">  [15,7]</div><div class="line">]</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h3><ul>
+<li>广度优先遍历</li>
+<li>设置flag，看是正序还是逆序，决定如何加入list<ul>
+<li>若是正序：<code>list.add(node.val)</code></li>
+<li>若是逆序：<code>list.add(0, node.val)</code></li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for binary tree</div><div class="line"> * public class TreeNode &#123;</div><div class="line"> *     int val;</div><div class="line"> *     TreeNode left;</div><div class="line"> *     TreeNode right;</div><div class="line"> *     TreeNode(int x) &#123; val = x; &#125;</div><div class="line"> * &#125;</div><div class="line"> */</div><div class="line"><span class="keyword">import</span> java.util.*;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> ArrayList&lt;ArrayList&lt;Integer&gt;&gt; zigzagLevelOrder(TreeNode root) &#123;</div><div class="line">        <span class="comment">//广度优先遍历</span></div><div class="line">        <span class="comment">//设个flag代表正序还是逆序</span></div><div class="line">        ArrayList&lt;ArrayList&lt;Integer&gt;&gt; result = <span class="keyword">new</span> ArrayList&lt;ArrayList&lt;Integer&gt;&gt;();</div><div class="line">        <span class="keyword">if</span> (root == <span class="keyword">null</span>)</div><div class="line">            <span class="keyword">return</span> result;</div><div class="line">        <span class="keyword">boolean</span> flag = <span class="keyword">true</span>;</div><div class="line">        Queue&lt;TreeNode&gt; queue = <span class="keyword">new</span> LinkedList&lt;TreeNode&gt;();</div><div class="line">        queue.offer(root);</div><div class="line">        <span class="keyword">while</span> (!queue.isEmpty()) &#123;</div><div class="line">            <span class="keyword">int</span> size = queue.size();</div><div class="line">            ArrayList&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span>  i = <span class="number">0</span>; i &lt; size; i++) &#123;</div><div class="line">                TreeNode treeNode = queue.poll();</div><div class="line">                </div><div class="line">                <span class="keyword">if</span> (flag) &#123;</div><div class="line">                    list.add(treeNode.val);</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">else</span> &#123;</div><div class="line">                    list.add(<span class="number">0</span>, treeNode.val);</div><div class="line">                &#125;</div><div class="line">                </div><div class="line">                <span class="keyword">if</span> (treeNode.left != <span class="keyword">null</span>) &#123;</div><div class="line">                    queue.offer(treeNode.left);</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">if</span> (treeNode.right != <span class="keyword">null</span>) &#123;</div><div class="line">                    queue.offer(treeNode.right);</div><div class="line">                &#125;</div><div class="line">               </div><div class="line">            &#125;</div><div class="line">            flag = !flag;</div><div class="line">            result.add(list);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> result;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="思路2"><a href="#思路2" class="headerlink" title="思路2"></a>思路2</h3><ul>
+<li>利用堆栈来做</li>
+</ul>
+<p>直接上代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition of TreeNode:</div><div class="line"> * public class TreeNode &#123;</div><div class="line"> *     public int val;</div><div class="line"> *     public TreeNode left, right;</div><div class="line"> *     public TreeNode(int val) &#123;</div><div class="line"> *         this.val = val;</div><div class="line"> *         this.left = this.right = null;</div><div class="line"> *     &#125;</div><div class="line"> * &#125;</div><div class="line"> */</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="comment">/*</span></div><div class="line">     * @param root: A Tree</div><div class="line">     * @return: A list of lists of integer include the zigzag level order traversal of its nodes' values.</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; zigzagLevelOrder(TreeNode root) &#123;</div><div class="line">        <span class="comment">// write your code here</span></div><div class="line">      </div><div class="line">        List&lt;List&lt;Integer&gt;&gt; result = <span class="keyword">new</span> ArrayList&lt;List&lt;Integer&gt;&gt;();</div><div class="line">        </div><div class="line">        <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">return</span> result;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        Stack&lt;TreeNode&gt; currLevel = <span class="keyword">new</span> Stack&lt;TreeNode&gt;();</div><div class="line">        Stack&lt;TreeNode&gt; nextLevel = <span class="keyword">new</span> Stack&lt;TreeNode&gt;();</div><div class="line">        Stack&lt;TreeNode&gt; tmp;</div><div class="line">        </div><div class="line">        currLevel.push(root);</div><div class="line">        <span class="keyword">boolean</span> normalOrder = <span class="keyword">true</span>;</div><div class="line">        </div><div class="line">        <span class="keyword">while</span> (!currLevel.isEmpty()) &#123;</div><div class="line">            </div><div class="line">            ArrayList&lt;Integer&gt; currLevelResult = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</div><div class="line">            </div><div class="line">            <span class="keyword">while</span> (!currLevel.isEmpty()) &#123;</div><div class="line">                TreeNode node = currLevel.pop();</div><div class="line">                currLevelResult.add(node.val);</div><div class="line">                </div><div class="line">                <span class="keyword">if</span> (normalOrder) &#123;</div><div class="line">                    <span class="keyword">if</span> (node.left != <span class="keyword">null</span>) &#123;</div><div class="line">                        nextLevel.push(node.left);</div><div class="line">                    &#125;</div><div class="line">                    <span class="keyword">if</span> (node.right != <span class="keyword">null</span>) &#123;</div><div class="line">                        nextLevel.push(node.right);</div><div class="line">                    &#125;</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    <span class="keyword">if</span> (node.right != <span class="keyword">null</span>) &#123;</div><div class="line">                        nextLevel.push(node.right);</div><div class="line">                    &#125; </div><div class="line">                    <span class="keyword">if</span> (node.left != <span class="keyword">null</span>) &#123;</div><div class="line">                        nextLevel.push(node.left);</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            </div><div class="line">            result.add(currLevelResult);</div><div class="line">            tmp = currLevel;</div><div class="line">            currLevel = nextLevel;</div><div class="line">            nextLevel = tmp;</div><div class="line">            normalOrder = !normalOrder;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">return</span> result;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;题目详情&quot;&gt;&lt;a href=&quot;#题目详情&quot; class=&quot;headerlink&quot; title=&quot;题目详情&quot;&gt;&lt;/a&gt;&lt;a href=&quot;https://www.lintcode.com/zh-cn/problem/binary-tree-zigzag-level-order-traversal/&quot;&gt;题目详情&lt;/a&gt;&lt;/h4&gt;&lt;blockquote&gt;
+&lt;p&gt;给出一棵二叉树，返回其节点值的锯齿形层次遍历（先从左往右，下一层再从右往左，层与层之间交替进行） &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;样例：&lt;/strong&gt;&lt;br&gt;给出一棵二叉树 {3,9,20,#,#,15,7},&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;  3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt; / \&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9  20&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  /  \&lt;/div&gt;&lt;div class=&quot;line&quot;&gt; 15   7&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;返回其锯齿形的层次遍历为：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;[&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  [3],&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  [20,9],&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  [15,7]&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;]&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;思路：&quot;&gt;&lt;a href=&quot;#思路：&quot; class=&quot;headerlink&quot; title=&quot;思路：&quot;&gt;&lt;/a&gt;思路：&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;广度优先遍历&lt;/li&gt;
+&lt;li&gt;设置flag，看是正序还是逆序，决定如何加入list&lt;ul&gt;
+&lt;li&gt;若是正序：&lt;code&gt;list.add(node.val)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;若是逆序：&lt;code&gt;list.add(0, node.val)&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="数据结构" scheme="wanglilin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="二叉树" scheme="wanglilin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
+    
+    
+      <category term="高频面试题总结" scheme="wanglilin.github.io/tags/%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="数据结构" scheme="wanglilin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="tree系列" scheme="wanglilin.github.io/tags/tree%E7%B3%BB%E5%88%97/"/>
+    
+  </entry>
   
   <entry>
     <title>dp系列之房屋染色</title>
@@ -58,9 +117,9 @@
       <category term="动态规划" scheme="wanglilin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
     
     
-      <category term="数据结构" scheme="wanglilin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
       <category term="高频面试题总结" scheme="wanglilin.github.io/tags/%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="数据结构" scheme="wanglilin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
       <category term="dp系列" scheme="wanglilin.github.io/tags/dp%E7%B3%BB%E5%88%97/"/>
     
@@ -99,9 +158,9 @@
       <category term="深度优先搜索" scheme="wanglilin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/"/>
     
     
-      <category term="数据结构" scheme="wanglilin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
       <category term="高频面试题总结" scheme="wanglilin.github.io/tags/%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="数据结构" scheme="wanglilin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
       <category term="dfs系列" scheme="wanglilin.github.io/tags/dfs%E7%B3%BB%E5%88%97/"/>
     
@@ -128,9 +187,9 @@
       <category term="深度优先搜索" scheme="wanglilin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/"/>
     
     
-      <category term="数据结构" scheme="wanglilin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
       <category term="高频面试题总结" scheme="wanglilin.github.io/tags/%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="数据结构" scheme="wanglilin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
       <category term="dfs系列" scheme="wanglilin.github.io/tags/dfs%E7%B3%BB%E5%88%97/"/>
     
@@ -194,9 +253,9 @@
       <category term="动态规划" scheme="wanglilin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
     
     
-      <category term="数据结构" scheme="wanglilin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
       <category term="高频面试题总结" scheme="wanglilin.github.io/tags/%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="数据结构" scheme="wanglilin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
       <category term="dp系列" scheme="wanglilin.github.io/tags/dp%E7%B3%BB%E5%88%97/"/>
     
@@ -245,9 +304,9 @@
       <category term="数据结构" scheme="wanglilin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
     
-      <category term="数据结构" scheme="wanglilin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
       <category term="高频面试题总结" scheme="wanglilin.github.io/tags/%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="数据结构" scheme="wanglilin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
@@ -283,9 +342,9 @@
       <category term="数据结构" scheme="wanglilin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
     
-      <category term="数据结构" scheme="wanglilin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
       <category term="高频面试题总结" scheme="wanglilin.github.io/tags/%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="数据结构" scheme="wanglilin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
@@ -433,9 +492,9 @@
       <category term="数据结构" scheme="wanglilin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
     
-      <category term="数据结构" scheme="wanglilin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
       <category term="高频面试题总结" scheme="wanglilin.github.io/tags/%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="数据结构" scheme="wanglilin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
@@ -481,9 +540,9 @@
       <category term="数据结构" scheme="wanglilin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
     
-      <category term="数据结构" scheme="wanglilin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
       <category term="高频面试题总结" scheme="wanglilin.github.io/tags/%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="数据结构" scheme="wanglilin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
@@ -544,9 +603,9 @@
       <category term="数据结构" scheme="wanglilin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
     
-      <category term="数据结构" scheme="wanglilin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
       <category term="高频面试题总结" scheme="wanglilin.github.io/tags/%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="数据结构" scheme="wanglilin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
@@ -585,9 +644,9 @@
       <category term="数据结构" scheme="wanglilin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
     
-      <category term="数据结构" scheme="wanglilin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
       <category term="高频面试题总结" scheme="wanglilin.github.io/tags/%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="数据结构" scheme="wanglilin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
@@ -640,9 +699,9 @@
       <category term="数据结构" scheme="wanglilin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
     
-      <category term="数据结构" scheme="wanglilin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
       <category term="高频面试题总结" scheme="wanglilin.github.io/tags/%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="数据结构" scheme="wanglilin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
@@ -674,9 +733,9 @@
       <category term="数据结构" scheme="wanglilin.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
     
-      <category term="数据结构" scheme="wanglilin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
       <category term="高频面试题总结" scheme="wanglilin.github.io/tags/%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="数据结构" scheme="wanglilin.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
@@ -1103,137 +1162,6 @@
     
     
       <category term="Android" scheme="wanglilin.github.io/tags/Android/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java基础之异常</title>
-    <link href="wanglilin.github.io/2017/03/11/java-exception/"/>
-    <id>wanglilin.github.io/2017/03/11/java-exception/</id>
-    <published>2017-03-11T12:51:50.000Z</published>
-    <updated>2017-03-11T13:17:27.612Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
-<p>A clever person solves a problem, a wise person avoids it.<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;   ——那你，会如何处理异常，try or throw？</p>
-</blockquote>
-<h2 id="1-异常是什么"><a href="#1-异常是什么" class="headerlink" title="1 异常是什么"></a>1 异常是什么</h2><p>我有一辆车（不是自行车，四轮的！！诶，更不是拖拉机！！！），我要开车去隔壁村见小王（不是隔壁老王），开到半路爆胎了，此时，我有两个选择：</p>
-<ul>
-<li>如果我车上有备胎（诶，可惜我备胎这东西是建立在有女朋友的基础之上的，女朋友是个好东西，然而我并没有），我可以选择在当前就换个轮胎，然后将坏了的车胎放到后备箱，车子仍然可以继续开；</li>
-<li>我车上没有备胎，那我只能放个警示牌，打个电话给能处理这个车爆胎的人来处理，而这并不妨碍我走着去见隔壁村的小王。</li>
-</ul>
-<p>这就是在Java中遇到异常的两个常用的方法，你可以处理它（try）或抛出它（throw），即将锅交给别人去处理。</p>
-<a id="more"></a>
-<blockquote>
-<p>“异常”这个词通常有“我对此感到很意外”的意思。问题出现了，你也许不清楚该如何处理，但你的确知道不应该置之不理；你要停下来，看看是不是有别人或在别的地方，能够处理这个问题。只是在当前的环境中，还没有足够的信息来解决这个问题，所以就把这个问题提交到一个更高级别的环境中，在那里将做出正确的决定。<br>&emsp;&emsp;&emsp;——《Java编程思想》 P248</p>
-</blockquote>
-<p>异常指不期而遇的各种状况，如：文件找不到、网络连接失败，非法参数等。异常是一个事件，它发生在程序运行期间，干扰了正常的指令流程。Java通过API中Throwable类的众多子类描述各种不同的异常。因而，Java异常都是对象，是Throwable子类的实例。Java异常类的层次结构图如下：<br><img src="http://omdld2kxe.bkt.clouddn.com/1354020417_5176.jpg" alt="Java异常类层次结构图"></p>
-<ul>
-<li>Throwable：Java语言中所有错误或异常的超类，有两个重要的子类，Exception（异常）和Error（错误），二者都是Java异常处理的重要子类，各自都包含大量子类。</li>
-<li>Error：表示仅靠程序本身无法恢复的严重错误。与代码编写者无关，是代码运行时JVM出现的错误，发生于虚拟机自身、或者发生在虚拟机试图执行应用时，如Java虚拟机运行错误（VirtualMachineError）、类定义错误（NoClassDefFoundError）等。这些错误都是不可查的，因为他们在应用程序的控制和处理能力之外，而且绝大多数是程序运行时不允许出现的状况。</li>
-<li>Exception：表示程序本身可以处理的异常。<ul>
-<li>RuntimeException：那些可能在Java虚拟机正常运行期间抛出的异常的超类。Java编译器不去检查它，也就是说，当程序中可能出现这类异常时，即使没有用<code>try...catch</code>语句捕获它，也没有用<code>throws</code>子句声明抛出它，也还是会编译通过。例如：若试图使用空值对象引用、除数为零或数组越界，则分别引发运行时异常（NullPointerException/ArithmeticException/ArrayIndexOutOfBoundException）。</li>
-<li>CheckedException：正确的程序在运行中，很容易出现的、情理可容的异常状况，可查异常状况虽然是异常状况，但在一定程度上它的发生是可以预计的，而且一旦发生这种异常状况，就必须采取某种方式进行处理。即Java编译器会检查它，也就是说，当程序中可能出现这类异常，要么用<code>try-catch</code>语句捕获它，要么用throws字句声明抛出它，否则编译不会通过。如IOException/SQLException等。</li>
-</ul>
-</li>
-</ul>
-<p>PS：Java中RuntimeException这个类名起的并不恰当，因为任何异常都是运行时出现的。（在编译时出现的错误并不是异常，换句话说，异常就是为了解决程序运行时出现的的错误）。</p>
-<p>PPS：如何区分，如果出现RuntimeException，那么一定是程序员的错误。例如，可以通过检查数组下标和数组边界来避免数组越界访问异常。 非RutimeException一般是外部错误，例如试图从文件尾后读取数据等，这并不是程序本身的错误，而是在应用环境中出现的外部错误。</p>
-<h2 id="2-异常处理机制"><a href="#2-异常处理机制" class="headerlink" title="2 异常处理机制"></a>2 异常处理机制</h2><p> 异常机制是指当程序出现错误后，程序如何处理。具体来说，异常机制提供了程序退出的安全通道。当出现错误后，程序执行的流程发生改变，程序的控制权转移到异常处理器。在Java应用程序中，异常处理机制为：抛出异常、捕获异常。异常处理的流程：</p>
-<ul>
-<li>遇到错误，方法立即结束，并不返回一个值；同时，抛出一个异常对象 。</li>
-<li>调用该方法的程序也不会继续执行下去，而是搜索一个可以处理该异常的异常处理器，并执行其中的代码。</li>
-</ul>
-<h3 id="2-1-try-catch"><a href="#2-1-try-catch" class="headerlink" title="2.1 try-catch"></a>2.1 try-catch</h3><ul>
-<li><p><strong>抛出异常：</strong> 当遇到异常情形时，程序无法继续向下执行，因为在当前的环境下无法获得必要的信息来解决问题。只能从当前环境跳出，将问题提交至上一级环境。当抛出异常后，会有几件事情随之发生：</p>
-<ul>
-<li>将使用<code>new</code>在堆上创建异常对象。</li>
-<li>当前的执行路径（它不能继续下去了）被终止，并且从当前环境中弹出对异常对象的引用。</li>
-<li>异常处理机制接管程序，并开始寻找一个恰当的地方来执行程序。这个恰当的地方就是<strong>异常处理程序</strong>，它的任务是将程序从错误状态中恢复，以使程序要么换一种方式运行，要么继续运行下去。</li>
-</ul>
-</li>
-<li><p><strong>捕获异常：</strong> Java中，异常的捕获通常通过<code>try-catch</code>或<code>try-catch-finally</code>语句实现，即监控区域（一段可能产生异常的代码+处理这些异常的代码）</p>
-<ul>
-<li>try块：<br>如果在方法内部抛出了异常，这个方法将在抛出异常的过程中结束。要是不希望方法就此结束，可以在方法内设置一个特殊的块来捕获异常。因为在这块里，尝试了各种可能产生异常的方法的调用，所以称为try块。它是跟在try关键字之后的普通程序块：</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">try</span>&#123;</div><div class="line">    <span class="comment">//code that might generate exceptions</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>catch子句：<br>  抛出的异常必须在某处得到处理。这个地点就是异常处理程序，<strong>而且针对每个要捕获的异常，得准备相应的处理程序。异常程序紧跟在try块之后，以关键字catch表示：</strong></li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">try</span>&#123;</div><div class="line">    <span class="comment">//  code that might generate exceptions</span></div><div class="line">&#125;<span class="keyword">catch</span>(Type id1)&#123;</div><div class="line">    <span class="comment">//Handle exceptions of Type1</span></div><div class="line">&#125;<span class="keyword">catch</span>(Type id2)&#123;</div><div class="line">    <span class="comment">//Handle exceptions of Type2</span></div><div class="line">&#125;<span class="keyword">catch</span>(Type id3)&#123;</div><div class="line">    <span class="comment">//Handle exceptions of Type3</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>每个catch子句看起来就像是接收一个且仅接受一个特殊类型的参数的方法。当异常被抛出后，异常处理机制将负责搜寻参数与异常类型相匹配的第一个处理程序，然后进入catch子句之中执行。只有匹配的catch子句才能得到执行。<br>异常匹配的原则是：如果抛出的异常对象属于catch子句的异常类，或者该异常类的子类，则认为生成的异常类对象与catch块捕获的异常类型相匹配。<br>下面举个例子：</p>
-<p><strong>捕获throw语句抛出的“除数为0”异常</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestException</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">        <span class="keyword">int</span> a = <span class="number">1</span>;</div><div class="line">        <span class="keyword">int</span> b = <span class="number">0</span>;</div><div class="line">        <span class="keyword">try</span>&#123;</div><div class="line">            <span class="keyword">if</span> (b == <span class="number">0</span>) &#123;</div><div class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> ArithmeticException();</div><div class="line">            &#125;</div><div class="line">            System.out.println(<span class="string">"a/b的值是："</span> + a / b);</div><div class="line">        &#125;<span class="keyword">catch</span>(ArithmeticException e)&#123;</div><div class="line">            System.out.println(<span class="string">"变量b不能为0"</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        System.out.println(<span class="string">"程序正常结束"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><strong>运行结果：</strong><br>变量b不能为0<br>程序正常结束</p>
-<p>事实上，“除数为0”等ArithmeticException，是RuntimeException的子类，而运行时异常将由运行时系统自动抛出，不需要使用throw语句。故可将代码改成如下形式：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestException</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">        <span class="keyword">int</span> a = <span class="number">1</span>;</div><div class="line">        <span class="keyword">int</span> b = <span class="number">0</span>;</div><div class="line">        <span class="keyword">try</span>&#123;</div><div class="line">            System.out.println(<span class="string">"a/b的值是："</span> + a / b);</div><div class="line">        &#125;<span class="keyword">catch</span>(ArithmeticException e)&#123;</div><div class="line">            System.out.println(<span class="string">"变量b不能为0"</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        System.out.println(<span class="string">"程序正常结束"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><strong>运行结果：</strong><br> 变量b不能为0<br>程序正常结束</p>
-<p>由于检查运行时异常的代价远大于捕捉异常所带来的益处，Java编译器允许忽略运行时异常，一个方法可以既不捕捉，也不声明抛出运行时异常。如下代码所示：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestException</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">        <span class="keyword">int</span> a = <span class="number">1</span>;</div><div class="line">        <span class="keyword">int</span> b = <span class="number">0</span>;</div><div class="line">        System.out.println(<span class="string">"a/b的值是："</span> + a / b);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><strong>运行结果：</strong><br> Exception in thread “main” java.lang.ArithmeticException: / by zero</p>
-<h4 id="2-1-1-catch子句注意事项"><a href="#2-1-1-catch子句注意事项" class="headerlink" title="2.1.1 catch子句注意事项"></a>2.1.1 catch子句注意事项</h4><ol>
-<li>一旦某个catch子句捕获到匹配的异常类型，将进入异常处理代码。一经处理结束，就意味着整个<code>try-catch</code>语句结束。其他的catch子句不再有匹配和捕获异常类型的机会。</li>
-<li>Java通过异常类描述异常类型，对于有多个catch子句的异常程序而言，应该尽量将捕获底层异常类的catch子句放在前面，同时尽量将捕获相对高层的异常类的catch子句放在后面。否则，捕获底层异常类的catch子句可能会被屏蔽。</li>
-<li>RuntimeException异常类包括运行时各种常见的异常，ArithmeticException类和ArrayIndexOutOfBoundsException类都是它的子类。因此，RuntimeException异常类的catch子句应该放在最后面，否则可能会屏蔽其后的特定异常处理或引起编译错误。</li>
-</ol>
-<h3 id="2-2-try-catch-finally"><a href="#2-2-try-catch-finally" class="headerlink" title="2.2 try-catch-finally"></a>2.2 try-catch-finally</h3><p><code>try-catch</code>语句还可以包括第三部分，就是finally子句。它表示无论是否出现异常，都应该执行的内容，<code>try-catch-finally</code>语句的一般语法形式如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">try</span>&#123;</div><div class="line">    <span class="comment">//  code that might generate exceptions</span></div><div class="line">&#125;<span class="keyword">catch</span>(Type id1)&#123;</div><div class="line">    <span class="comment">//Handle exceptions of Type1</span></div><div class="line">&#125;<span class="keyword">catch</span>(Type id2)&#123;</div><div class="line">    <span class="comment">//Handle exceptions of Type2</span></div><div class="line">&#125;<span class="keyword">catch</span>(Type id3)&#123;</div><div class="line">    <span class="comment">//Handle exceptions of Type3</span></div><div class="line">&#125;<span class="keyword">finally</span>&#123;</div><div class="line">    <span class="comment">//Activities that happen every time</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>对于一些代码，可能会希望无论try块中的异常是否抛出，它们都能得到执行。图示如下：<br><img src="http://omdld2kxe.bkt.clouddn.com/d0vCr.jpg" alt="try-catch-finally执行顺序"><br>这通常适用于内存回收之外的情况（因为回收由垃圾回收器完成）。为了达到这个效果，可以在异常处理程序后面架上finally子句。如下例所示：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestException</span> </span>&#123;  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;  </div><div class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;  </div><div class="line">        String greetings[] = &#123; <span class="string">" Hello world !"</span>, <span class="string">" Hello World !! "</span>,  </div><div class="line">                <span class="string">" HELLO WORLD !!!"</span> &#125;;  </div><div class="line">        <span class="keyword">while</span> (i &lt; <span class="number">4</span>) &#123;  </div><div class="line">            <span class="keyword">try</span> &#123;  </div><div class="line">                <span class="comment">// 特别注意循环控制变量i的设计，避免造成无限循环  </span></div><div class="line">                System.out.println(greetings[i++]);  </div><div class="line">            &#125; <span class="keyword">catch</span> (ArrayIndexOutOfBoundsException e) &#123;  </div><div class="line">                System.out.println(<span class="string">"数组下标越界异常"</span>);  </div><div class="line">            &#125; <span class="keyword">finally</span> &#123;  </div><div class="line">                System.out.println(<span class="string">"--------------------------"</span>);  </div><div class="line">            &#125;  </div><div class="line">        &#125;  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="2-2-1-finally子句注意事项"><a href="#2-2-1-finally子句注意事项" class="headerlink" title="2.2.1 finally子句注意事项"></a>2.2.1 finally子句注意事项</h4><ol>
-<li>对于没有垃圾回收和析构函数自动调用机制的语言来说，finally非常重要。它能使程序员保证：无论try块里发生了什么，内存总能得到释放。但Java有垃圾回收机制，所以内存释放不再是问题。而且，Java也没有析构函数可供调用。在Java中，用到finallyde情况主要是在，当要把除内存之外的资源恢复到它们的初始状态时。这种需要清理的资源包括：已经打开的文件或网络连接，在屏幕上画的图形，甚至可以是外部世界的某个开关。</li>
-<li>当在try块或catch块中遇到return语句时，finally语句块将在方法返回之前被执行。</li>
-<li>finally语句块不能给变量赋新值来改变return的返回值，也不建议在finally块中使用return语句。没有意义还容易造成混淆。</li>
-</ol>
-<h3 id="2-3-throw-throws"><a href="#2-3-throw-throws" class="headerlink" title="2.3 throw/throws"></a>2.3 throw/throws</h3><p>任何Java代码都可以抛出异常，如：自己编写的代码、来自Java开发环境包中的代码，或者Java运行时系统。Java对于处理不了的异常或者要转型的异常，一般用throw/throws语句抛出异常。如果一个方法没有捕获一个检查性异常，那么该方法必须使用throws关键字来声明。throws关键字放在方法签名的尾部，也可以使用throw关键字抛出一个异常，无论它是新实例化的还是刚捕获到的。</p>
-<h4 id="2-3-1-throws"><a href="#2-3-1-throws" class="headerlink" title="2.3.1 throws"></a>2.3.1 throws</h4><p>如果与一个方法可能会出现异常，但没有能力处理这种异常，可以在方法声明处用throws子句来声明抛出异常。就好像，初中时经常会有打架时间，几个人打一个人，这个人被打之后，想报仇又无力报仇，所以叫一帮兄弟帮他报仇。<br>throws语句用在方法定义时声明该方法要抛出的异常类型，如果抛出的是Exception异常类型，则该方法被声明为抛出所有de异常；多个异常用逗号分隔，throws语句的语法格式如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">methodName <span class="keyword">throws</span> Exception1, Exception2, Exception3&#123;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>throws后为声明要抛出的异常列表。当方法抛出异常列表中的异常的时候，方法将不对这些类型及其子类型进行异常处理，而将异常抛向调用该方法的方法。<br>举例如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.lang.Exception;  </div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestException</span> </span>&#123;  </div><div class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">pop</span><span class="params">()</span> <span class="keyword">throws</span> NegativeArraySizeException </span>&#123;  </div><div class="line">        <span class="comment">// 定义方法并抛出NegativeArraySizeException异常  </span></div><div class="line">        <span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[-<span class="number">3</span>]; <span class="comment">// 创建数组  </span></div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123; <span class="comment">// 主方法  </span></div><div class="line">        <span class="keyword">try</span> &#123; <span class="comment">// try语句处理异常信息  </span></div><div class="line">            pop(); <span class="comment">// 调用pop()方法  </span></div><div class="line">        &#125; <span class="keyword">catch</span> (NegativeArraySizeException e) &#123;  </div><div class="line">            System.out.println(<span class="string">"pop()方法抛出的异常"</span>);<span class="comment">// 输出异常信息  </span></div><div class="line">        &#125;  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>pop方法没有处理异常NegativeArraySizeException，而是由main函数来处理。</p>
-<p> <strong>throws抛出异常的规则：</strong></p>
-<ol>
-<li>如果是不可检查异常（Unchecked Exception），即Error、RuntimeException或它们的子类，那么可以不使用throws关键字来声明要抛出的异常，编译仍然能通过，但运行时会被系统抛出。</li>
-<li>必须声明方法可抛出的任何可查异常（Checked Exception），即如果一个方法可能出现可查异常，要么用try-catch语句捕获，要么用throws语句声明将它抛出，否则会导致编译错误。</li>
-<li>该方法的调用者必须处理或者重新抛出该异常。当方法的调用者无力处理该异常的时候，应该继续抛出，而不是囫囵吞枣。</li>
-<li>调用方法必须遵循任何可查异常的处理和声明规则。若覆盖一个方法，则不能声明与覆盖方法不同的异常。声明的任何异常必须是被覆盖方法所声明异常的同类或子类。</li>
-</ol>
-<h4 id="2-3-2-throw"><a href="#2-3-2-throw" class="headerlink" title="2.3.2 throw"></a>2.3.2 throw</h4><p><code>throw</code>总是出现在函数体中，用来抛出一个Throwable的异常，程序会在throw语句后立即终止，它后面的语句总是执行不到的。<br>异常是异常类的实力对象，我们可以创建异常类的实例对象通过throw语句抛出，该语句的语法格式如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">throw</span> <span class="keyword">new</span> ExceptionName();</div></pre></td></tr></table></figure></p>
-<p>如果抛出了检查异常，则还应该在方法头部声明方法可能抛出的异常类型。该方法的调用者也必须检查处理抛出的异常，如果所有方法都层层上抛获取的异常，最终JVM会进行处理。处理方式也很简单，即打印异常消息和堆栈消息。</p>
-<h4 id="2-3-3-Throwable类中的常用方法"><a href="#2-3-3-Throwable类中的常用方法" class="headerlink" title="2.3.3 Throwable类中的常用方法"></a>2.3.3 Throwable类中的常用方法</h4><p>catch关键字后面括号中的Exception类型的参数e。Exception就是try代码块传递给catch代码块的变量类型，e就是变量名。通常异常处理常用3个函数来获取异常的有关信息：<br><code>getCause()</code>: 返回抛出异常的原因。如果 cause 不存在或未知，则返回 null。<br><code>getMeage()</code>: 返回异常的消息信息。<br><code>printStackTrace()</code>:  对象的堆栈跟踪输出至错误输出流，作为字段 System.err 的值。</p>
-<p>有时为了简单会忽略掉catch语句后的代码，这样try-catch语句就成了一种摆设，一旦程序在运行过程中出现了异常，就会忽略处理异常，而错误发生的原因很难查找。</p>
-<h3 id="3-自定义异常"><a href="#3-自定义异常" class="headerlink" title="3 自定义异常"></a>3 自定义异常</h3><p>所谓自定义异常，通常就是指定义了一个继承自Exception类的子类，那么这个类就是一个自定义异常类。通常情况下，我们都会继承自Exception类，一般不会继承某个运行时的异常类。基于特定的需求，自定义异常在项目中的使用还是很普遍的。</p>
-<p>自定义异常类MyException：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyException</span> <span class="keyword">extends</span> <span class="title">Exception</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyException</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">super</span>();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyException</span><span class="params">(String messeage)</span></span>&#123;</div><div class="line">        <span class="keyword">super</span>(messeage);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>当然也可选用Throwable作为父类。其中无参数构造器为创建缺省参数对象提供了方便。第二个构造器将在创建这个异常对象时提供描述这个异常信息的字符串，通过调用父类构造器向上传递给父类，对父类中的toString()方法中返回的原有信息进行覆盖。作为该异常的异常信息。</p>
-<p>测试自定义异常类代码：</p>
-<p>1.抛出异常throws：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExxceptionTest</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">(String string)</span> <span class="keyword">throws</span> MyException </span>&#123;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (<span class="keyword">null</span> == string)&#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> MyException(<span class="string">"传入的字符串参数不能为null"</span>);</div><div class="line">        &#125;<span class="keyword">else</span> &#123;</div><div class="line">            System.out.println(string);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> MyException </span>&#123;</div><div class="line">   </div><div class="line">      ExxceptionTest test = <span class="keyword">new</span> ExxceptionTest();</div><div class="line">      test.method(<span class="keyword">null</span>);</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><strong>运行结果：</strong><br>Exception in thread “main” MyException: 传入的字符串参数不能为null<br>    at ExxceptionTest.method(ExxceptionTest.java:9)<br>    at ExxceptionTest.main(ExxceptionTest.java:29)<br>    ……</p>
-<p>2.处理异常try-catch：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExceptionTest</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">(String string)</span> <span class="keyword">throws</span> MyException </span>&#123;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (<span class="keyword">null</span> == string)&#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> MyException(<span class="string">"传入的字符串参数不能为null"</span>);</div><div class="line">        &#125;<span class="keyword">else</span> &#123;</div><div class="line">            System.out.println(string);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="keyword">try</span>&#123;</div><div class="line">            ExceptionTest test = <span class="keyword">new</span> ExceptionTest();</div><div class="line">            test.method(<span class="keyword">null</span>);</div><div class="line">        &#125;<span class="keyword">catch</span> (MyException e)&#123;</div><div class="line">            <span class="comment">//将错误信息在System.out流中打印出来</span></div><div class="line">            e.printStackTrace(System.out);</div><div class="line">        &#125;<span class="keyword">finally</span> &#123;</div><div class="line">            System.out.println(<span class="string">"异常处理完毕"</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        System.out.println(<span class="string">"程序执行完毕"</span>);</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><strong>运行结果：</strong><br>MyException: 传入的字符串参数不能为null<br>        at ExxceptionTest.method(ExceptionTest.java:9)<br>        at ExxceptionTest.main(ExceptionTest.java:19)<br>            ….<br>异常处理完毕<br>程序执行完毕</p>
-<p>毋庸置疑，我们不可能期待JVM自动抛出一个自定义异常，也不能够期待JVM会自动处理一个自定义异常。发现异常、抛出异常以及处理异常的工作必须靠编程人员在代码中利用异常处理机制自己完成。而打印异常处理信息可以在抛出时包括在构造器的参数中，或者包括在处理这个异常的catch中。</p>
-<p>不定期更新…</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;A clever person solves a problem, a wise person avoids it.&lt;br&gt;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;   ——那你，会如何处理异常，try or throw？&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;1-异常是什么&quot;&gt;&lt;a href=&quot;#1-异常是什么&quot; class=&quot;headerlink&quot; title=&quot;1 异常是什么&quot;&gt;&lt;/a&gt;1 异常是什么&lt;/h2&gt;&lt;p&gt;我有一辆车（不是自行车，四轮的！！诶，更不是拖拉机！！！），我要开车去隔壁村见小王（不是隔壁老王），开到半路爆胎了，此时，我有两个选择：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;如果我车上有备胎（诶，可惜我备胎这东西是建立在有女朋友的基础之上的，女朋友是个好东西，然而我并没有），我可以选择在当前就换个轮胎，然后将坏了的车胎放到后备箱，车子仍然可以继续开；&lt;/li&gt;
-&lt;li&gt;我车上没有备胎，那我只能放个警示牌，打个电话给能处理这个车爆胎的人来处理，而这并不妨碍我走着去见隔壁村的小王。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;这就是在Java中遇到异常的两个常用的方法，你可以处理它（try）或抛出它（throw），即将锅交给别人去处理。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="JavaSE" scheme="wanglilin.github.io/categories/JavaSE/"/>
-    
-    
-      <category term="Java基础" scheme="wanglilin.github.io/tags/Java%E5%9F%BA%E7%A1%80/"/>
-    
-      <category term="JavaSE" scheme="wanglilin.github.io/tags/JavaSE/"/>
     
   </entry>
   
