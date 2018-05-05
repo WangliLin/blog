@@ -3,20 +3,26 @@
 <head>
     <meta charset="utf-8">
     
-    <title>深搜系列之字符串全组合 | Wangli&#39;s Blog</title>
+    <title>dp系列之子集系列 | Wangli&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="12345678910111213141516171819202122import java.util.ArrayList;public class FullCombination &amp;#123;    public static void main(String[] args) &amp;#123;        ArrayList&amp;lt;String&amp;gt; result = new ArrayList">
+    <meta name="description" content="1. 子集题目详情
+
+给定一个含不同整数的集合，返回其所有的子集样例：如果 S = [1,2,3]，有如下的解：[      [3],      [1],      [2],      [1,2,3],      [1,3],      [2,3],      [1,2],      []]">
 <meta property="og:type" content="article">
-<meta property="og:title" content="深搜系列之字符串全组合">
-<meta property="og:url" content="wanglilin.github.io/2018/04/13/fullCombination/index.html">
+<meta property="og:title" content="dp系列之子集系列">
+<meta property="og:url" content="wanglilin.github.io/2018/05/05/dfs-subsets/index.html">
 <meta property="og:site_name" content="Wangli's Blog">
-<meta property="og:description" content="12345678910111213141516171819202122import java.util.ArrayList;public class FullCombination &amp;#123;    public static void main(String[] args) &amp;#123;        ArrayList&amp;lt;String&amp;gt; result = new ArrayList">
-<meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1524196107&di=36c51bd941438c2233cdd5561edf209a&imgtype=jpg&er=1&src=http%3A%2F%2Ff.hiphotos.baidu.com%2Fbaike%2Fc0%253Dbaike60%252C5%252C5%252C60%252C20%2Fsign%3D1b7b0521087b020818c437b303b099b6%2Fa6efce1b9d16fdfada2ceb6ab68f8c5495ee7bf5.jpg">
-<meta property="og:updated_time" content="2018-04-13T03:52:38.165Z">
+<meta property="og:description" content="1. 子集题目详情
+
+给定一个含不同整数的集合，返回其所有的子集样例：如果 S = [1,2,3]，有如下的解：[      [3],      [1],      [2],      [1,2,3],      [1,3],      [2,3],      [1,2],      []]">
+<meta property="og:image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIrWF-XTJPs2iF-HDYRmQSReqAYZgxyEtN3Q5JkzF6vOe2nZ12">
+<meta property="og:updated_time" content="2018-05-05T12:45:13.324Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="深搜系列之字符串全组合">
-<meta name="twitter:description" content="12345678910111213141516171819202122import java.util.ArrayList;public class FullCombination &amp;#123;    public static void main(String[] args) &amp;#123;        ArrayList&amp;lt;String&amp;gt; result = new ArrayList">
-<meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1524196107&di=36c51bd941438c2233cdd5561edf209a&imgtype=jpg&er=1&src=http%3A%2F%2Ff.hiphotos.baidu.com%2Fbaike%2Fc0%253Dbaike60%252C5%252C5%252C60%252C20%2Fsign%3D1b7b0521087b020818c437b303b099b6%2Fa6efce1b9d16fdfada2ceb6ab68f8c5495ee7bf5.jpg">
+<meta name="twitter:title" content="dp系列之子集系列">
+<meta name="twitter:description" content="1. 子集题目详情
+
+给定一个含不同整数的集合，返回其所有的子集样例：如果 S = [1,2,3]，有如下的解：[      [3],      [1],      [2],      [1,2,3],      [1,3],      [2,3],      [1,2],      []]">
+<meta name="twitter:image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIrWF-XTJPs2iF-HDYRmQSReqAYZgxyEtN3Q5JkzF6vOe2nZ12">
     
 
     
@@ -201,7 +207,7 @@
 </aside>
 
             
-            <section id="main"><article id="post-fullCombination" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-dfs-subsets" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -209,7 +215,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            深搜系列之字符串全组合
+            dp系列之子集系列
         </h1>
     
 
@@ -218,8 +224,8 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/blog/2018/04/13/fullCombination/">
-            <time datetime="2018-04-13T03:48:28.000Z" itemprop="datePublished">2018-04-13</time>
+        <a href="/blog/2018/05/05/dfs-subsets/">
+            <time datetime="2018-05-05T12:40:33.000Z" itemprop="datePublished">2018-05-05</time>
         </a>
     </div>
 
@@ -227,13 +233,13 @@
                         
     <div class="article-category">
     	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/blog/categories/数据结构/">数据结构</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/数据结构/深度优先搜索/">深度优先搜索</a>
+        <a class="article-category-link" href="/blog/categories/数据结构/">数据结构</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/数据结构/动态规划/">动态规划</a>
     </div>
 
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/blog/tags/dfs系列/">dfs系列</a>, <a class="tag-link" href="/blog/tags/数据结构/">数据结构</a>, <a class="tag-link" href="/blog/tags/高频面试题总结/">高频面试题总结</a>
+        <a class="tag-link" href="/blog/tags/dp系列/">dp系列</a>, <a class="tag-link" href="/blog/tags/数据结构/">数据结构</a>, <a class="tag-link" href="/blog/tags/高频面试题总结/">高频面试题总结</a>
     </div>
 
                     </div>
@@ -244,7 +250,35 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.ArrayList;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FullCombination</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        ArrayList&lt;String&gt; result = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">        helper(result, <span class="string">"abc"</span>, <span class="keyword">new</span> StringBuilder(), <span class="number">0</span>);</div><div class="line">        <span class="keyword">for</span> (String s : result)</div><div class="line">            System.out.println(s);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">helper</span><span class="params">(ArrayList&lt;String&gt; result, String s, StringBuilder sb, <span class="keyword">int</span> index)</span> </span>&#123;</div><div class="line"></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = index; i &lt; s.length(); i++) &#123;</div><div class="line">            sb.append(s.charAt(i));</div><div class="line">            result.add(sb.toString());</div><div class="line">            helper(result, s, sb, i + <span class="number">1</span>);</div><div class="line">            sb.deleteCharAt(sb.length() - <span class="number">1</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+            <h3 id="1-子集"><a href="#1-子集" class="headerlink" title="1. 子集"></a>1. 子集</h3><p><a href="https://www.lintcode.com/problem/subsets/description" target="_blank" rel="external">题目详情</a></p>
+<blockquote>
+<p>给定一个含不同整数的集合，返回其所有的子集<br><strong>样例：</strong><br>如果 S = [1,2,3]，有如下的解：<br>[<br>      [3],<br>      [1],<br>      [2],<br>      [1,2,3],<br>      [1,3],<br>      [2,3],<br>      [1,2],<br>      []<br>]</p>
+</blockquote>
+<a id="more"></a>
+<h4 id="思路-–-递归解法"><a href="#思路-–-递归解法" class="headerlink" title="思路 – 递归解法"></a>思路 – 递归解法</h4><ul>
+<li>深度优先搜索</li>
+<li>由于样例中的输出需要满足从小到大排列，所以在将数组传入<code>helper()</code>中时需要先对数组进行排序处理</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * <span class="doctag">@param</span> nums: A set of numbers</div><div class="line">     * <span class="doctag">@return</span>: A list of lists</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; subsets(<span class="keyword">int</span>[] nums) &#123;</div><div class="line">        <span class="comment">// write your code here</span></div><div class="line">        List&lt;List&lt;Integer&gt;&gt; result = <span class="keyword">new</span> ArrayList&lt;List&lt;Integer&gt;&gt;();</div><div class="line">        List&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</div><div class="line">        result.add(<span class="keyword">new</span> ArrayList&lt;Integer&gt;(list));</div><div class="line">        <span class="comment">//为了使列表中的值按顺序排列</span></div><div class="line">        Arrays.sort(nums);</div><div class="line">        helper(result, list, nums, <span class="number">0</span>);</div><div class="line">        </div><div class="line">        <span class="keyword">return</span> result;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">helper</span><span class="params">(List&lt;List&lt;Integer&gt;&gt; result,</span></span></div><div class="line">                        List&lt;Integer&gt; list,</div><div class="line">                        <span class="keyword">int</span>[] nums,</div><div class="line">                        <span class="keyword">int</span> index) &#123;</div><div class="line">        <span class="keyword">if</span> (list.size() == nums.length) &#123;</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = index; i &lt; nums.length; i++) &#123;</div><div class="line">            list.add(nums[i]);</div><div class="line">            result.add(<span class="keyword">new</span> ArrayList&lt;Integer&gt;(list));</div><div class="line">            helper(result, list, nums, i+<span class="number">1</span>);</div><div class="line">            list.remove(list.size() - <span class="number">1</span>);</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="思路-–-非递归解法"><a href="#思路-–-非递归解法" class="headerlink" title="思路 – 非递归解法"></a>思路 – 非递归解法</h4><ul>
+<li>n = nums.length, 1 &lt;&lt; n  =  2^n</li>
+<li>each subset equals to an binary integer between 0 … 2^n - 1</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">0 - &gt; 000 - &gt; []</div><div class="line">1 - &gt; 001 - &gt; [1]</div><div class="line">2 - &gt; 010 - &gt; [2]</div><div class="line">...</div><div class="line">7 - &gt; 111 - &gt; [1, 2, 3]</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.*;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> ArrayList&lt;ArrayList&lt;Integer&gt;&gt; subsets(<span class="keyword">int</span>[] S) &#123;</div><div class="line">        </div><div class="line">        ArrayList&lt;ArrayList&lt;Integer&gt;&gt; result = <span class="keyword">new</span> ArrayList&lt;ArrayList&lt;Integer&gt;&gt;();</div><div class="line">        <span class="keyword">int</span> n = S.length;</div><div class="line">        Array.sort(S);</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; (<span class="number">1</span> &lt;&lt; n); i++) &#123;</div><div class="line">            ArrayList&lt;Integer&gt; subset = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++) &#123;</div><div class="line">                <span class="keyword">if</span> ((i &amp; (<span class="number">1</span> &lt;&lt; j)) != <span class="number">0</span>) &#123;</div><div class="line">                    subset.add(S[j]);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            result.add(subset);</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">return</span> result;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="2-带重复元素的子集"><a href="#2-带重复元素的子集" class="headerlink" title="2. 带重复元素的子集"></a>2. 带重复元素的子集</h3><p><a href="https://www.lintcode.com/problem/subsets-ii/description" target="_blank" rel="external">题目详情</a></p>
+<p>给定一个可能具有重复数字的列表，返回其所有可能的子集</p>
+<blockquote>
+<p><strong>样例：</strong><br>如果 S = [1,2,2]，有如下的解：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[</div><div class="line">  [2],</div><div class="line">  [1],</div><div class="line">  [1,2,2],</div><div class="line">  [2,2],</div><div class="line">  [1,2],</div><div class="line">  []</div><div class="line">]</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><ul>
+<li><p>在dfs函数中的for循环里面加条语句即可</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (i != index &amp;&amp; nums[i] == nums[i-<span class="number">1</span>])</div><div class="line">                <span class="keyword">continue</span>;</div></pre></td></tr></table></figure>
+</li>
+<li><p>其余逻辑和不带重复元素的子集一样</p>
+</li>
+</ul>
+<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * <span class="doctag">@param</span> nums: A set of numbers.</div><div class="line">     * <span class="doctag">@return</span>: A list of lists. All valid subsets.</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; subsetsWithDup(<span class="keyword">int</span>[] nums) &#123;</div><div class="line">        <span class="comment">// write your code here</span></div><div class="line">        List&lt;List&lt;Integer&gt;&gt; result = <span class="keyword">new</span> ArrayList&lt;List&lt;Integer&gt;&gt;();</div><div class="line">        List&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</div><div class="line">        result.add(<span class="keyword">new</span> ArrayList&lt;Integer&gt;());</div><div class="line"></div><div class="line">        Arrays.sort(nums);</div><div class="line">        helper(result, list, nums, <span class="number">0</span>);</div><div class="line">        </div><div class="line">        <span class="keyword">return</span> result;</div><div class="line">                </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">helper</span><span class="params">(List&lt;List&lt;Integer&gt;&gt; result,</span></span></div><div class="line">                        List&lt;Integer&gt; list,</div><div class="line">                        <span class="keyword">int</span>[] nums,</div><div class="line">                        <span class="keyword">int</span> index) &#123;</div><div class="line">                            </div><div class="line">        <span class="keyword">if</span> (list.size() == nums.length)</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        </div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = index; i &lt; nums.length; i++) &#123;</div><div class="line">            </div><div class="line">            <span class="keyword">if</span> (i != index &amp;&amp; nums[i] == nums[i-<span class="number">1</span>])</div><div class="line">                <span class="keyword">continue</span>;</div><div class="line">            </div><div class="line">            list.add(nums[i]);</div><div class="line">            result.add(<span class="keyword">new</span> ArrayList&lt;Integer&gt;(list));</div><div class="line">            helper(result, list, nums, i+<span class="number">1</span>);</div><div class="line">            list.remove(list.size() - <span class="number">1</span>);</div><div class="line">            </div><div class="line">        &#125;</div><div class="line">                            </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
         
         </div>
@@ -255,7 +289,7 @@
 
 </div>
 
-    <a data-url="wanglilin.github.io/blog/2018/04/13/fullCombination/" data-id="cjgtdpmkb000pxw5ld90ygg83" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="wanglilin.github.io/blog/2018/05/05/dfs-subsets/" data-id="cjgtdpmjh0009xw5ls2blz5jq" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -323,7 +357,7 @@
 
             
     
-        <a href="wanglilin.github.io/blog/2018/04/13/fullCombination/#comments" class="article-comment-link ds-thread-count" data-thread-key="wanglilin.github.io/blog/2018/04/13/fullCombination/">Comments</a>
+        <a href="wanglilin.github.io/blog/2018/05/05/dfs-subsets/#comments" class="article-comment-link ds-thread-count" data-thread-key="wanglilin.github.io/blog/2018/05/05/dfs-subsets/">Comments</a>
     
 
         </footer>
@@ -332,19 +366,10 @@
         
 <nav id="article-nav">
     
-        <a href="/blog/2018/04/19/splitwords/" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">Newer</strong>
-            <div class="article-nav-title">
-                
-                    深搜系列之分割字符串
-                
-            </div>
-        </a>
     
-    
-        <a href="/blog/2018/04/13/editDistance/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/blog/2018/04/30/linked-list-circly/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">Older</strong>
-            <div class="article-nav-title">dp系列之编辑距离</div>
+            <div class="article-nav-title">链表系列之linked-list-cycle</div>
         </a>
     
 </nav>
@@ -358,7 +383,7 @@
     <section id="comments">
     
         
-    <div class="ds-thread" data-thread-key="2018/04/13/fullCombination/" data-title="深搜系列之字符串全组合" data-url="wanglilin.github.io/blog/2018/04/13/fullCombination/"></div>
+    <div class="ds-thread" data-thread-key="2018/05/05/dfs-subsets/" data-title="dp系列之子集系列" data-url="wanglilin.github.io/blog/2018/05/05/dfs-subsets/"></div>
     <style>
         #ds-thread #ds-reset .ds-textarea-wrapper {
             background: none;
