@@ -3,14 +3,23 @@
 <head>
     <meta charset="utf-8">
     
-    <title>Archivo: 2018 | Wangli&#39;s Blog</title>
+    <title>LightGBM使用小结 | Wangli&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Wangli's Blog">
-<meta property="og:url" content="wanglilin.github.io/archives/2018/index.html">
+    <meta name="description" content="最近在参加一些数据竞赛，诸如腾讯校园算法大赛和蚂蚁金服风险识别大赛，在参赛的过程中，发现原生的LightGBM比sklearn接口的LIghtGBM方便的不要太多。因此，趁此之际，总结一波。
+数据接口加载numpy数组到Dataset中：12345# 500个样本，每一个包含10个特征data = np.random.rand(500, 10)# 二元目标变量，0和1label = np.rand">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LightGBM使用小结">
+<meta property="og:url" content="wanglilin.github.io/2018/05/12/LightGBM-Cookbook/index.html">
 <meta property="og:site_name" content="Wangli's Blog">
+<meta property="og:description" content="最近在参加一些数据竞赛，诸如腾讯校园算法大赛和蚂蚁金服风险识别大赛，在参赛的过程中，发现原生的LightGBM比sklearn接口的LIghtGBM方便的不要太多。因此，趁此之际，总结一波。
+数据接口加载numpy数组到Dataset中：12345# 500个样本，每一个包含10个特征data = np.random.rand(500, 10)# 二元目标变量，0和1label = np.rand">
+<meta property="og:image" content="https://orizuru.io/wp/wp-content/uploads/2017/10/img_lightgbm.jpg">
+<meta property="og:updated_time" content="2018-05-12T12:18:36.067Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Wangli's Blog">
+<meta name="twitter:title" content="LightGBM使用小结">
+<meta name="twitter:description" content="最近在参加一些数据竞赛，诸如腾讯校园算法大赛和蚂蚁金服风险识别大赛，在参赛的过程中，发现原生的LightGBM比sklearn接口的LIghtGBM方便的不要太多。因此，趁此之际，总结一波。
+数据接口加载numpy数组到Dataset中：12345# 500个样本，每一个包含10个特征data = np.random.rand(500, 10)# 二元目标变量，0和1label = np.rand">
+<meta name="twitter:image" content="https://orizuru.io/wp/wp-content/uploads/2017/10/img_lightgbm.jpg">
     
 
     
@@ -195,25 +204,21 @@
 </aside>
 
             
-            <section id="main"><div class="timeline timeline-wrap">
-    
-            <div class="timeline-row timeline-row-major">
-                <span class="node"><i class="fa fa-calendar"></i></span>
-                <h1 class="title">2018</h1>
-            </div>
+            <section id="main"><article id="post-LightGBM-Cookbook" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
         
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
+        
+            <header class="article-header">
                 
     
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/blog/2018/05/12/LightGBM-Cookbook/">LightGBM使用小结</a>
+        <h1 class="article-title" itemprop="name">
+            LightGBM使用小结
         </h1>
     
 
-                <div class="article-meta">
-                    
+                
+                    <div class="article-meta">
+                        
     <div class="article-date">
         <i class="fa fa-calendar"></i>
         <a href="/blog/2018/05/12/LightGBM-Cookbook/">
@@ -222,351 +227,210 @@
     </div>
 
 
-                    
+                        
     <div class="article-category">
     	<i class="fa fa-folder"></i>
         <a class="article-category-link" href="/blog/categories/机器学习/">机器学习</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/机器学习/树模型系列/">树模型系列</a>
     </div>
 
-                    
+                        
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link" href="/blog/tags/LightGBM/">LightGBM</a>, <a class="tag-link" href="/blog/tags/机器学习/">机器学习</a>
     </div>
 
-                </div>
-            </div>
-        </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
+                    </div>
                 
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/blog/2018/05/05/dfs-subsets/">dp系列之子集系列</a>
-        </h1>
-    
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>最近在参加一些数据竞赛，诸如腾讯校园算法大赛和蚂蚁金服风险识别大赛，在参赛的过程中，发现原生的LightGBM比sklearn接口的LIghtGBM方便的不要太多。因此，趁此之际，总结一波。</p>
+<h4 id="数据接口"><a href="#数据接口" class="headerlink" title="数据接口"></a>数据接口</h4><h5 id="加载numpy数组到Dataset中："><a href="#加载numpy数组到Dataset中：" class="headerlink" title="加载numpy数组到Dataset中："></a>加载<code>numpy</code>数组到<code>Dataset</code>中：</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 500个样本，每一个包含10个特征</span></div><div class="line">data = np.random.rand(<span class="number">500</span>, <span class="number">10</span>)</div><div class="line"><span class="comment"># 二元目标变量，0和1</span></div><div class="line">label = np.random.randint(<span class="number">2</span>, size=<span class="number">500</span>)</div><div class="line">train_data = lgb.Dataset(data, label=label)</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h5 id="加载libsvm文本文件或者LightGBM二进制文件到Dataset中："><a href="#加载libsvm文本文件或者LightGBM二进制文件到Dataset中：" class="headerlink" title="加载libsvm文本文件或者LightGBM二进制文件到Dataset中："></a>加载libsvm文本文件或者LightGBM二进制文件到Dataset中：</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">train_data = lgb.Dataset(<span class="string">'train.svm.bin'</span>)</div></pre></td></tr></table></figure>
+<ul>
+<li>保存Dataset到LightGBM二进制文件将会使得加载更快速<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">train_data = lgb.Dataset(data, label=label)</div><div class="line">train_data.save_binary(<span class="string">'train.bin'</span>)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="指定feature-names（分类名称）和categorical-features（分类特征）："><a href="#指定feature-names（分类名称）和categorical-features（分类特征）：" class="headerlink" title="指定feature names（分类名称）和categorical features（分类特征）："></a>指定<code>feature names</code>（分类名称）和<code>categorical features</code>（分类特征）：</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">train_data = lgb.Dataset(data, label=label, feature_name=[<span class="string">'c1'</span>, <span class="string">'c2'</span>, <span class="string">'c3'</span>], categorical_feature=[<span class="string">'c3'</span>])</div></pre></td></tr></table></figure>
+<p>LightGBM可以直接使用<code>categorical features</code>作为输入，它不需要被转换为one-hot encoding（独热编码），并且它比one-hot更快。</p>
+<h5 id="内存的高使用："><a href="#内存的高使用：" class="headerlink" title="内存的高使用："></a>内存的高使用：</h5><p>LightGBM中的<code>Dataset</code>对象由于只需要保存discrete bins（离散的数据块），因此，它具有很好的内存效率。然而，Numpy/Array/Pandas对象的内存开销较大，如果更关心内存消耗的时候，可以根据以下方式来节省内存：</p>
+<ul>
+<li>在构造<code>Dataset</code>时设置<code>free_raw_data=True</code> （默认为True）</li>
+<li>在<code>Dataset</code>被构造完之后手动设置<code>raw_data=None</code></li>
+<li>调用<code>gc</code></li>
+</ul>
+<h4 id="设置参数"><a href="#设置参数" class="headerlink" title="设置参数"></a>设置参数</h4><p>LightGBM可以使用一个pair的list或一个字典来设置参数，例如：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">param = &#123;<span class="string">'num_leaves'</span>: <span class="number">31</span>, <span class="string">'num_trees'</span>: <span class="number">100</span>, <span class="string">'objective'</span>: <span class="string">'binary'</span>&#125;</div><div class="line">param[<span class="string">'metric'</span>] = <span class="string">'auc'</span></div></pre></td></tr></table></figure></p>
+<ul>
+<li>可以指定多个eval指标<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">param[<span class="string">'metric'</span>] = [<span class="string">'auc'</span>, <span class="string">'binary_logloss'</span>]</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h4><ul>
+<li><p>训练一个模型时，需要一个parameter list（参数列表）和dataset（数据集）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 迭代次数</span></div><div class="line">num_round = <span class="number">10</span></div><div class="line"><span class="comment"># valid_sets中包含训练集和验证集 即可看到过拟合现象</span></div><div class="line">bst = lgb.train(param, train_data, num_round, valid_sets=[train_data, test_data])</div></pre></td></tr></table></figure>
+</li>
+<li><p>在训练完成后，可以使用如下方式来保存模型：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bst.save_model(<span class="string">'model.txt'</span>)</div></pre></td></tr></table></figure>
+</li>
+<li><p>已保存模型也可以使用如下方式来加载</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bst = lgb.Booster(model_file=<span class="string">'model.txt'</span>)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="交叉验证"><a href="#交叉验证" class="headerlink" title="交叉验证"></a>交叉验证</h4><p>使用5-折方式的交叉验证来进行训练（4个训练集，1个测试集）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">num_round = <span class="number">10</span></div><div class="line">lgb.cv(param, train_data, num_round, nfold=<span class="number">5</span>)</div></pre></td></tr></table></figure>
+<h4 id="早停策略"><a href="#早停策略" class="headerlink" title="早停策略"></a>早停策略</h4><p>如果含有验证集，则可以使用早停策略来找到最佳参数的boosting rounds（梯度次数）。提前停止需要在<code>valid_sets</code>中至少有一个集合，如果有多个，它们都会被使用：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">bst = lgb.train(param, train_data, num_round, valid_sets=valid_sets, early_stopping_rounds=<span class="number">10</span>)</div><div class="line">bst.save_model(<span class="string">'model.txt'</span>, num_iteration=bst.best_iteration)</div></pre></td></tr></table></figure></p>
+<p>该模型将开始训练，直到验证得分停止提高为止。</p>
+<h4 id="预测"><a href="#预测" class="headerlink" title="预测"></a>预测</h4><p>已经训练或加载的模型都可以对数据集进行预测：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">data = np.random.rand(<span class="number">7</span>, <span class="number">10</span>)</div><div class="line">y_pred = bst.predict(data)</div></pre></td></tr></table></figure></p>
+<p>如果在训练过程中启用了提前停止，可以用<code>bst.best_iteration</code>从最佳迭代中获得预测结果：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">y_pred = bst.predict(data, num_iteration=bst.best_iteration)</div></pre></td></tr></table></figure></p>
 
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/blog/2018/05/05/dfs-subsets/">
-            <time datetime="2018-05-05T12:40:33.000Z" itemprop="datePublished">2018-05-05</time>
-        </a>
-    </div>
-
-
-                    
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/blog/categories/数据结构/">数据结构</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/数据结构/动态规划/">动态规划</a>
-    </div>
-
-                    
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/blog/tags/dp系列/">dp系列</a>, <a class="tag-link" href="/blog/tags/数据结构/">数据结构</a>, <a class="tag-link" href="/blog/tags/高频面试题总结/">高频面试题总结</a>
-    </div>
-
-                </div>
-            </div>
+        
         </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
-                
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/blog/2018/04/30/linked-list-circly/">链表系列之linked-list-cycle</a>
-        </h1>
-    
-
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/blog/2018/04/30/linked-list-circly/">
-            <time datetime="2018-04-30T09:13:59.000Z" itemprop="datePublished">2018-04-30</time>
-        </a>
-    </div>
+        <footer class="article-footer">
+            <div class="share-container">
 
 
-                    
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/blog/categories/数据结构/">数据结构</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/数据结构/链表/">链表</a>
-    </div>
 
-                    
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/blog/tags/数据结构/">数据结构</a>, <a class="tag-link" href="/blog/tags/链表系列/">链表系列</a>, <a class="tag-link" href="/blog/tags/高频面试题总结/">高频面试题总结</a>
-    </div>
-
-                </div>
-            </div>
-        </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
-                
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/blog/2018/04/28/zigzagTree/">二叉树系列之zigzag打印二叉树</a>
-        </h1>
-    
-
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/blog/2018/04/28/zigzagTree/">
-            <time datetime="2018-04-28T08:59:43.000Z" itemprop="datePublished">2018-04-28</time>
-        </a>
-    </div>
-
-
-                    
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/blog/categories/数据结构/">数据结构</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/数据结构/二叉树/">二叉树</a>
-    </div>
-
-                    
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/blog/tags/tree系列/">tree系列</a>, <a class="tag-link" href="/blog/tags/数据结构/">数据结构</a>, <a class="tag-link" href="/blog/tags/高频面试题总结/">高频面试题总结</a>
-    </div>
-
-                </div>
-            </div>
-        </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
-                
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/blog/2018/04/19/housePaint/">dp系列之房屋染色</a>
-        </h1>
-    
-
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/blog/2018/04/19/housePaint/">
-            <time datetime="2018-04-19T12:44:09.000Z" itemprop="datePublished">2018-04-19</time>
-        </a>
-    </div>
-
-
-                    
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/blog/categories/数据结构/">数据结构</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/数据结构/动态规划/">动态规划</a>
-    </div>
-
-                    
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/blog/tags/dp系列/">dp系列</a>, <a class="tag-link" href="/blog/tags/数据结构/">数据结构</a>, <a class="tag-link" href="/blog/tags/高频面试题总结/">高频面试题总结</a>
-    </div>
-
-                </div>
-            </div>
-        </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
-                
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/blog/2018/04/19/splitwords/">深搜系列之分割字符串</a>
-        </h1>
-    
-
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/blog/2018/04/19/splitwords/">
-            <time datetime="2018-04-19T08:58:53.000Z" itemprop="datePublished">2018-04-19</time>
-        </a>
-    </div>
-
-
-                    
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/blog/categories/数据结构/">数据结构</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/数据结构/深度优先搜索/">深度优先搜索</a>
-    </div>
-
-                    
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/blog/tags/dfs系列/">dfs系列</a>, <a class="tag-link" href="/blog/tags/数据结构/">数据结构</a>, <a class="tag-link" href="/blog/tags/高频面试题总结/">高频面试题总结</a>
-    </div>
-
-                </div>
-            </div>
-        </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
-                
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/blog/2018/04/13/fullCombination/">深搜系列之字符串全组合</a>
-        </h1>
-    
-
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/blog/2018/04/13/fullCombination/">
-            <time datetime="2018-04-13T03:48:28.000Z" itemprop="datePublished">2018-04-13</time>
-        </a>
-    </div>
-
-
-                    
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/blog/categories/数据结构/">数据结构</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/数据结构/深度优先搜索/">深度优先搜索</a>
-    </div>
-
-                    
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/blog/tags/dfs系列/">dfs系列</a>, <a class="tag-link" href="/blog/tags/数据结构/">数据结构</a>, <a class="tag-link" href="/blog/tags/高频面试题总结/">高频面试题总结</a>
-    </div>
-
-                </div>
-            </div>
-        </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
-                
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/blog/2018/04/13/editDistance/">dp系列之编辑距离</a>
-        </h1>
-    
-
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/blog/2018/04/13/editDistance/">
-            <time datetime="2018-04-13T03:16:18.000Z" itemprop="datePublished">2018-04-13</time>
-        </a>
-    </div>
-
-
-                    
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/blog/categories/数据结构/">数据结构</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/数据结构/动态规划/">动态规划</a>
-    </div>
-
-                    
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/blog/tags/dp系列/">dp系列</a>, <a class="tag-link" href="/blog/tags/数据结构/">数据结构</a>, <a class="tag-link" href="/blog/tags/高频面试题总结/">高频面试题总结</a>
-    </div>
-
-                </div>
-            </div>
-        </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
-                
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/blog/2018/04/09/findMin/">寻找旋转排序数组中的最小值</a>
-        </h1>
-    
-
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/blog/2018/04/09/findMin/">
-            <time datetime="2018-04-09T03:51:04.000Z" itemprop="datePublished">2018-04-09</time>
-        </a>
-    </div>
-
-
-                    
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/blog/categories/数据结构/">数据结构</a>
-    </div>
-
-                    
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/blog/tags/数据结构/">数据结构</a>, <a class="tag-link" href="/blog/tags/高频面试题总结/">高频面试题总结</a>
-    </div>
-
-                </div>
-            </div>
-        </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
-                
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/blog/2018/04/07/sortLinkedList/">高频面试题总结之链表排序</a>
-        </h1>
-    
-
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/blog/2018/04/07/sortLinkedList/">
-            <time datetime="2018-04-07T08:11:44.000Z" itemprop="datePublished">2018-04-07</time>
-        </a>
-    </div>
-
-
-                    
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/blog/categories/数据结构/">数据结构</a>
-    </div>
-
-                    
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/blog/tags/数据结构/">数据结构</a>, <a class="tag-link" href="/blog/tags/高频面试题总结/">高频面试题总结</a>
-    </div>
-
-                </div>
-            </div>
-        </div>
-    
 </div>
 
-    <nav id="page-nav">
-        <span class="page-number current">1</span><a class="page-number" href="/blog/archives/2018/page/2/">2</a><a class="extend next" rel="next" href="/blog/archives/2018/page/2/">Siguiente  &raquo;</a>
-    </nav>
+    <a data-url="wanglilin.github.io/blog/2018/05/12/LightGBM-Cookbook/" data-id="cjh3cq46o00021g5lmo1vtuot" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="wanglilin.github.io/blog/2018/05/12/LightGBM-Cookbook/#comments" class="article-comment-link ds-thread-count" data-thread-key="wanglilin.github.io/blog/2018/05/12/LightGBM-Cookbook/">Comentarios</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/blog/2018/05/05/dfs-subsets/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Más viejo</strong>
+            <div class="article-nav-title">dp系列之子集系列</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div class="ds-thread" data-thread-key="2018/05/12/LightGBM-Cookbook/" data-title="LightGBM使用小结" data-url="wanglilin.github.io/blog/2018/05/12/LightGBM-Cookbook/"></div>
+    <style>
+        #ds-thread #ds-reset .ds-textarea-wrapper {
+            background: none;
+        }
+        #ds-reset .ds-avatar img {
+            box-shadow: none;
+        }
+        #ds-reset .ds-gradient-bg {
+            background: #f7f7f7;
+        }
+        #ds-thread #ds-reset li.ds-tab a {
+            border-radius: 3px;
+        }
+        #ds-thread #ds-reset .ds-post-button {
+            color: white;
+            border: none;
+            box-shadow: none;
+            background: #d32;
+            text-shadow: none;
+            font-weight: normal;
+            font-family: 'Microsoft Yahei';
+        }
+        #ds-thread #ds-reset .ds-post-button:hover {
+            color: white;
+            background: #DE594C;
+        }
+        #ds-thread #ds-reset .ds-post-button:active {
+            background: #d32;
+        }
+        #ds-smilies-tooltip ul.ds-smilies-tabs li a.ds-current {
+            color: white;
+            background: #d32;
+            box-shadow: none;
+            text-shadow: none;
+            font-weight: normal;
+        }
+    </style>
+
+    
+    </section>
+
 </section>
             
                 <aside id="sidebar">

@@ -78,7 +78,7 @@
             <div id="search-form-wrap">
 
     <form class="search-form">
-        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
         <button type="submit" class="search-form-submit"></button>
     </form>
     <div class="ins-search">
@@ -97,10 +97,10 @@
 (function (window) {
     var INSIGHT_CONFIG = {
         TRANSLATION: {
-            POSTS: 'Posts',
+            POSTS: 'Entradas',
             PAGES: 'Pages',
-            CATEGORIES: 'Categories',
-            TAGS: 'Tags',
+            CATEGORIES: 'Categorias',
+            TAGS: 'Etiquetas',
             UNTITLED: '(Untitled)',
         },
         ROOT_URL: '/blog/',
@@ -131,7 +131,7 @@
                 <td>
                     
     <div class="search-form">
-        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
     </div>
 
                 </td>
@@ -155,11 +155,11 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                24
+                25
                 <span>文章</span>
             </div>
             <div class="article-info-block">
-                15
+                16
                 <span>标签</span>
             </div>
         </div>
@@ -196,7 +196,7 @@
 
             
             <section id="main">
-    <article id="post-dfs-subsets" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-LightGBM-Cookbook" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -204,7 +204,7 @@
                 
     
         <h1 itemprop="name">
-            <a class="article-title" href="/blog/2018/05/05/dfs-subsets/">dp系列之子集系列</a>
+            <a class="article-title" href="/blog/2018/05/12/LightGBM-Cookbook/">LightGBM使用小结</a>
         </h1>
     
 
@@ -213,8 +213,8 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/blog/2018/05/05/dfs-subsets/">
-            <time datetime="2018-05-05T12:40:33.000Z" itemprop="datePublished">2018-05-05</time>
+        <a href="/blog/2018/05/12/LightGBM-Cookbook/">
+            <time datetime="2018-05-12T12:09:52.000Z" itemprop="datePublished">2018-05-12</time>
         </a>
     </div>
 
@@ -222,13 +222,13 @@
                         
     <div class="article-category">
     	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/blog/categories/数据结构/">数据结构</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/数据结构/动态规划/">动态规划</a>
+        <a class="article-category-link" href="/blog/categories/机器学习/">机器学习</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/机器学习/树模型系列/">树模型系列</a>
     </div>
 
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/blog/tags/dp系列/">dp系列</a>, <a class="tag-link" href="/blog/tags/数据结构/">数据结构</a>, <a class="tag-link" href="/blog/tags/高频面试题总结/">高频面试题总结</a>
+        <a class="tag-link" href="/blog/tags/LightGBM/">LightGBM</a>, <a class="tag-link" href="/blog/tags/机器学习/">机器学习</a>
     </div>
 
                     </div>
@@ -238,12 +238,10 @@
         
         <div class="article-entry" itemprop="articleBody">
         
-            <p><h3 id="1-子集"><a href="#1-子集" class="headerlink" title="1. 子集"></a>1. 子集</h3><p><a href="https://www.lintcode.com/problem/subsets/description">题目详情</a></p>
-<blockquote>
-<p>给定一个含不同整数的集合，返回其所有的子集<br><strong>样例：</strong><br>如果 S = [1,2,3]，有如下的解：<br>[<br>      [3],<br>      [1],<br>      [2],<br>      [1,2,3],<br>      [1,3],<br>      [2,3],<br>      [1,2],<br>      []<br>]</p>
-</blockquote></p>
+            <p><p>最近在参加一些数据竞赛，诸如腾讯校园算法大赛和蚂蚁金服风险识别大赛，在参赛的过程中，发现原生的LightGBM比sklearn接口的LIghtGBM方便的不要太多。因此，趁此之际，总结一波。</p>
+<h4 id="数据接口"><a href="#数据接口" class="headerlink" title="数据接口"></a>数据接口</h4><h5 id="加载numpy数组到Dataset中："><a href="#加载numpy数组到Dataset中：" class="headerlink" title="加载numpy数组到Dataset中："></a>加载<code>numpy</code>数组到<code>Dataset</code>中：</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 500个样本，每一个包含10个特征</span></div><div class="line">data = np.random.rand(<span class="number">500</span>, <span class="number">10</span>)</div><div class="line"><span class="comment"># 二元目标变量，0和1</span></div><div class="line">label = np.random.randint(<span class="number">2</span>, size=<span class="number">500</span>)</div><div class="line">train_data = lgb.Dataset(data, label=label)</div></pre></td></tr></table></figure></p>
             <p class="article-more-link">
-                <a href="/blog/2018/05/05/dfs-subsets/#more">Read More</a>
+                <a href="/blog/2018/05/12/LightGBM-Cookbook/#more">Read More</a>
             </p>
         
         </div>
@@ -254,7 +252,7 @@
 
 </div>
 
-    <a data-url="wanglilin.github.io/blog/2018/05/05/dfs-subsets/" data-id="cjgtdpmjh0009xw5ls2blz5jq" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="wanglilin.github.io/blog/2018/05/12/LightGBM-Cookbook/" data-id="cjh3cq46o00021g5lmo1vtuot" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -322,7 +320,143 @@
 
             
     
-        <a href="wanglilin.github.io/blog/2018/05/05/dfs-subsets/#comments" class="article-comment-link ds-thread-count" data-thread-key="wanglilin.github.io/blog/2018/05/05/dfs-subsets/">Comments</a>
+        <a href="wanglilin.github.io/blog/2018/05/12/LightGBM-Cookbook/#comments" class="article-comment-link ds-thread-count" data-thread-key="wanglilin.github.io/blog/2018/05/12/LightGBM-Cookbook/">Comentarios</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-dfs-subsets" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/blog/2018/05/05/dfs-subsets/">dp系列之子集系列</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/blog/2018/05/05/dfs-subsets/">
+            <time datetime="2018-05-05T12:40:33.000Z" itemprop="datePublished">2018-05-05</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/blog/categories/数据结构/">数据结构</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/数据结构/动态规划/">动态规划</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/blog/tags/dp系列/">dp系列</a>, <a class="tag-link" href="/blog/tags/数据结构/">数据结构</a>, <a class="tag-link" href="/blog/tags/高频面试题总结/">高频面试题总结</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            <p><h3 id="1-子集"><a href="#1-子集" class="headerlink" title="1. 子集"></a>1. 子集</h3><p><a href="https://www.lintcode.com/problem/subsets/description">题目详情</a></p>
+<blockquote>
+<p>给定一个含不同整数的集合，返回其所有的子集<br><strong>样例：</strong><br>如果 S = [1,2,3]，有如下的解：<br>[<br>      [3],<br>      [1],<br>      [2],<br>      [1,2,3],<br>      [1,3],<br>      [2,3],<br>      [1,2],<br>      []<br>]</p>
+</blockquote></p>
+            <p class="article-more-link">
+                <a href="/blog/2018/05/05/dfs-subsets/#more">Read More</a>
+            </p>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="wanglilin.github.io/blog/2018/05/05/dfs-subsets/" data-id="cjh3cq47k000e1g5la1myl2i5" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="wanglilin.github.io/blog/2018/05/05/dfs-subsets/#comments" class="article-comment-link ds-thread-count" data-thread-key="wanglilin.github.io/blog/2018/05/05/dfs-subsets/">Comentarios</a>
     
 
         </footer>
@@ -393,7 +527,7 @@
 
 </div>
 
-    <a data-url="wanglilin.github.io/blog/2018/04/30/linked-list-circly/" data-id="cjgtdpmkl000yxw5lbljvf6ik" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="wanglilin.github.io/blog/2018/04/30/linked-list-circly/" data-id="cjh3cq48k00111g5la1h6rsa9" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -461,7 +595,7 @@
 
             
     
-        <a href="wanglilin.github.io/blog/2018/04/30/linked-list-circly/#comments" class="article-comment-link ds-thread-count" data-thread-key="wanglilin.github.io/blog/2018/04/30/linked-list-circly/">Comments</a>
+        <a href="wanglilin.github.io/blog/2018/04/30/linked-list-circly/#comments" class="article-comment-link ds-thread-count" data-thread-key="wanglilin.github.io/blog/2018/04/30/linked-list-circly/">Comentarios</a>
     
 
         </footer>
@@ -538,7 +672,7 @@
 
 </div>
 
-    <a data-url="wanglilin.github.io/blog/2018/04/28/zigzagTree/" data-id="cjgtdpmlp001vxw5lgwt2btgn" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="wanglilin.github.io/blog/2018/04/28/zigzagTree/" data-id="cjh3cq49s00231g5lvhnsnhbu" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -606,7 +740,7 @@
 
             
     
-        <a href="wanglilin.github.io/blog/2018/04/28/zigzagTree/#comments" class="article-comment-link ds-thread-count" data-thread-key="wanglilin.github.io/blog/2018/04/28/zigzagTree/">Comments</a>
+        <a href="wanglilin.github.io/blog/2018/04/28/zigzagTree/#comments" class="article-comment-link ds-thread-count" data-thread-key="wanglilin.github.io/blog/2018/04/28/zigzagTree/">Comentarios</a>
     
 
         </footer>
@@ -674,7 +808,7 @@
 
 </div>
 
-    <a data-url="wanglilin.github.io/blog/2018/04/19/housePaint/" data-id="cjgtdpmk1000kxw5lcecj2oal" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="wanglilin.github.io/blog/2018/04/19/housePaint/" data-id="cjh3cq49w00281g5l27coufa9" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -742,7 +876,7 @@
 
             
     
-        <a href="wanglilin.github.io/blog/2018/04/19/housePaint/#comments" class="article-comment-link ds-thread-count" data-thread-key="wanglilin.github.io/blog/2018/04/19/housePaint/">Comments</a>
+        <a href="wanglilin.github.io/blog/2018/04/19/housePaint/#comments" class="article-comment-link ds-thread-count" data-thread-key="wanglilin.github.io/blog/2018/04/19/housePaint/">Comentarios</a>
     
 
         </footer>
@@ -810,7 +944,7 @@
 
 </div>
 
-    <a data-url="wanglilin.github.io/blog/2018/04/19/splitwords/" data-id="cjgtdpmlp001qxw5lwfljjy8u" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="wanglilin.github.io/blog/2018/04/19/splitwords/" data-id="cjh3cq49d001n1g5lf9wcnwif" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -878,7 +1012,7 @@
 
             
     
-        <a href="wanglilin.github.io/blog/2018/04/19/splitwords/#comments" class="article-comment-link ds-thread-count" data-thread-key="wanglilin.github.io/blog/2018/04/19/splitwords/">Comments</a>
+        <a href="wanglilin.github.io/blog/2018/04/19/splitwords/#comments" class="article-comment-link ds-thread-count" data-thread-key="wanglilin.github.io/blog/2018/04/19/splitwords/">Comentarios</a>
     
 
         </footer>
@@ -942,7 +1076,7 @@
 
 </div>
 
-    <a data-url="wanglilin.github.io/blog/2018/04/13/fullCombination/" data-id="cjgtdpmkb000pxw5ld90ygg83" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="wanglilin.github.io/blog/2018/04/13/fullCombination/" data-id="cjh3cq47n000g1g5lwti4oulj" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1010,7 +1144,7 @@
 
             
     
-        <a href="wanglilin.github.io/blog/2018/04/13/fullCombination/#comments" class="article-comment-link ds-thread-count" data-thread-key="wanglilin.github.io/blog/2018/04/13/fullCombination/">Comments</a>
+        <a href="wanglilin.github.io/blog/2018/04/13/fullCombination/#comments" class="article-comment-link ds-thread-count" data-thread-key="wanglilin.github.io/blog/2018/04/13/fullCombination/">Comentarios</a>
     
 
         </footer>
@@ -1084,7 +1218,7 @@
 
 </div>
 
-    <a data-url="wanglilin.github.io/blog/2018/04/13/editDistance/" data-id="cjgtdpmjr000dxw5ltm7pglo6" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="wanglilin.github.io/blog/2018/04/13/editDistance/" data-id="cjh3cq47s000k1g5l3q4n46sc" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1152,7 +1286,7 @@
 
             
     
-        <a href="wanglilin.github.io/blog/2018/04/13/editDistance/#comments" class="article-comment-link ds-thread-count" data-thread-key="wanglilin.github.io/blog/2018/04/13/editDistance/">Comments</a>
+        <a href="wanglilin.github.io/blog/2018/04/13/editDistance/#comments" class="article-comment-link ds-thread-count" data-thread-key="wanglilin.github.io/blog/2018/04/13/editDistance/">Comentarios</a>
     
 
         </footer>
@@ -1221,7 +1355,7 @@
 
 </div>
 
-    <a data-url="wanglilin.github.io/blog/2018/04/09/findMin/" data-id="cjgtdpmk1000fxw5l5b4yd3a4" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="wanglilin.github.io/blog/2018/04/09/findMin/" data-id="cjh3cq47w000l1g5lyd420lob" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1289,7 +1423,7 @@
 
             
     
-        <a href="wanglilin.github.io/blog/2018/04/09/findMin/#comments" class="article-comment-link ds-thread-count" data-thread-key="wanglilin.github.io/blog/2018/04/09/findMin/">Comments</a>
+        <a href="wanglilin.github.io/blog/2018/04/09/findMin/#comments" class="article-comment-link ds-thread-count" data-thread-key="wanglilin.github.io/blog/2018/04/09/findMin/">Comentarios</a>
     
 
         </footer>
@@ -1357,7 +1491,7 @@
 
 </div>
 
-    <a data-url="wanglilin.github.io/blog/2018/04/07/sortLinkedList/" data-id="cjgtdpml5001bxw5lsbqsgtay" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="wanglilin.github.io/blog/2018/04/07/sortLinkedList/" data-id="cjh3cq49l001v1g5l3emzykm2" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1425,145 +1559,7 @@
 
             
     
-        <a href="wanglilin.github.io/blog/2018/04/07/sortLinkedList/#comments" class="article-comment-link ds-thread-count" data-thread-key="wanglilin.github.io/blog/2018/04/07/sortLinkedList/">Comments</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-sql-1" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/blog/2018/04/04/sql-1/">SQL典型例题总结</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/blog/2018/04/04/sql-1/">
-            <time datetime="2018-04-04T04:16:05.000Z" itemprop="datePublished">2018-04-04</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/blog/categories/SQL/">SQL</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/blog/tags/SQL/">SQL</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            <p><h3 id="1-统计出当前各个title类型对应的员工当前薪水对应的平均工资。"><a href="#1-统计出当前各个title类型对应的员工当前薪水对应的平均工资。" class="headerlink" title="1. 统计出当前各个title类型对应的员工当前薪水对应的平均工资。"></a>1. 统计出当前各个title类型对应的员工当前薪水对应的平均工资。</h3><p>表结构：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`salaries`</span> (</div><div class="line"><span class="string">`emp_no`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line"><span class="string">`salary`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line"><span class="string">`from_date`</span> <span class="built_in">date</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line"><span class="string">`to_date`</span> <span class="built_in">date</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">PRIMARY <span class="keyword">KEY</span> (<span class="string">`emp_no`</span>,<span class="string">`from_date`</span>));</div><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> <span class="string">"titles"</span> (</div><div class="line"><span class="string">`emp_no`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line"><span class="string">`title`</span> <span class="built_in">varchar</span>(<span class="number">50</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line"><span class="string">`from_date`</span> <span class="built_in">date</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line"><span class="string">`to_date`</span> <span class="built_in">date</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>);</div></pre></td></tr></table></figure></p>
-<p>思路：</p>
-<ul>
-<li><code>INNER JOIN</code>的使用</li>
-<li><code>GROUP BY</code> + <code>AVG( )</code>的使用</li>
-</ul></p>
-            <p class="article-more-link">
-                <a href="/blog/2018/04/04/sql-1/#more">Read More</a>
-            </p>
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="wanglilin.github.io/blog/2018/04/04/sql-1/" data-id="cjgtdpmlz001yxw5l8y61stku" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="wanglilin.github.io/blog/2018/04/04/sql-1/#comments" class="article-comment-link ds-thread-count" data-thread-key="wanglilin.github.io/blog/2018/04/04/sql-1/">Comments</a>
+        <a href="wanglilin.github.io/blog/2018/04/07/sortLinkedList/#comments" class="article-comment-link ds-thread-count" data-thread-key="wanglilin.github.io/blog/2018/04/07/sortLinkedList/">Comentarios</a>
     
 
         </footer>
@@ -1574,7 +1570,7 @@
 
 
     <nav id="page-nav">
-        <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><a class="page-number" href="/blog/page/3/">3</a><a class="extend next" rel="next" href="/blog/page/2/">Next &raquo;</a>
+        <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><a class="page-number" href="/blog/page/3/">3</a><a class="extend next" rel="next" href="/blog/page/2/">Siguiente  &raquo;</a>
     </nav>
 </section>
             
@@ -1585,6 +1581,25 @@
         <h3 class="widget-title">最新文章</h3>
         <div class="widget">
             <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/2018/05/12/LightGBM-Cookbook/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://orizuru.io/wp/wp-content/uploads/2017/10/img_lightgbm.jpg)" alt="LightGBM使用小结" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/机器学习/">机器学习</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/机器学习/树模型系列/">树模型系列</a></p>
+                            <p class="item-title"><a href="/blog/2018/05/12/LightGBM-Cookbook/" class="title">LightGBM使用小结</a></p>
+                            <p class="item-date"><time datetime="2018-05-12T12:09:52.000Z" itemprop="datePublished">2018-05-12</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -1662,25 +1677,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/blog/2018/04/19/splitwords/" class="thumbnail">
-    
-    
-        <span style="background-image:url(https://direct.sanwa.co.jp/images/goods/400-SKB009_MA.JPG)" alt="深搜系列之分割字符串" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/数据结构/">数据结构</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/数据结构/深度优先搜索/">深度优先搜索</a></p>
-                            <p class="item-title"><a href="/blog/2018/04/19/splitwords/" class="title">深搜系列之分割字符串</a></p>
-                            <p class="item-date"><time datetime="2018-04-19T08:58:53.000Z" itemprop="datePublished">2018-04-19</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -1690,7 +1686,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Android/">Android</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/JavaSE/">JavaSE</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java源码/">Java源码</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/SQL/">SQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/天池大数据竞赛/">天池大数据竞赛</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/数据结构/">数据结构</a><span class="category-list-count">17</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/数据结构/二叉树/">二叉树</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/数据结构/动态规划/">动态规划</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/数据结构/深度优先搜索/">深度优先搜索</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/数据结构/链表/">链表</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/机器学习/">机器学习</a><span class="category-list-count">1</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Android/">Android</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/JavaSE/">JavaSE</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Java源码/">Java源码</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/SQL/">SQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/天池大数据竞赛/">天池大数据竞赛</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/数据结构/">数据结构</a><span class="category-list-count">17</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/数据结构/二叉树/">二叉树</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/数据结构/动态规划/">动态规划</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/数据结构/深度优先搜索/">深度优先搜索</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/数据结构/链表/">链表</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/机器学习/">机器学习</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/机器学习/树模型系列/">树模型系列</a><span class="category-list-count">1</span></li></ul></li></ul>
         </div>
     </div>
 
@@ -1699,7 +1695,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/05/">May 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/04/">April 2018</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/03/">March 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/12/">December 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/09/">September 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/03/">March 2017</a><span class="archive-list-count">3</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/05/">May 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/04/">April 2018</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/03/">March 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/12/">December 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/09/">September 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/03/">March 2017</a><span class="archive-list-count">3</span></li></ul>
         </div>
     </div>
 
@@ -1708,7 +1704,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Android/">Android</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/JavaSE/">JavaSE</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Java基础/">Java基础</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Java源码阅读/">Java源码阅读</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/SQL/">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/dfs系列/">dfs系列</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/dp系列/">dp系列</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mooc/">mooc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/tree系列/">tree系列</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/天池/">天池</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据结构/">数据结构</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/特征工程/">特征工程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/链表系列/">链表系列</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/高频面试题总结/">高频面试题总结</a><span class="tag-list-count">15</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Android/">Android</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/JavaSE/">JavaSE</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Java基础/">Java基础</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Java源码阅读/">Java源码阅读</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/LightGBM/">LightGBM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/SQL/">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/dfs系列/">dfs系列</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/dp系列/">dp系列</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mooc/">mooc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/tree系列/">tree系列</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/天池/">天池</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/数据结构/">数据结构</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/机器学习/">机器学习</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/特征工程/">特征工程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/链表系列/">链表系列</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/高频面试题总结/">高频面试题总结</a><span class="tag-list-count">15</span></li></ul>
         </div>
     </div>
 
@@ -1717,7 +1713,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/blog/tags/Android/" style="font-size: 10px;">Android</a> <a href="/blog/tags/JavaSE/" style="font-size: 12.5px;">JavaSE</a> <a href="/blog/tags/Java基础/" style="font-size: 15px;">Java基础</a> <a href="/blog/tags/Java源码阅读/" style="font-size: 10px;">Java源码阅读</a> <a href="/blog/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/blog/tags/dfs系列/" style="font-size: 12.5px;">dfs系列</a> <a href="/blog/tags/dp系列/" style="font-size: 15px;">dp系列</a> <a href="/blog/tags/mooc/" style="font-size: 10px;">mooc</a> <a href="/blog/tags/tree系列/" style="font-size: 10px;">tree系列</a> <a href="/blog/tags/天池/" style="font-size: 10px;">天池</a> <a href="/blog/tags/数据结构/" style="font-size: 20px;">数据结构</a> <a href="/blog/tags/机器学习/" style="font-size: 10px;">机器学习</a> <a href="/blog/tags/特征工程/" style="font-size: 10px;">特征工程</a> <a href="/blog/tags/链表系列/" style="font-size: 10px;">链表系列</a> <a href="/blog/tags/高频面试题总结/" style="font-size: 17.5px;">高频面试题总结</a>
+            <a href="/blog/tags/Android/" style="font-size: 10px;">Android</a> <a href="/blog/tags/JavaSE/" style="font-size: 12.5px;">JavaSE</a> <a href="/blog/tags/Java基础/" style="font-size: 15px;">Java基础</a> <a href="/blog/tags/Java源码阅读/" style="font-size: 10px;">Java源码阅读</a> <a href="/blog/tags/LightGBM/" style="font-size: 10px;">LightGBM</a> <a href="/blog/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/blog/tags/dfs系列/" style="font-size: 12.5px;">dfs系列</a> <a href="/blog/tags/dp系列/" style="font-size: 15px;">dp系列</a> <a href="/blog/tags/mooc/" style="font-size: 10px;">mooc</a> <a href="/blog/tags/tree系列/" style="font-size: 10px;">tree系列</a> <a href="/blog/tags/天池/" style="font-size: 10px;">天池</a> <a href="/blog/tags/数据结构/" style="font-size: 20px;">数据结构</a> <a href="/blog/tags/机器学习/" style="font-size: 12.5px;">机器学习</a> <a href="/blog/tags/特征工程/" style="font-size: 10px;">特征工程</a> <a href="/blog/tags/链表系列/" style="font-size: 10px;">链表系列</a> <a href="/blog/tags/高频面试题总结/" style="font-size: 17.5px;">高频面试题总结</a>
         </div>
     </div>
 
