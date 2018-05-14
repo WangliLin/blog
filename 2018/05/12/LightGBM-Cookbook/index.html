@@ -14,7 +14,7 @@
 <meta property="og:description" content="最近在参加一些数据竞赛，诸如腾讯校园算法大赛和蚂蚁金服风险识别大赛，在参赛的过程中，发现原生的LightGBM比sklearn接口的LIghtGBM方便的不要太多。因此，趁此之际，总结一波。
 数据接口加载numpy数组到Dataset中：12345# 500个样本，每一个包含10个特征data = np.random.rand(500, 10)# 二元目标变量，0和1label = np.rand">
 <meta property="og:image" content="https://orizuru.io/wp/wp-content/uploads/2017/10/img_lightgbm.jpg">
-<meta property="og:updated_time" content="2018-05-12T12:18:36.067Z">
+<meta property="og:updated_time" content="2018-05-14T02:28:14.157Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LightGBM使用小结">
 <meta name="twitter:description" content="最近在参加一些数据竞赛，诸如腾讯校园算法大赛和蚂蚁金服风险识别大赛，在参赛的过程中，发现原生的LightGBM比sklearn接口的LIghtGBM方便的不要太多。因此，趁此之际，总结一波。
@@ -263,6 +263,8 @@
 <li>在<code>Dataset</code>被构造完之后手动设置<code>raw_data=None</code></li>
 <li>调用<code>gc</code></li>
 </ul>
+<h5 id="验证集的产生"><a href="#验证集的产生" class="headerlink" title="验证集的产生"></a>验证集的产生</h5><p>在LightGBM中，验证集的生成必须依赖于训练集，可用如下语句生成验证集：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">val_data = train_data.create_valid(valid_x, label=valid_y)</div></pre></td></tr></table></figure>
 <h4 id="设置参数"><a href="#设置参数" class="headerlink" title="设置参数"></a>设置参数</h4><p>LightGBM可以使用一个pair的list或一个字典来设置参数，例如：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">param = &#123;<span class="string">'num_leaves'</span>: <span class="number">31</span>, <span class="string">'num_trees'</span>: <span class="number">100</span>, <span class="string">'objective'</span>: <span class="string">'binary'</span>&#125;</div><div class="line">param[<span class="string">'metric'</span>] = <span class="string">'auc'</span></div></pre></td></tr></table></figure></p>
 <ul>
 <li>可以指定多个eval指标<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">param[<span class="string">'metric'</span>] = [<span class="string">'auc'</span>, <span class="string">'binary_logloss'</span>]</div></pre></td></tr></table></figure>
@@ -295,7 +297,7 @@
 
 </div>
 
-    <a data-url="wanglilin.github.io/blog/2018/05/12/LightGBM-Cookbook/" data-id="cjh3cq46o00021g5lmo1vtuot" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
+    <a data-url="wanglilin.github.io/blog/2018/05/12/LightGBM-Cookbook/" data-id="cjh5mq3210000gw5lqe0swu96" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
